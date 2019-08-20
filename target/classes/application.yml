@@ -1,0 +1,18 @@
+server:
+  port: 8888
+spring: 
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://xawn.f3322.net:3306/prj6?characterEncoding=UTF-8
+    username: prj6
+    password: #@$*()#$
+    
+logging:
+  level:
+    com: 
+      woniu: 
+        mapper: DEBUG

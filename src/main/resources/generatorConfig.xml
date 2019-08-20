@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+    <classPathEntry location="F:\mysql-connector-java-5.1.35.jar"/>	
+  <context id="context1" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://xawn.f3322.net:3306/prj6" userId="prj6" password="#@$*()#$" />
+    <javaModelGenerator targetPackage="com.woniu.entity" targetProject="prj6" ></javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="prj6" ></sqlMapGenerator>
+    <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="prj6" type="XMLMAPPER" />
+    <table schema="" tableName="address" ></table>
+    <table schema="" tableName="brand" ></table>
+    <table schema="" tableName="brand_type" ></table>
+    <table schema="" tableName="cart" ></table>
+    <table schema="" tableName="city" ></table>
+    <table schema="" tableName="evaluation" ></table>
+    <table schema="" tableName="log" ></table>
+    <table schema="" tableName="mycollection" ></table>
+    <table schema="" tableName="orderreturn" ></table>
+    <table schema="" tableName="pro_history" ></table>
+    <table schema="" tableName="pro_size" ></table>
+    <table schema="" tableName="prod_type" ></table>
+    <table schema="" tableName="product" ></table>
+    <table schema="" tableName="province" ></table>
+    <table schema="" tableName="pwdques" ></table>
+    <table schema="" tableName="role" ></table>
+    <table schema="" tableName="roletree" ></table>
+    <table schema="" tableName="s_t" ></table>
+    <table schema="" tableName="size" ></table>
+    <table schema="" tableName="store" ></table>
+    <table schema="" tableName="store_order" ></table>
+    <table schema="" tableName="storeprodtype" ></table>
+    <table schema="" tableName="storetype" ></table>
+    <table schema="" tableName="tree" ></table>
+    <table schema="" tableName="user_address" ></table>
+    <table schema="" tableName="user_order" ></table>
+    <table schema="" tableName="user_role" ></table>
+    <table schema="" tableName="userinfo" ></table>
+    <table schema="" tableName="zone" ></table>
+  </context>
+</generatorConfiguration>
