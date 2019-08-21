@@ -17,8 +17,12 @@ public class ProductServiceImpl implements IProductService{
 	private ProductMapper productMapper;
 
 	@Override
-	@Transactional(readOnly = true)
 	public List findAll() {
 		return productMapper.selectByExample(null);
+	}
+
+	@Override
+	public int findByCount() {
+		return productMapper.findByCount();
 	}
 }

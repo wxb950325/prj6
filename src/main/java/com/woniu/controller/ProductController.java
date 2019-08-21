@@ -20,6 +20,7 @@ public class ProductController {
 	public String findAll(ModelMap map) {
 		List list = productService.findAll();
 		map.put("list", list);
+		System.out.println(list);
 		return "/admin/product/list";
 	}
 }
