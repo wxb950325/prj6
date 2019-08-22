@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="zcxin_footer">
 			<p>已有账号？立即去</p>
-			<a href="https://member.godaji.com/login">登录>></a>
+			<a href="login.jsp">登录>></a>
 		</div>
 	</div>
 </body>

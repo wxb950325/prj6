@@ -82,7 +82,7 @@
 				</div>
 				<div class="dlyxz_footer">
 					<p>还没有账号？立即去</p>
-					<a href="https://member.godaji.com/register">注册>></a>
+					<a href="registe.jsp">注册>></a>
 				</div>
 			</div>
 
