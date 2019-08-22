@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img alt="123" src="/image/1.jpg">
+	
 </body>
 </html>
