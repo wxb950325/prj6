@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.woniu.entity.Product;
 import com.woniu.service.IProductService;
 
-@RestController
+@Controller 
 @Transactional
 @RequestMapping("/admin/product/")
 public class ProductController {
@@ -34,7 +35,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {
+	public String findAll(ModelMap map) {//geishanghu
 		List<Product> list = productService.find();
 		for (Product product : list) {
 			System.out.println(product);
@@ -64,12 +65,10 @@ public class ProductController {
 		return "redirect:findAll";
 	}
 	
-	
 	@RequestMapping("goInput")
 	public String goInput(ModelMap map) {
 		List<Product> list = productService.find();
 		map.put("list", list);
 		return "/admin/product/input";
 	}
-	
 }
