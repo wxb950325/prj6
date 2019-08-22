@@ -25,7 +25,7 @@ public class ProductController {
 	@RequestMapping("save")
 	public String save(Product product,ModelMap map) {
 		productService.save(product);
-		System.out.println("");
+		System.out.println("222");
 		System.out.println("ProductController.save()");
 		return "redirect:findAll";
 	}
