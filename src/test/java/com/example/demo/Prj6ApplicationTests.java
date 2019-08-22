@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import static org.junit.Assert.*;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -15,17 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.woniu.Prj6Application;
 import com.woniu.mapper.ProductMapper;
 
+import com.woniu.Prj6Application;
+import com.woniu.mapper.UserinfoMapper;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Prj6Application.class)
 public class Prj6ApplicationTests {
+
+	@Resource
+	private UserinfoMapper userinfoMapper;
 	
 	@Resource
 	private ProductMapper pm;
 	
 	@Test
 	public void contextLoads() {
-		
+		int i = userinfoMapper.countByExample(null);
+		System.out.println(i);
 	}
+	
 
 	@Test
 	public void testxxx() {
