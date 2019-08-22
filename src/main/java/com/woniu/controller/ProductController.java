@@ -18,7 +18,7 @@ import com.woniu.service.IProductService;
 @Transactional
 @RequestMapping("/admin/product/")
 public class ProductController {
-	
+	  
 	@Resource
 	private IProductService productService;
 	
