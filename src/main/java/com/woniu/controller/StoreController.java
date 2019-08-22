@@ -16,7 +16,7 @@ import com.woniu.service.impl.StoreServiceImpl;
 @Controller
 @RequestMapping("/before/store/")
 public class StoreController {
-	@Resource
+	@Resource  
 	private IStoreService StoreServiceImpl;
 	@Resource
 	private IProvinceService provinceServiceImpl;
