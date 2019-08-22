@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 </head>
-
+   
 <body>
 <h3>商品编辑</h3>
 <div class="container">

@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="findById?pid=${product.pid}">修改</a>
 	</TD>
 </TR>
-</c:forEach>
+</c:forEach>   
 </tbody>
 </TABLE>
 </div>

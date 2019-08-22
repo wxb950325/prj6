@@ -24,7 +24,7 @@ public class ProductServiceImpl implements IProductService {
 		product.setIsdelete(0);
 		productMapper.insertSelective(product);
 	}
-
+  
 	@Override
 	public void delete(Integer pid) {
 		// TODO Auto-generated method stub
