@@ -14,6 +14,12 @@
     <result column="note" property="note" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  <delete id="deleteBatch">
+  	delete from prodtype where tid in 
+  	<foreach collection="array" item="item" open="(" close=")" index="index" separator=",">
+  		#{item}
+  	</foreach>
+  </delete>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

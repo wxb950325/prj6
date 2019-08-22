@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import com.woniu.entity.PageBean;
 import com.woniu.entity.ProdType;
 import com.woniu.mapper.ProdTypeMapper;
 import com.woniu.service.IProdTypeService;
@@ -45,8 +47,16 @@ public class ProdTypeServiceImpl implements IProdTypeService {
 	}
 
 	@Override
-	public List<ProdType> findAll() {
-		return prodTypeMapper.selectByExample(null);
+	public List<ProdType> findAll(PageBean pageBean) {
+		List<ProdType> list = prodTypeMapper.selectByExample(null,new RowBounds(pageBean.getOffset(), pageBean.getLimit()));
+		int count = prodTypeMapper.countByExample(null);
+		pageBean.setCount(count);
+		return list;
+	}
+
+	@Override
+	public void deleteBatch(Integer[] tids) {
+		prodTypeMapper.deleteBatch(tids);
 	}
 	
 
