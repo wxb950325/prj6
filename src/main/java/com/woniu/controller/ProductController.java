@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.entity.Product;
 import com.woniu.service.IProductService;
-
+  
 @Controller 
 @Transactional
 @RequestMapping("/admin/product/")
