@@ -38,10 +38,6 @@
     <result column="p_details" property="pDetails" jdbcType="LONGVARCHAR" />
   </resultMap>
   
-  <select id="findByCount" resultMap="java.lang.Integer" >
-  	select count(*) from product
-  </select>
-  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

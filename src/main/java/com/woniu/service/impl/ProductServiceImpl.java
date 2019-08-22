@@ -23,6 +23,6 @@ public class ProductServiceImpl implements IProductService{
 
 	@Override
 	public int findByCount() {
-		return productMapper.findByCount();
+		return productMapper.countByExample(null);
 	}
 }
