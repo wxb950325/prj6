@@ -34,9 +34,19 @@ public class ProductController {
 		return "redirect:findAll";
 	}
 	
-	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {  //给商户的FindAll
-		List<Product> list = productService.find();
+	@RequestMapping("findAll2Seller")
+	public String findAll2Seller(ModelMap map) {         //给商户的FindAll
+		List<Product> list = productService.findAll2Seller();
+		for (Product product : list) {
+			System.out.println(product);
+		}
+		map.put("list", list);
+		return "/admin/product/list";
+	}
+	
+	@RequestMapping("findAll2buyers")
+	public String findAll2buyers(ModelMap map) {         //给逛大集首页的FindAll
+		List<Product> list = productService.findAll2buyers();
 		for (Product product : list) {
 			System.out.println(product);
 		}

@@ -15,13 +15,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
 	function goInput(){
-		location.href="goInput";
+		location.href="goInput";  
 	}  
+	 
+	first()
+	
+	$(function(){
+		$("#test").click(function(){
+			$.ajax({
+				   url: "findAll2buyers",
+				   dataType:"json",
+				   success: function(msg){
+				     alert(msg);
+				   }
+			});
+		});
 
+	});
+	
 </script>
 </head>
 <body>
-商品展示
+<h3>我的商品</h3>
 <div class="container">
 <TABLE border="1" width="900px" class="table table-bordered table-striped table-hover">
 <thead>
@@ -80,5 +95,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </TABLE>
 </div>
 <button onclick="goInput()">增加商品</button>
+<button id="test" onclick="first()">首页商品</button>
 </body>
 </html>
