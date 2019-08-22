@@ -25,9 +25,6 @@ public class ProductController {
 	@RequestMapping("save")
 	public String save(Product product,ModelMap map) {
 		productService.save(product);
-		System.out.println("222");
-		System.out.println("333");
-		System.out.println("ProductController.save()");
 		return "redirect:findAll";
 	}
 	
@@ -38,7 +35,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {//geishanghu
+	public String findAll(ModelMap map) {  //给商户的FindAll
 		List<Product> list = productService.find();
 		for (Product product : list) {
 			System.out.println(product);
@@ -46,7 +43,7 @@ public class ProductController {
 		map.put("list", list);
 		return "/admin/product/list";
 	}
-	
+	   
 	@RequestMapping("findById")
 	public String findById(Integer pid,ModelMap map) {
 		Product product = productService.find(pid);
@@ -54,7 +51,6 @@ public class ProductController {
 		System.out.println(product);
 		return "/admin/product/input";
 	}
-	
 	
 	@RequestMapping("delete")
 	public String delete(Integer pid) {

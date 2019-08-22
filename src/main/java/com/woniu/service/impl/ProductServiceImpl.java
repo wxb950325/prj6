@@ -54,7 +54,7 @@ public class ProductServiceImpl implements IProductService {
 		// TODO Auto-generated method stub
 		return productMapper.selectByExample(null);
 	}
-
+  
 	@Override
 	public Product find(Integer pid) {
 		// TODO Auto-generated method stub
