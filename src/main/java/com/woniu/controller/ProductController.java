@@ -26,6 +26,7 @@ public class ProductController {
 	public String save(Product product,ModelMap map) {
 		productService.save(product);
 		System.out.println("222");
+		System.out.println("333");
 		System.out.println("ProductController.save()");
 		return "redirect:findAll";
 	}
