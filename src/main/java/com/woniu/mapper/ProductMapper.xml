@@ -37,6 +37,7 @@
     -->
     <result column="p_details" property="pDetails" jdbcType="LONGVARCHAR" />
   </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
