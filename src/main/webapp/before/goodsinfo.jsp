@@ -72,6 +72,7 @@
 								<button type="button" id="num+">+</button>
 							</td>
 						</tr>
+						
 						<tr>
 							<td colspan="2" style="text-align: right;" >
 								<button class="btn-danger" value="" name="">
