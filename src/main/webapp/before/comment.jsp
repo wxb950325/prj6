@@ -10,9 +10,19 @@
 <script src="../js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
+		$(".li").hide();
+		$("#ul").hover(
+			function(){
+				$(".li").show()
+			},
+			function(){
+				$(".li").hide()
+			}
+		);		
 		$("#buy").click(function() {
 			location.href = "goodsinfo.jsp";
 		});
+		
 	});
 </script>
 </head>
@@ -23,14 +33,14 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-5" style="height: 50px; margin: auto">
 
-			<form id="">
+			<form id="" action="login" method="post">
 				<input type="text" name="username" id="username"
 					placeholder="请输入手机号" /> <input type="password" name="password"
 					id="password" placeholder="请输入密码"> <input type="button"
 					value="登录" /> <input type="button" value="注册" />
 			</form>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<form id="">
 				<input type="text" name="username" id="username" placeholder="来点啥" />
 				<input type="button" value="搜索" />
@@ -39,9 +49,22 @@
 		<div class="col-md-2">
 			<span class="glyphicon glyphicon-bed"
 				style="height: 50px; line-height: 50px;"> <a id="login">我的</a>
-			</span> <span class="glyphicon glyphicon-arrow-right"
+			</span> 
+			<span class="glyphicon glyphicon-arrow-right"
 				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/gwc.jsp">购物车</a>
 			</span>
+		</div>
+		<div class="col-md-2">
+			
+				<ul id="ul">
+					<span class="glyphicon glyphicon-home" 	style="height: 50px; line-height: 50px;">
+						卖家中心
+					</span>
+						<li class="li"><a href="/before/storeType/storeRegiste">注册开店</a></li>
+						<li class="li"><a>已卖出商品</a></li>
+						<li class="li"><a>出售中商品</a></li>
+				</ul>
+			
 		</div>
 	</nav>
 

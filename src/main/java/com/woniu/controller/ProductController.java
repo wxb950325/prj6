@@ -50,6 +50,7 @@ public class ProductController {
 		for (Product product : list) {
 			System.out.println(product);
 		}
+		System.out.println("ProductController.findAll()");
 		map.put("list", list);
 		return "/admin/product/list";
 	}
