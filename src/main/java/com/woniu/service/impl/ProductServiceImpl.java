@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woniu.entity.Product;
-import com.woniu.entity.ProductExample;
 import com.woniu.mapper.ProductMapper;
 import com.woniu.service.IProductService;
 
