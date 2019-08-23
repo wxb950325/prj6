@@ -7,10 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Store</title>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
 </head>
 <body>
 	<h3>商户管理</h3>
-	<table border="1" width="100%">
+	<table class="table table-bordered table-hover table-striped" border="1">
 		<tr>
 			<td>sid</td>
 			<td>sname</td>
@@ -58,6 +60,15 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/before/store/goInput">添加</a>
+	<a href="/before/store/goInput">添加商户</a>
+	<button class="btn btn-info" class="btn"><a href="/before/store/goInput">添加商户</a></button>
+	<hr align="center" width="90%" size="10">
+	<!-- 版权 -->
+	<div class="bottom_margin"></div>
+	<div class="allcopy"
+		style="color: #4a4a49 !important; font-size: 13px;" align="center">
+		Copyright &copy; 2018-2019 辽宁禾丰牧业股份有限公司版权所有 <a href="javascript:;"
+			onClick="goToMinistry();return false;">辽ICP备14005490号-5</a>
+	</div>
 </body>
 </html>
