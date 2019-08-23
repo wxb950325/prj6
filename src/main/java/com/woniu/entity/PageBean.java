@@ -9,7 +9,7 @@ public class PageBean {
 	
 	//为了向EasyUI兼容   转到offset 和limit
 	private Integer page = 1;
-	private Integer rows = 10;
+	private Integer rows = 3;
 	
 	public Integer getPage() {
 		return page;

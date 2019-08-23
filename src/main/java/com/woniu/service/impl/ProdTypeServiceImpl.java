@@ -25,8 +25,12 @@ public class ProdTypeServiceImpl implements IProdTypeService {
 	@Override
 	public void delete(Integer tid) {
 		ProdType prodType = prodTypeMapper.selectByPrimaryKey(tid);
-		prodType.setIsdelete(1);
-		prodTypeMapper.insertSelective(prodType);
+		int i = prodType.getIsdelete();
+		if(i==1) {
+			i=0;
+		}else {i=1;}
+		prodType.setIsdelete(i);
+		prodTypeMapper.updateByPrimaryKey(prodType);
 	}
 
 	@Override

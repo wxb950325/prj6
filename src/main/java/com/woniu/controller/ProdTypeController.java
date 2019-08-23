@@ -15,7 +15,7 @@ import com.woniu.entity.PageBean;
 import com.woniu.entity.ProdType;
 import com.woniu.service.IProdTypeService;
 
-@RequestMapping("/admin/prodType/")
+@RequestMapping("/before/prodType/")
 @Controller
 public class ProdTypeController {
 	
@@ -55,9 +55,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.update(prodType);
-			msg = new Message(true, "学生修改成功");
+			msg = new Message(true, "修改成功");
 		} catch (Exception e) {
-			msg = new Message(false, "学生修改失败"+e.getMessage());
+			msg = new Message(false, "修改失败"+e.getMessage());
 		}
 		return msg;
 	}

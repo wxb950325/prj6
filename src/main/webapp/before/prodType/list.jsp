@@ -33,12 +33,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
-		        {field:'tname',title:'学生姓名',width:100},   
+		        {field:'tname',title:'商品品牌名称姓名',width:100},   
 		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
 					if (value==1){
-						return '已删除';
-					} else {
 						return '已保留';
+					} else {
+						return '已删除';
 					}
 				}
 				},
@@ -46,20 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					if (value < 60){
 						return 'color:red;';
 					}
-				}, */
-				{field:'parentTid',title:'父级父类id',width:100
-
-				},
-				{field:'typePhoto',titlt:'父类图片路径',width:100
-
-				},
-				{field:'note',titlt:'备注',width:100
-
-				},
-				},
+				},}, */
+				{field:'parentTid',title:'父级父类id',width:100},
+				{field:'typePhoto',title:'父类图片路径',width:100},
+				{field:'note',title:'备注',width:100},
+				
 		        {field:'operate',title:'操作',width:100,formatter: function(value,row,index){
-		        	var btns = "<a id=\"btn\" href=\"javascript:delete("+row.stid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.stid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
 					return btns;
 				}
 				}
@@ -71,10 +65,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	})
 	
-	function deleteItem(stid){
+	function deleteItem(tid){
 		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
 		    if (r){   
-		    	$.getJSON("delete",{stid:stid},function(json){
+		    	$.getJSON("delete",{tid:tid},function(json){
 		    		$.messager.show({
 		    			title:'My Title',
 		    			msg:json.msg,
@@ -114,8 +108,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#win').window('open');  // open a window 
 			$.getJSON("findById",{tid:tid},function(json){
 				$('#ff').form('load',json);	// 从URL加载
-				var sex = json.isdelete?1:0;
-				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1');
+				/* var isdelete = json.isdelete?1:0;
+				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1'); */
 			});
 		
 	}
@@ -176,8 +170,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <input class="easyui-validatebox" type="text" name="parentTid" data-options="required:true" />  
 	    </div>
 	    <div>  
-	        <label for="parePhoto">parePhoto:</label>  
-	        <input class="easyui-validatebox" type="text" name="parePhoto" data-options="required:true" />  
+	        <label for="typePhoto">typePhoto:</label>  
+	        <input class="easyui-validatebox" type="text" name="typePhoto" data-options="required:true" />  
 	    </div>
 	    <div>  
 	        <label for="note">note:</label>  
@@ -185,7 +179,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>  
 	    <div>  
 	        <label for="isdelete">isdelete:</label>  
-	        <input type="radio" name="stsex" value="0">已保留<input type="radio" name="stsex" value="1">已删除
+	        <input type="radio" name="isdelete" value="0">已删除<input type="radio" name="isdelete" value="1">已保留
 	    </div>  
 	    <!-- <div>  
 	        <label for="score">score:</label>  
