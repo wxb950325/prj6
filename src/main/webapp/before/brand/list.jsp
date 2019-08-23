@@ -29,16 +29,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品类型管理',
+		    title:'商品品牌管理',
 		    pagination:true,
 		    columns:[[   
-		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
-		        {field:'tname',title:'商品名称姓名',width:100},   
-		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
+		        {field:'bid',checkbox:'checkbox',title:'品牌id',width:100},   
+		        {field:'bname',title:'品牌名',width:100},   
+		        {field:'state',title:'状态',width:100,formatter: function(value,row,index){
 					if (value==1){
-						return '已保留';
+						return '已上架';
 					} else {
-						return '已删除';
+						return '已下架';
 					}
 				}
 				},
@@ -47,13 +47,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						return 'color:red;';
 					}
 				},}, */
-				{field:'parentTid',title:'父级父类id',width:100},
-				{field:'typePhoto',title:'父类图片路径',width:100},
 				{field:'note',title:'备注',width:100},
 				
 		        {field:'operate',title:'操作',width:100,formatter: function(value,row,index){
-		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.bid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.bid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
 					return btns;
 				}
 				}
@@ -65,10 +63,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	})
 	
-	function deleteItem(tid){
+	function deleteItem(bid){
 		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
 		    if (r){   
-		    	$.getJSON("delete",{tid:tid},function(json){
+		    	$.getJSON("delete",{bid:bid},function(json){
 		    		$.messager.show({
 		    			title:'My Title',
 		    			msg:json.msg,
@@ -87,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var selections = $('#dg').datagrid('getSelections');  // fix the 'name' column size
 		for(var i=0;i<selections.length;i++)
 		{
-			stidstring += selections[i].tid;
+			stidstring += selections[i].bid;
 			if(i<selections.length-1)
 				stidstring +=",";
 		}
@@ -103,10 +101,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	}
 	
-	function findById(tid){
+	function findById(bid){
 		$('#ff').form('clear');	// 从URL加载 		
 		$('#win').window('open');  // open a window 
-			$.getJSON("findById",{tid:tid},function(json){
+			$.getJSON("findById",{bid:bid},function(json){
 				$('#ff').form('load',json);	// 从URL加载
 				/* var isdelete = json.isdelete?1:0;
 				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1'); */
@@ -117,13 +115,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function openForm(){
 		$('#ff').form('clear');	// 从URL加载 
 		$('#win').window('open');  // open a window 
-		$("input[name='isdelete'][value=0]").prop('checked','1');
+		/* $("input[name='state'][value=0]").prop('checked','1'); */
 	}
 	
 	function dosave(){
-		var tid = $("#tid").val();
+		var tid = $("#bid").val();
 		var path = "save";
-		if(tid!=null&&tid!=""&&tid!=undefined){
+		if(bid!=null&&bid!=""&&bid!=undefined){
 			path = "update";
 		}
 		$('#ff').form('submit', {   
@@ -158,29 +156,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
         data-options="iconCls:'icon-save',modal:true,closed:true">  
-    	商品类型管理
+    	商品品牌管理
     <form id="ff" method="post">  
-    	<input type="hidden" name="tid" id="tid">
+    	<input type="hidden" name="bid" id="bid">
 	    <div>  
-	        <label for="tname">tname:</label>  
-	        <input class="easyui-validatebox" type="text" name="tname" data-options="required:true" />  
+	        <label for="bname">bname:</label>  
+	        <input class="easyui-validatebox" type="text" name="bname" data-options="required:true" />  
 	    </div>
 	    <div>  
-	        <label for="parentTid">parentTid:</label>  
-	        <input class="easyui-validatebox" type="text" name="parentTid" data-options="required:true" />  
-	    </div>
-	    <div>  
-	        <label for="typePhoto">typePhoto:</label>  
-	        <input class="easyui-validatebox" type="text" name="typePhoto" data-options="required:true" />  
-	    </div>
+	        <label for="state">state:</label>  
+	        <input type="radio" name="state" value="0">已下架<input type="radio" name="state" value="1">已上架
+	    </div> 
 	    <div>  
 	        <label for="note">note:</label>  
 	        <input class="easyui-validatebox" type="text" name="note" data-options="required:true" />  
 	    </div>  
-	    <div>  
-	        <label for="isdelete">isdelete:</label>  
-	        <input type="radio" name="isdelete" value="0">已删除<input type="radio" name="isdelete" value="1">已保留
-	    </div>  
+	     
 	    <!-- <div>  
 	        <label for="score">score:</label>  
 	        <input class="easyui-numberbox" type="text" name="score" data-options="required:true" />  
