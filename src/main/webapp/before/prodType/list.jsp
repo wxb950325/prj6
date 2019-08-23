@@ -29,27 +29,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    toolbar: '#tb',
 		    pageSize:20,
 		    striped:true,
-		    title:'学生管理',
+		    title:'商品品牌管理',
 		    pagination:true,
 		    columns:[[   
-		        {field:'stid',checkbox:'checkbox',title:'编号',width:100},   
-		        {field:'stname',title:'学生姓名',width:100},   
-		        {field:'stsex',title:'性别',width:100,formatter: function(value,row,index){
-					if (value){
-						return '女';
+		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
+		        {field:'tname',title:'学生姓名',width:100},   
+		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
+					if (value==1){
+						return '已删除';
 					} else {
-						return '男';
+						return '已保留';
 					}
 				}
 				},
-		        {field:'score',title:'成绩',width:100,styler: function(value,row,index){
+		       /*  {field:'score',title:'成绩',width:100,styler: function(value,row,index){
 					if (value < 60){
 						return 'color:red;';
 					}
-				}
+				}, */
+				{field:'parentTid',title:'父级父类id',width:100
+
+				},
+				{field:'typePhoto',titlt:'父类图片路径',width:100
+
+				},
+				{field:'note',titlt:'备注',width:100
+
+				},
 				},
 		        {field:'operate',title:'操作',width:100,formatter: function(value,row,index){
-		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.stid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+		        	var btns = "<a id=\"btn\" href=\"javascript:delete("+row.stid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
 		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.stid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
 					return btns;
 				}
@@ -69,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    		$.messager.show({
 		    			title:'My Title',
 		    			msg:json.msg,
-		    			timeout:5000,
+		    			timeout:4000,
 		    			showType:'slide'
 		    		});
 					$('#dg').datagrid('reload');    // reload the current page data  
@@ -84,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var selections = $('#dg').datagrid('getSelections');  // fix the 'name' column size
 		for(var i=0;i<selections.length;i++)
 		{
-			stidstring += selections[i].stid;
+			stidstring += selections[i].tid;
 			if(i<selections.length-1)
 				stidstring +=",";
 		}
@@ -93,20 +102,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.messager.show({
     			title:'My Title',
     			msg:json.msg,
-    			timeout:5000,
+    			timeout:4000,
     			showType:'slide'
     		});
 			$('#dg').datagrid('reload');    // reload the current page data  
 		});
 	}
 	
-	function findById(stid){
+	function findById(tid){
 		$('#ff').form('clear');	// 从URL加载 		
 		$('#win').window('open');  // open a window 
-			$.getJSON("findById",{stid:stid},function(json){
+			$.getJSON("findById",{tid:tid},function(json){
 				$('#ff').form('load',json);	// 从URL加载
-				var sex = json.stsex?1:0;
-				$("input[name='stsex'][value="+sex+"]").prop('checked','true');
+				var sex = json.isdelete?1:0;
+				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1');
 			});
 		
 	}
@@ -114,13 +123,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function openForm(){
 		$('#ff').form('clear');	// 从URL加载 
 		$('#win').window('open');  // open a window 
-		$("input[name='stsex'][value=0]").prop('checked','true');
+		$("input[name='isdelete'][value=0]").prop('checked','1');
 	}
 	
 	function dosave(){
-		var stid = $("#stid").val();
+		var tid = $("#tid").val();
 		var path = "save";
-		if(stid!=null&&stid!=""&&stid!=undefined){
+		if(tid!=null&&tid!=""&&tid!=undefined){
 			path = "update";
 		}
 		$('#ff').form('submit', {   
@@ -134,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       	$.messager.show({
 	    			title:'My Title',
 	    			msg:json.msg,
-	    			timeout:5000,
+	    			timeout:4000,
 	    			showType:'slide'
 	    		});
 		       	$('#win').window('close');  // open a window 
@@ -155,28 +164,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
         data-options="iconCls:'icon-save',modal:true,closed:true">  
-    	用户管理
-    	<form id="ff" method="post">  
-    	<input type="hidden" name="stid" id="stid">
+    	商品品牌管理
+    <form id="ff" method="post">  
+    	<input type="hidden" name="tid" id="tid">
 	    <div>  
-	        <label for="name">stname:</label>  
-	        <input class="easyui-validatebox" type="text" name="stname" data-options="required:true" />  
+	        <label for="tname">tname:</label>  
+	        <input class="easyui-validatebox" type="text" name="tname" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="parentTid">parentTid:</label>  
+	        <input class="easyui-validatebox" type="text" name="parentTid" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="parePhoto">parePhoto:</label>  
+	        <input class="easyui-validatebox" type="text" name="parePhoto" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="note">note:</label>  
+	        <input class="easyui-validatebox" type="text" name="note" data-options="required:true" />  
 	    </div>  
 	    <div>  
-	        <label for="stsex">stsex:</label>  
-	        <input type="radio" name="stsex" value="0">男<input type="radio" name="stsex" value="1">女
+	        <label for="isdelete">isdelete:</label>  
+	        <input type="radio" name="stsex" value="0">已保留<input type="radio" name="stsex" value="1">已删除
 	    </div>  
-	    <div>  
+	    <!-- <div>  
 	        <label for="score">score:</label>  
 	        <input class="easyui-numberbox" type="text" name="score" data-options="required:true" />  
-	    </div>   
+	    </div>  -->  
 	    <div>  
-	            <input type="button" onclick="dosave()" value="保存" />  
+	    	<input type="button" onclick="dosave()" value="保存" />  
 	    </div> 
 	</form>  
     	   
 </div>  
-
 
 </body>
 </html>
