@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    url:'findAll', 
 		    fitColumns:true,
 		    toolbar: '#tb',
-		    pageSize:20,
+		    pageSize:10,
 		    striped:true,
 		    title:'商品品牌管理',
 		    pagination:true,

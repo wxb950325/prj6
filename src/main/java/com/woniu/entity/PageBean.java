@@ -2,7 +2,7 @@ package com.woniu.entity;
 
 public class PageBean {
 	private Integer offset;//从哪里开始
-	private Integer limit = 10;//去几条  pageSize
+	private Integer limit = 3;//去几条  pageSize
 	private Integer pageNow = 1;//当前页
 	private Integer count;//总记录数
 	private Integer pageCount;//总页数
