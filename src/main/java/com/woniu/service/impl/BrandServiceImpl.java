@@ -19,7 +19,6 @@ public class BrandServiceImpl implements IBrandService {
 	
 	@Override
 	public void save(Brand brand) {
-		brand.setState(0);
 		brandMapper.insertSelective(brand);
 	}
 
