@@ -16,4 +16,6 @@ public interface IBrandService {
 	
 	public Brand find(Integer bid);
 	public List<Brand> findAll(PageBean pageBean);
+	
+	List findByBrand(String brand);
 }

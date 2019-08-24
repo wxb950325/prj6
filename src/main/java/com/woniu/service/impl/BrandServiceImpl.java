@@ -59,4 +59,9 @@ public class BrandServiceImpl implements IBrandService {
 		brandMapper.deleteBatch(tids);
 	}
 
+	@Override
+	public List findByBrand(String brand) {
+		return brandMapper.findByBrand(brand);
+	}
+
 }

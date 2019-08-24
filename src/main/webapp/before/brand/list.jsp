@@ -60,7 +60,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.easyui-linkbutton').linkbutton({   
 				});  
 			}  
-		}); 
+		});
+		var vm = new Vue({
+	        el:'#app',
+	        data:{
+	            json:'',
+	            bname:''
+	   	    },
+	        methods:{
+	        	findByBrand:function(event){
+	            	this.$http({
+	                	method:'post',
+	                	url:'findByBrand',
+	                	emulateJSON:true, 
+	                	params:{
+	                		bname:this.bname
+	                	},	
+	                }).then(function(res){
+	                	 this.json=res.body;
+	                	 if(event.code!='Backspace')
+		                	 if(this.json.length==1){
+		                		 this.bname=this.json[0].bname;
+		                		 this.json ='';
+		                	 }
+	                },function(){
+	                    console.log('请求失败处理');
+	                });
+	            },
+	            select:function(brand){
+	            	this.bname=bname;
+	            	this.json='';
+	            }
+	        }
+	    }); 
 	})
 	
 	function deleteItem(bid){
@@ -143,6 +175,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    }   
 		}); 
 	}
+
+/* 	$(function(){
+	    var vm = new Vue({
+	        el:'#app',
+	        data:{
+	            json:'',
+	            bname:''
+	   	    },
+	        methods:{
+	        	findByBrand:function(event){
+	            	this.$http({
+	                	method:'post',
+	                	url:'findByBrand',
+	                	emulateJSON:true, 
+	                	params:{
+	                		bname:this.bname
+	                	},	
+	                }).then(function(res){
+	                	 this.json=res.body;
+	                	 if(event.code!='Backspace')
+		                	 if(this.json.length==1){
+		                		 this.bname=this.json[0].bname;
+		                		 this.json ='';
+		                	 }
+	                },function(){
+	                    console.log('请求失败处理');
+	                });
+	            },
+	            select:function(brand){
+	            	this.bname=bname;
+	            	this.json='';
+	            }
+	        }
+	    });
+	}) */
+	
 </script>
 </head>
 <body>
@@ -182,6 +250,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</form>  
     	   
 </div>  
+
+<div id="app">
+	<INPUT TYPE="text" NAME="brand" v-model="brand" @keyup="findByBrand($event)"  style="width:175px">
+	
+	<TABLE bgColor="#FFFFCC" width="175px">
+		<TR v-for="n in json" bgcolor="#FFFFFF">
+			<TD @click="select(n.bname)">{{n.bname}}</TD>
+		</TR>
+	</TABLE>
+</div>
 
 </body>
 </html>

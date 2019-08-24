@@ -3,7 +3,8 @@
 	    "-//mybatis.org//DTD Config 3.0//EN"  
 	    "http://mybatis.org/dtd/mybatis-3-config.dtd">
 	    
-<configuration>  
+<configuration>
+		<!-- 此处的value值得改变会影响到PageInterceptor中数据库类型的选择 -->  
 		<properties>
 			<property name="dialect" value="mysql"/>
 		</properties>

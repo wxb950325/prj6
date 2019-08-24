@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
-		        {field:'tname',title:'商品名称姓名',width:100},   
+		        {field:'tname',title:'商品名称',width:100},   
 		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
 					if (value==1){
 						return '已保留';
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	})
 	
 	function deleteItem(tid){
-		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
+		$.messager.confirm('Confirm','确定删除?',function(r){   
 		    if (r){   
 		    	$.getJSON("delete",{tid:tid},function(json){
 		    		$.messager.show({
@@ -79,7 +79,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 		    }   
 		});  
-		
 	}
 	
 	function deleteBatch(){
