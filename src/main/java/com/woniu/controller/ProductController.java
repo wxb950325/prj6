@@ -21,7 +21,7 @@ public class ProductController {
 	  
 	@Resource
 	private IProductService productService;
-	
+	   
 	@RequestMapping("save")
 	public String save(Product product,ModelMap map) {
 		productService.save(product);
