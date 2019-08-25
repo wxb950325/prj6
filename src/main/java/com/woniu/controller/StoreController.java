@@ -1,13 +1,18 @@
 package com.woniu.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.woniu.entity.Message;
+import com.woniu.entity.PageBean;
 import com.woniu.entity.Store;
 import com.woniu.service.IProvinceService;
 import com.woniu.service.IStoreService;
@@ -30,24 +35,40 @@ public class StoreController {
 
 	// 删除
 	@RequestMapping("delete")
-	public String delete(Integer sid) {
-		StoreServiceImpl.delete(sid);
-		return "redirect:findAll";
+	public @ResponseBody Message delete(Integer sid) {
+		Message msg = null;
+		try {
+			StoreServiceImpl.delete(sid);
+			msg = new Message(true, "商户删除成功");
+		} catch (Exception e) {
+			msg = new Message(false, "商户删除失败");
+		}
+		
+		return msg;
 	}
 
 	// 恢复
 	@RequestMapping("revoke")
-	public String revoke(Integer sid) {
-		StoreServiceImpl.revoke(sid);
-		return "redirect:findAll";
+	public Message revoke(Integer sid) {
+		Message msg = null;
+		try {
+			StoreServiceImpl.revoke(sid);
+			msg = new Message(true, "商户恢复成功");
+		} catch (Exception e) {
+			msg = new Message(false, "商户恢复失败"+e.getMessage());
+		}
+		
+		return msg;
 	}
 
 	// 商户查所有
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {
-		List list = StoreServiceImpl.findAll();
-		map.put("list", list);
-		return "/before/store/list";
+	public @ResponseBody Map findAll(PageBean pagebean) {
+		List rows = StoreServiceImpl.findAll(pagebean);
+		Map map = new HashMap();
+		map.put("total", pagebean.getCount());
+		map.put("rows", rows);
+		return map;
 	}
 
 	// 商户查所有
