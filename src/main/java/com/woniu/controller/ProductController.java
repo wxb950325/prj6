@@ -19,7 +19,7 @@ import com.woniu.service.IProductService;
 @RequestMapping("/admin/product/")
 public class ProductController {
 	  
-	@Resource
+	@Resource 
 	private IProductService productService;
 	
 	@RequestMapping("save")

@@ -56,7 +56,7 @@
 		</div>
 		<div class="col-md-2">
 			
-				<ul id="ul">
+				<ul id="ul" style="list-style-type:none">
 					<span class="glyphicon glyphicon-home" 	style="height: 50px; line-height: 50px;">
 						卖家中心
 					</span>
