@@ -1,11 +1,16 @@
 package com.woniu.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.woniu.entity.Userinfo;
 
 public interface IUserService {
 	
-	void registe(Userinfo info);
+	boolean registe(Userinfo info);
+	boolean login(Userinfo info,HttpSession session);
+	List findByPhone(Userinfo info);
+	
 	
 }

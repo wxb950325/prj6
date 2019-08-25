@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.woniu.mapper")
+@ServletComponentScan("com.woniu.filter")
 public class Prj6Application {
 
 	public static void main(String[] args) {

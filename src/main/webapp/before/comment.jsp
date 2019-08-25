@@ -22,7 +22,9 @@
 		$("#buy").click(function() {
 			location.href = "goodsinfo.jsp";
 		});
-		
+		$("#registe").click(function(){
+			location.href = "/before/userinfo/registe.jsp";
+		})
 	});
 </script>
 </head>
@@ -33,22 +35,22 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-5" style="height: 50px; margin: auto">
 
-			<form id="" action="login" method="post">
-				<input type="text" name="username" id="username"
-					placeholder="请输入手机号" /> <input type="password" name="password"
-					id="password" placeholder="请输入密码"> <input type="button"
-					value="登录" /> <input type="button" value="注册" />
+			<form action="/before/userinfo/login" method="post">
+				<input type="text" name="phone" id="phone"
+					placeholder="请输入手机号" /> <input type="password" name="upass"
+					id="password" placeholder="请输入密码"> <input type="submit"
+					value="登录" /> <input type="button" id="registe" value="注册" />
 			</form>
 		</div>
 		<div class="col-md-2">
 			<form id="">
-				<input type="text" name="username" id="username" placeholder="来点啥" />
+				<input type="text" style="width:120px;" name="username" id="username" placeholder="来点啥" />
 				<input type="button" value="搜索" />
 			</form>
 		</div>
 		<div class="col-md-2">
 			<span class="glyphicon glyphicon-bed"
-				style="height: 50px; line-height: 50px;"> <a id="login">我的</a>
+				style="height: 50px; line-height: 50px;"> <a href="/before/userinfo/main/mainInfo.jsp">${sessionScope.loginInfo==null?'我的':sessionScope.loginInfo.phone }</a>
 			</span> 
 			<span class="glyphicon glyphicon-arrow-right"
 				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/gwc.jsp">购物车</a>

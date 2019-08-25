@@ -7,7 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>    
 <!DOCTYPE html>
-<html>
+<html>  
 <head>  
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -17,33 +17,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function goInput(){
 		location.href="goInput";  
 	}  
-	 
-	first()
-	
-	$(function(){
-		$("#test").click(function(){
-			$.ajax({
-				   url: "findAll2buyers",
-				   dataType:"json",
-				   success: function(msg){
-				     alert(msg);
-				   }
-			});
-		});
 
-	});
-	
 </script>
 </head>
 <body>
 <h3>我的商品</h3>
 <div class="container">
+
 <TABLE border="1" width="900px" class="table table-bordered table-striped table-hover">
 <thead>
 <TR class="success">
 	<TD>商品名称</TD>
 	<TD>类型id</TD>
-	<TD>商户id</TD>
 	<TD>商品库存</TD>
 	<TD>商品图片</TD>
 	<TD>品牌id</TD>
@@ -68,9 +53,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <TR>
 	<TD>${product.pName}</TD>
 	<TD>${product.tid}</TD>
-	<TD>${product.sid}</TD>
 	<TD>${product.stock}</TD>
-	<TD>${product.photo}</TD>
+	<TD><img src="${pageContext.request.contextPath }${product.photo }" width="200" /></TD>
 	<TD>${product.bid}</TD>
 	<TD>${product.pDescribe}</TD>
 	<TD>${product.pDetails}</TD>
@@ -84,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<TD>${product.isaudit}</TD>
 	<%-- <TD>${product.audittime}</TD> --%>
 	<TD>${product.pStatus}</TD>
-	<TD>${product.isdelete==0?'已删除':'已恢复'}</TD>
+	<TD>${product.isdelete==0?'删除':'正常'}</TD>
 	<TD>
 		<a href="${product.isdelete==1?'delete':'revoke'}?pid=${product.pid}">${product.isdelete==1?'删除':'恢复'}</a> 
 		<a href="findById?pid=${product.pid}">修改</a>
@@ -93,8 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </c:forEach>   
 </tbody>
 </TABLE>
+
 </div>
 <button onclick="goInput()">增加商品</button>
-<button id="test" onclick="first()">首页商品</button>
 </body>
 </html>

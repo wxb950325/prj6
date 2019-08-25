@@ -56,44 +56,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<form id="login_form" style="height: 285px" class="zcxin_form01"
 					action="registe" method="post">
 					<div>
-						<p>手机号码：</p>
+						手机号码：
 						<input type="text" name="phone" id="phone"
-							placeholder="请输入手机号码" class="zcxin_text01" />
+							placeholder="请输入手机号码" onchange="phoneCheck()" onkeydown="phoneCheck()" />
 						<span id="phoneNote"></span>
 					</div>
 					<div>
-						<p>验证码：</p>
+						验证码：
 						<input type="text" name="captchaCode" id="captchaCode"
-							placeholder="请输入验证码" class="zcxin_text04" /> <img
+							placeholder="请输入验证码"  /> 
+							<img
 							src="https://member.godaji.com/getKaptcha.png" width="80"
-							height="40" style="float: left" id="kaptcha"> <a
-							href="javascript:void(0)" class="lanse px12 zcxinhuan"
-							id="js-refresh">看不清？换一个</a>
+							height="20" id="kaptcha"> 
+							<a href="javascript:void(0)"  id="js-refresh">
+							看不清？换一个</a>
 					</div>
 					<div style="position: relative">
-						<p>短信验证码：</p>
+						短信验证码：
 						<input type="text" name="verifyCode" id="verifyCode"
-							placeholder="请输入短信验证码" class="zcxin_text01" /> <input
-							type="button" value="获取验证码" class="zcxin_yzmk" id="js-send-sms">
+							placeholder="请输入短信验证码" /> <input
+							type="button" value="获取验证码" id="js-send-sms">
 					</div>
 					<div>
-						<p>密码：</p>
+						密码：
 						<input type="password" name="upass" id="upass"
-							placeholder="请输入密码" class="zcxin_text01" />
+							placeholder="请输入密码" />
 					</div>
 					<div>
-						<p>确认密码：</p>
+						确认密码：
 						<input type="password" name="repeatPassword" id="repeatPassword"
-							placeholder="请再次输入密码" class="zcxin_text01" />
+							placeholder="请再次输入密码" />
 					</div>
 					<input type="submit" value="注册" class="zcxin_text03"
 						id="js-register" />
 				</form>
 			</div>
 			<div class="zcxin_gg">
-				<a> <img
-					src="http://qn.hefengren.com/advertisement/yt/e753b492-834d-43b6-945f-55b854cab1bc.png">
-				</a>
+				<img
+					src="<%=basePath %>image/registe.png">
 			</div>
 			<div class="tsck"></div>
 		</div>
@@ -105,32 +105,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 </html>
 <script>
-	function phoneCheck(){
-		var phone = $("#phone").val();
-		var flag = false;
-	      var message = "";
-	      var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;       
-	      if(phone == ''){
-	        message = "手机号码不能为空！";
-	      }else if(phone.length !=11){
-	        message = "请输入有效的手机号码！";
-	      }else if(!myreg.test(phone)){
-	        message = "请输入有效的手机号码！";
-	      }else if(checkPhoneIsExist()){
-	        message = "该手机号码已经被绑定！";
-	      }else{
-	          flag = true;
-	      }
-	      if(!flag){
-	     //提示错误效果
-	     	$("#phoneNote").html("");
-	        $("#phoneNote").html(message);
-	      }else{
-	           //提示正确效果
-	        $("#phoneNote").html("该手机号码可用");
-	      }
-	      return flag;
-		
-	}
+function phoneCheck(){
+	var phone = $("#phone").val();
+	var flag = false;
+      var message = "";
+      var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;       
+      if(phone == ''){
+        message = "手机号码不能为空！";
+      }else if(phone.length !=11){
+        message = "请输入有效的手机号码！";
+      }else if(!myreg.test(phone)){
+        message = "请输入有效的手机号码！";
+      }else if(checkPhoneIsExist()){
+        message = "该手机号码已经被绑定！";
+      }else{
+          flag = true;
+      }
+      if(!flag){
+     //提示错误效果
+     	$("#phoneNote").html("");
+        $("#phoneNote").html(message);
+      }else{
+           //提示正确效果
+        $("#phoneNote").html("该手机号码可用");
+      }
+      return flag;
+	
+}
 </script>
 
