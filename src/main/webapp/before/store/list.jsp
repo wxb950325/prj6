@@ -12,7 +12,8 @@
 </head>
 <body>
 	<h3>商户管理</h3>
-	<table class="table table-bordered table-hover table-striped" border="1">
+	<table class="table table-bordered table-hover table-striped"
+		border="1">
 		<tr>
 			<td>sid</td>
 			<td>sname</td>
@@ -48,21 +49,16 @@
 				<td>${store.isaudit }</td>
 				<td>${store.audittime }</td>
 				<td>${store.isdelete==0?'已删除':'正常' }</td>
-				<td>
-					<a href="">
-						${store.isdelete?'恢复':'删除' }
-					</a>
-					|
-					<a href="findById?sid=${store.sid}">
-						edit
-					</a>
-				</td>
+				<td><a href=""> ${store.isdelete?'恢复':'删除' } </a> | <a
+					href="findById?sid=${store.sid}"> edit </a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<a href="/before/store/goInput">添加商户</a>
-	<button class="btn btn-info" class="btn"><a href="/before/store/goInput">添加商户</a></button>
-	<hr align="center" width="90%" size="10">
+	<button class="btn btn-info" class="btn">
+		<a href="/before/store/goInput">添加商户</a>
+	</button>
+	<hr align="center" width="90%" size="1">
 	<!-- 版权 -->
 	<div class="bottom_margin"></div>
 	<div class="allcopy"
