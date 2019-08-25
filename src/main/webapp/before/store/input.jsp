@@ -12,10 +12,22 @@
 	<h3>添加页面</h3>
 	<form action="save" method="post">
 		<input type="hidden" name="sid" /><br>
-		sname:<input type="text" name="sname" /><br>
-		uid:<input type="text" name="uid" /><br>
-		legal_name:<input type="text" name="legalName" /><br>
-		legal_photo:<input type="file" name="legalPhoto" /><br>
+		<h3>sname</h3>
+		<div>
+			<input type="text" name="sname" />
+		</div>
+		<h3>uid</h3>
+		<div>
+		<input type="text" name="uid" />
+		</div>
+		<h3>legal_name</h3>
+		<div>
+		<input type="text" name="legalName" />
+		</div>
+		<h3>legal_photo</h3>
+		<div>
+		<input type="file" name="legalPhoto" />
+		</div>
 		省<select id="prov">
 			<c:forEach items="${prov}" var="p">
 			<option value="${p.pid}">
@@ -38,8 +50,14 @@
 			</c:forEach>
 		</select>
 		<br>
-		assessor_id:<input type="text" name="assessorId" /><br>
-		audittime:<input type="datetime" name="audittime"><br>
+		<h3>assessor_id</h3>
+		<div>
+			<input type="text" name="assessorId" />
+		</div>
+		<h3>audittime</h3>
+		<div>
+			<input type="datetime" name="audittime">
+		</div>
 		<INPUT TYPE="submit" value="${store==null?'save':'update' }">
 	</form>
 </body>
