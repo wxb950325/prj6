@@ -46,7 +46,6 @@
 </script>
 </head>
 <body>
-
 	<div class="dlyxz_head">
 		<a href="https://member.godaji.com/business"><img
 			src="https://member.godaji.com/godaji_member/resources/images/newPage/logo.png"></a>
@@ -67,15 +66,15 @@
 						class="dlyxz_form01">
 						<div>
 							<p>手机号码:</p>
-							<input type="text" name="username" id="username" value=""
+							<input type="text" name="phone" id="phone" value=""
 								maxlength="11" placeholder="请输入手机号码" class="dlyxz_text01" />
 						</div>
 						<div>
 							<p>密码:</p>
-							<input type="password" name="password" id="password"
+							<input type="password" name="upass" id="upass"
 								placeholder="请输入密码" class="dlyxz_text01" />
 						</div>
-						<input type="button" value="登录" class="dlyxz_text03"
+						<input type="submit" value="登录" class="dlyxz_text03"
 								id="js-login" />
 						<a class="dlyxz_wj01" href="https://member.godaji.com/forgot.html">忘记密码？</a>
 					</form>
@@ -85,7 +84,6 @@
 					<a href="registe.jsp">注册>></a>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </body>

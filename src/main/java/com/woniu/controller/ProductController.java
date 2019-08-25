@@ -1,15 +1,24 @@
 package com.woniu.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.woniu.entity.Product;
 import com.woniu.service.IProductService;
@@ -19,35 +28,90 @@ import com.woniu.service.IProductService;
 @RequestMapping("/admin/product/")
 public class ProductController {
 	  
-	@Resource 
-	private IProductService productService;
+	@Resource
+	private IProductService productServiceImpl;
 	
+	private String photo;
+	   
 	@RequestMapping("save")
-	public String save(Product product,ModelMap map) {
-		productService.save(product);
-		return "redirect:findAll";
+	public String save(Product product,ModelMap map){
+		product.setPhoto(photo);
+		productServiceImpl.save(product);
+        return "redirect:findAll2Seller";
+	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping("upload")
+	@ResponseBody
+	public String upload(@RequestParam("photo") MultipartFile multipartFile,
+			HttpServletRequest request,ModelMap map) {
+		try {
+			
+			//获取项目路径
+			String realPath = request.getSession().getServletContext()
+					.getRealPath("");
+			System.out.println(realPath+"!~~~~~~~~");
+			InputStream inputStream = multipartFile.getInputStream();
+			String contextPath = request.getContextPath();
+			//服务器根目录的路径
+			
+			String uploadPath =  request.getRealPath("/upload");
+			//根目录下新建文件夹upload
+		
+			//获取文件名称
+			String newName = getUploadFileName(multipartFile);
+			
+			//将文件上传dao服务器根目录下的upload文件夹
+			File file = new File(uploadPath, newName);
+			FileUtils.copyInputStreamToFile(inputStream, file);
+			//返回图片访问路径
+			photo = "/upload/" + newName;
+			map.put("photo", photo);
+			
+			return photo;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private String getUploadFileName(MultipartFile multipartFile) {
+		String uploadFileName = multipartFile.getOriginalFilename();
+		
+		 int lastDot = uploadFileName.lastIndexOf(".");
+		 String ext = uploadFileName.substring(lastDot);
+		 String newName = UUID.randomUUID().toString().replaceAll("-", "");
+		 newName += ext;
+		
+		 return newName;
 	}
 	
 	@RequestMapping("update")
 	public String update(Product product,ModelMap map) {
-		productService.update(product);
-		return "redirect:findAll";
+		productServiceImpl.update(product);
+		return "redirect:findAll2Seller";
 	}
 	
-	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {  //给商户的FindAll
-		List<Product> list = productService.find();
-		for (Product product : list) {
-			System.out.println(product);
-		}
-		System.out.println("ProductController.findAll()");
+	@RequestMapping("findAll2Seller")
+	public String findAll2Seller(ModelMap map) {      //给商户的FindAll
+		List<Product> list = productServiceImpl.findAll2Seller();
 		map.put("list", list);
 		return "/admin/product/list";
 	}
+	
+	@RequestMapping("findAll2buyers")
+	public List findAll2buyers() {         //给逛大集首页的FindAll，调用
+		List<Product> list = productServiceImpl.findAll2buyers();
+		for (Product product : list) {
+			System.out.println(product);
+		}  
+		return list;
+	} 
 	   
 	@RequestMapping("findById")
 	public String findById(Integer pid,ModelMap map) {
-		Product product = productService.find(pid);
+		Product product = productServiceImpl.find(pid);
 		map.put("product", product);
 		System.out.println(product);
 		return "/admin/product/input";
@@ -55,20 +119,21 @@ public class ProductController {
 	
 	@RequestMapping("delete")
 	public String delete(Integer pid) {
-		productService.delete(pid);
-		return "redirect:findAll";
+		productServiceImpl.delete(pid);
+		return "redirect:findAll2Seller";
 	}
 	
 	@RequestMapping("revoke")
 	public String revoke(Integer pid) {
-		productService.revoke(pid);
-		return "redirect:findAll";
+		productServiceImpl.revoke(pid);
+		return "redirect:findAll2Seller";
 	}
 	
 	@RequestMapping("goInput")
 	public String goInput(ModelMap map) {
-		List<Product> list = productService.find();
+		List<Product> list = productServiceImpl.find();
 		map.put("list", list);
 		return "/admin/product/input";
 	}
+	
 }

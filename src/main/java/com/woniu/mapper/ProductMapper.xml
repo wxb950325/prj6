@@ -38,6 +38,18 @@
     <result column="p_details" property="pDetails" jdbcType="LONGVARCHAR" />
   </resultMap>
   
+  
+   <select id="findAll2Seller" resultMap="BaseResultMap">
+  		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
+  		 FROM product 
+   </select>
+  
+  <select id="findAll2buyers" resultMap="BaseResultMap">
+  		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,selling_price,isAudit,p_status, FROM product 
+   </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
@@ -145,6 +157,8 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.woniu.entity.ProductExample" >
     <!--
       WARNING - @mbggenerated
@@ -164,6 +178,7 @@
       order by ${orderByClause}
     </if>
   </select>
+  
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

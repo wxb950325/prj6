@@ -22,6 +22,7 @@ public class ProductServiceImpl implements IProductService {
 	public void save(Product product) {
 		// 插入Product
 		product.setIsdelete(0);
+		product.setIsaudit(0);
 		productMapper.insertSelective(product);
 	}
   
@@ -50,15 +51,27 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public List<Product> find() {
+	public List<Product> findAll2Seller() {
 		// TODO Auto-generated method stub
-		return productMapper.selectByExample(null);
+		return productMapper.findAll2Seller();
+	}
+	
+	@Override
+	public List<Product> findAll2buyers() {
+		// TODO Auto-generated method stub
+		return productMapper.findAll2buyers();
 	}
   
 	@Override
 	public Product find(Integer pid) {
 		// TODO Auto-generated method stub
 		return productMapper.selectByPrimaryKey(pid);
+	}
+
+	@Override
+	public List<Product> find() {
+		// TODO Auto-generated method stub
+		return productMapper.selectByExample(null);
 	}
 
 
