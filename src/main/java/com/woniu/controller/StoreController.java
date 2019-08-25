@@ -126,11 +126,11 @@ public class StoreController {
 	@RequestMapping("goInput")
 	public String goInput(ModelMap map) {
 		List prov = provinceServiceImpl.findAll();
-		List city = provinceServiceImpl.findAllCity();
-		List zone = provinceServiceImpl.findAllZone();
+//		List city = provinceServiceImpl.findAllCity();
+//		List zone = provinceServiceImpl.findAllZone();
 		map.put("prov", prov);
-		map.put("city", city);
-		map.put("zone", zone);
+//		map.put("city", city);
+//		map.put("zone", zone);
 		return "/before/store/input";
 	}
 
