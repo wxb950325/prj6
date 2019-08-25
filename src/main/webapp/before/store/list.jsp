@@ -80,7 +80,7 @@
 										title : '城市名称',
 										width : 100
 									},
-									{
+									{ 
 										field : 'zoneId',
 										title : '区县编号',
 										width : 100
