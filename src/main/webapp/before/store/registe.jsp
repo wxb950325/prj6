@@ -16,7 +16,7 @@
 		<div class="col-md-12 col-md-offset-1" style="margin-bottom: 70px;">
 			
 			<div class="col-md-10">
-			<form action="storelogin" method="post">
+			<form action="/before/store/save" method="post" enctype="multipart/form-data">
 				<table  cellspacing="0" align="center" style="background-color:green;border-style:solid;border-color:black;width: 1200px; height:350px;">
 					<tr>
 						<td colspan="2" style=" display: table-cell; vertical-align: middle;font-family: 楷体; font-size: 30px; font-weight: 1200; text-align: center;">商户注册</td>
@@ -25,26 +25,26 @@
 						<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">商户类型：</td>
 						<td style="text-align: center;font-family: 楷体; font-size: 25px; font-weight: 500; display: table-cell; vertical-align: middle;">
 							<c:forEach items="${storetypes }" var="storetype">
-								<input type="checkbox" value="${storetype.tname }" name="st"/>${storetype.tname }
+								<input type="checkbox" value="${storetype.tname }" name="tname"/>${storetype.tname }
 							</c:forEach>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">店铺名：</td>
 						<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">
-							<input type="text" name="" />
+							<input type="text" name="sname" />
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">法人名：</td>
 						<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">
-							<input type="text" name="" />
+							<input type="text" name="legalName" />
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">法人照片：</td>
 						<td style="text-align: center; width: 200px; font-weight: 700; display: table-cell; vertical-align: middle;">
-							
+							<input type="file" name="fileName"/>
 						</td>
 					</tr>
 					<tr>

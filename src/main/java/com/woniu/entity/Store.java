@@ -482,4 +482,14 @@ public class Store {
     public void setIsdelete(Integer isdelete) {
         this.isdelete = isdelete;
     }
+
+	@Override
+	public String toString() {
+		return "Store [sid=" + sid + ", sname=" + sname + ", uid=" + uid + ", legalName=" + legalName + ", legalPhoto="
+				+ legalPhoto + ", provinceId=" + provinceId + ", provinceName=" + provinceName + ", cityId=" + cityId
+				+ ", cityName=" + cityName + ", zoneId=" + zoneId + ", zoneName=" + zoneName + ", assessorId="
+				+ assessorId + ", isaudit=" + isaudit + ", audittime=" + audittime + ", isdelete=" + isdelete + "]";
+	}
+    
+    
 }
