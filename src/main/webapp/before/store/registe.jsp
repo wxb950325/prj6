@@ -78,7 +78,7 @@
 	<div class="allcopy"
 		style="color: #4a4a49 !important; font-size: 13px;" align="center">
 		Copyright &copy; 2018-2019 辽宁禾丰牧业股份有限公司版权所有 <a href="javascript:;"
-				onClick="goToMinistry();return false;">辽ICP备14005490号-5</a>
+			onClick="goToMinistry();return false;">辽ICP备14005490号-5</a>
 	</div>
 </body>
 </html>
