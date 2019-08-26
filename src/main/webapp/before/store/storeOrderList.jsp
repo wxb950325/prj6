@@ -32,7 +32,6 @@
 							striped : true,
 							pagination : true,
 							toolbar : '#tb',
-							title : '商户订单管理',
 							columns : [ [
 									{
 										field : 'storeOid',

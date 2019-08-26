@@ -25,7 +25,6 @@
 							striped : true,
 							pagination : true,
 							toolbar : '#tb',
-							title : '商品管理',
 							columns : [ [
 									{
 										field : 'pid',

@@ -53,13 +53,6 @@ public class UserinfoController {
 			Integer uid = userinfo.getUid();
 			session.setAttribute("uid", uid);
 			
-			//根据用户查找是否为商户，如果是跳转/before/store/main.jsp
-			Store store = StoreServiceImpl.findOneByUid(uid);
-			System.out.println(store);
-			if(store!=null) {
-				System.out.println("======"+store);
-				return "/before/store/main";
-			}
 			
 			return "redirect:/before/comment.jsp";
 		}else {

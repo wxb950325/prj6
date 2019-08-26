@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品品牌管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'bid',checkbox:'checkbox',title:'品牌id',width:100},   

@@ -21,7 +21,6 @@ public class StoretypeController {
 	
 	@RequestMapping("/storeRegiste")
 	public String getStoretype(HttpSession session) {
-		System.out.println("qqqqqqqqq");
 		List<Storetype> storetypes = storetypeServiceImpl.storetypes();
 		session.setAttribute("storetypes", storetypes);
 		return "before/store/registe";

@@ -60,10 +60,10 @@
 			
 				<ul id="ul" style="list-style-type:none">
 					<span class="glyphicon glyphicon-home" 	style="height: 50px; line-height: 50px;">
-						卖家中心
+						<a href="/before/store/main.jsp">卖家中心</a>
 					</span>
 						<li class="li"><a href="/before/storeType/storeRegiste">注册开店</a></li>
-						<li class="li"><a href="/before/store/list.jsp">查看所有商户</a></li>
+						<li class="li"><a href="/before/store/storelist.jsp">查看所有商户</a></li>
 						<li class="li"><a>已卖出商品</a></li>
 						<li class="li"><a>出售中商品</a></li>
 				</ul>
