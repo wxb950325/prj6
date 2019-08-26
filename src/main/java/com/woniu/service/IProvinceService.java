@@ -6,4 +6,6 @@ public interface IProvinceService {
 	
 	public List findAll();
 	
+	int selectByName(String pname);
+	
 }

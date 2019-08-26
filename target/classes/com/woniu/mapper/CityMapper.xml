@@ -18,6 +18,10 @@
   	select * from city where pid=#{pid}
   </select>
   
+  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+	select cid from city where cname = #{cname}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

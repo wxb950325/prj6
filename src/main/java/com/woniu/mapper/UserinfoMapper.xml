@@ -24,7 +24,14 @@
     <result column="zone_id" property="zoneId" jdbcType="INTEGER" />
     <result column="zone_name" property="zoneName" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <collection property="roles" column="uid" select="com.woniu.mapper.RoleMapper.findByUid"></collection>
   </resultMap>
+  <resultMap id="BaseResultMapWithTree" type="com.woniu.entity.Userinfo" >
+  	<collection property="trees" column="uid" select="com.woniu.mapper.TreeMapper.findByUid"></collection>
+  </resultMap>
+  <select id="bglogin" resultMap="BaseResultMapWithTree">
+       select * from userinfo where uname=#{uname} and upass=#{upass} 
+   </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
