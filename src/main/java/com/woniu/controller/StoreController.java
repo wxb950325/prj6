@@ -94,7 +94,7 @@ public class StoreController {
 
 
 	// 删除
-	@RequestMapping("delete")
+	@RequestMapping("deleteStore")
 	public @ResponseBody Message delete(Integer sid) {
 		Message msg = null;
 		try {
@@ -108,7 +108,7 @@ public class StoreController {
 	}
 
 	// 恢复
-	@RequestMapping("revoke")
+	@RequestMapping("revokeStore")
 	public Message revoke(Integer sid) {
 		Message msg = null;
 		try {
@@ -122,7 +122,7 @@ public class StoreController {
 	}
 
 	// 商户查所有
-	@RequestMapping("findAll")
+	@RequestMapping("findAllStore")
 	public @ResponseBody Map findAll(PageBean pagebean) {
 		List rows = StoreServiceImpl.findAll(pagebean);
 		Map map = new HashMap();
@@ -139,17 +139,17 @@ public class StoreController {
 		return "forward:goInput";
 	}
 
-	// 省市区级查所有
-	@RequestMapping("goInput")
-	public String goInput(ModelMap map) {
-		List prov = provinceServiceImpl.findAll();
-//		List city = provinceServiceImpl.findAllCity();
-//		List zone = provinceServiceImpl.findAllZone();
-		map.put("prov", prov);
-//		map.put("city", city);
-//		map.put("zone", zone);
-		return "/before/store/input";
-	}
+//	// 省市区级查所有
+//	@RequestMapping("goInput")
+//	public String goInput(ModelMap map) {
+//		List prov = provinceServiceImpl.findAll();
+////		List city = provinceServiceImpl.findAllCity();
+////		List zone = provinceServiceImpl.findAllZone();
+//		map.put("prov", prov);
+////		map.put("city", city);
+////		map.put("zone", zone);
+//		return "/before/store/input";
+//	}
 
 }
 

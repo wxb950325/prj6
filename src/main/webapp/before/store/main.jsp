@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	};
 	
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		$("#ul").hide();
 
 		$("#li").click(function(){
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#ul").toggle();
 		});	
 		
-	});
+	}); */
 		
 		
 		
@@ -64,16 +64,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul type="square">
 					<li><span><a href="/before/comment.jsp">返回首页</a></span></li>
 					<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp'')">商铺信息</a></span></li>
-					<li id="li">商品管理
-						<ul id="ul" type="square">
+					<li id="li"><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品管理</a></span>
+						<!-- <ul id="ul" type="square">
 							<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品展示</a></span></li>
 							<li>商品上架</li>
 							<li>商品下架</li>
 							<li>商品修改</li>
-						</ul>
+						</ul> -->
 					</li>
 					<li>收藏管理</li>
-					<li>订单管理</li>
+					<li><span><a href="javascript:openURL('基本信息', '/before/store/storeOrderList.jsp')">订单管理</a></span></li>
 				</ul>
 			</div>
 		</div>
@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="pageContent" class="easyui-panel"
 				style="width: 100%; height: 100%;" border="false">
 				
-				WWWWWWWWWWWWWWWWW
+				
 				
 				</div>
 		</div>
