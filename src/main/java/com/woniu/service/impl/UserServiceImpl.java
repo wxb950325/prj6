@@ -61,4 +61,17 @@ public class UserServiceImpl implements IUserService {
 		return list;
 	}
 
+	@Override
+	public Userinfo findById(Integer uid) {
+		// TODO Auto-generated method stub
+		Userinfo userinfo = userinfoMapper.selectByPrimaryKey(uid);
+		return userinfo;
+	}
+
+	@Override
+	public void update(Userinfo info) {
+		// TODO Auto-generated method stub
+		userinfoMapper.updateByPrimaryKeySelective(info);
+	}
+
 }

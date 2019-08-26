@@ -19,8 +19,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(function(){
 		//进到当前页面最上方显示的页面内容
 	    $("#pageNorth").panel("refresh", "north.jsp");
-// 	    $("#pageContent").panel("refresh", "basicInfo.jsp");
 	    openURL("基本信息", "basicInfo.jsp");
+	    $("#pageContent").panel("refresh", "basicInfo.jsp");
 	});
 	 
 	 
@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul type="square">
 					<li><span><a href="/before/comment.jsp">返回首页</a></span></li>
 					<li><span><a href="javascript:openURL('基本信息', 'basicInfo.jsp')">基本信息</a></span></li>
-					<li>地址管理</li>
+					<li><span><a href="javascript:openURL('地址管理', 'address.jsp')">地址管理</a></span></li>
 					<li>我的收藏</li>
 					<li>支付管理</li>
 					<li>申请成为商家</li>
