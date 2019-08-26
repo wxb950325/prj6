@@ -2,6 +2,7 @@ package com.woniu.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -25,8 +27,10 @@ import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Store;
 import com.woniu.entity.Storetype;
+import com.woniu.service.ICityService;
 import com.woniu.service.IProvinceService;
 import com.woniu.service.IStoreService;
+import com.woniu.service.IZoneService;
 import com.woniu.service.impl.StoreServiceImpl;
 
 @Controller
@@ -34,14 +38,31 @@ import com.woniu.service.impl.StoreServiceImpl;
 public class StoreController {
 	@Resource  
 	private IStoreService StoreServiceImpl;
+	
 	@Resource
 	private IProvinceService provinceServiceImpl;
-	
+	@Resource
+	private ICityService cityServiceImpl;
+	@Resource
+	private IZoneService zoneServiceImpl;
 	
 	// 添加商户
 	@RequestMapping("save")
-	public String save(@RequestParam("fileName") MultipartFile file,HttpServletRequest req,Storetype storetype,Store store, Integer[] chk) {
-
+	public String save(@RequestParam("fileName") MultipartFile file,HttpServletRequest req,Storetype storetype,Store store, HttpSession session,Integer[] chk) {
+		
+		String provinceName = store.getProvinceName();
+		String cityName = store.getCityName();
+		String zoneName = store.getZoneName();
+		
+		int pid = provinceServiceImpl.selectByName(provinceName);
+		int cid = cityServiceImpl.selectByName(cityName);
+		int zid = zoneServiceImpl.selectByName(zoneName);
+		
+		store.setProvinceId(pid);
+		store.setCityId(cid);
+		store.setZoneId(zid);
+		store.setIsaudit(0);
+		store.setIsdelete(0);
 		
 		String fileName = file.getOriginalFilename();//获取文件名
 		System.out.println(fileName);
@@ -65,12 +86,14 @@ public class StoreController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+//		store.setAudittime(new Date());
 		System.out.println(store);
+		session.setAttribute("store", store);
 		StoreServiceImpl.save(store, chk);
 		System.out.println("上传成功");
-		return "redirect:findAll";
-
+		return "before/store/storeshow";
+		
 		
 	}
 		

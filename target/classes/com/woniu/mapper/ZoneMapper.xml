@@ -12,6 +12,11 @@
     <result column="zname" property="zname" jdbcType="VARCHAR" />
     <result column="cid" property="cid" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+			select zid from zone where zname = #{zname}
+  </select>
+  
   <select id="findByCid" resultMap="BaseResultMap">
   	select * from zone where cid=#{cid}
   </select>
