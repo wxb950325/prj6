@@ -21,6 +21,7 @@
 	<TD>p_details</TD>
 	<TD>total_sales</TD>
 	<TD>isAudit</TD>
+	<TD>审核</TD>
 	
 	
 </TR>
@@ -36,8 +37,7 @@
 		<TD>${product.pDetails}</TD>
 		<TD>${product.totalSales}</TD>
 		<TD>${product.isaudit}</TD>
-	    <TD><a href="${product.audit?}">审核</a></TD>
-	
+		<TD><a href="${audit}?pid=${product.pid}">审核</a></TD>
 	</TR>
 </c:forEach>
 </TABLE>

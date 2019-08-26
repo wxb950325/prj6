@@ -14,6 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+</head>
+<body>
 <script>
 	$.ajaxSetup({
 	  global: true,
@@ -24,12 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'findAll', 
+		    url:'/before/prodType/findAll', 
 		    fitColumns:true,
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品类型管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
@@ -145,11 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	}
 </script>
-</head>
-<body>
 <table id="dg"></table> 
-
-
 <div id="tb">
 <a href="javascript:deleteBatch()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
 <a href="javascript:openForm()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">增加</a>

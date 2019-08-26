@@ -14,6 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+</head>
+<body>
 <script>
 	$.ajaxSetup({
 	  global: true,
@@ -24,12 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'findAll', 
+		    url:'/before/brand/findAll', 
 		    fitColumns:true,
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品品牌管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'bid',checkbox:'checkbox',title:'品牌id',width:100},   
@@ -212,8 +214,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}) */
 	
 </script>
-</head>
-<body>
 <table id="dg"></table> 
 
 

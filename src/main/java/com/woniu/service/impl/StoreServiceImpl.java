@@ -64,5 +64,10 @@ public class StoreServiceImpl implements IStoreService {
 	public void update(Store store, Integer[] chk) {
 		// TODO Auto-generated method stub
 	}
+	@Override
+	public Store findOneByUid(int uid) {
+		
+		return storeMapper.findOneByUid(uid);
+	}
 
 }

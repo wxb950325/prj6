@@ -11,7 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.woniu.entity.Store;
 import com.woniu.entity.Userinfo;
+import com.woniu.service.IStoreService;
 import com.woniu.service.IUserService;
 
 @Controller
@@ -21,6 +23,9 @@ public class UserinfoController {
 
 	@Resource
 	private IUserService userServiceImpl;
+	
+	@Resource  
+	private IStoreService StoreServiceImpl;
 	
 	@RequestMapping("/main/update")
 	public String update(Userinfo info) {
@@ -47,6 +52,8 @@ public class UserinfoController {
 			Userinfo userinfo = (Userinfo) findByPhone.get(0);
 			Integer uid = userinfo.getUid();
 			session.setAttribute("uid", uid);
+			
+			
 			return "redirect:/before/comment.jsp";
 		}else {
 			return "redirect:/before/userinfo/login.jsp";
