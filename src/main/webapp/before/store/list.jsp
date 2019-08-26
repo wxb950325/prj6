@@ -116,20 +116,19 @@
 												return '已删除';
 											}
 										}
-									},
-									{
-										field : 'operate',
-										title : '操作',
-										width : 100,
-										formatter : function(value, row, index) {
-											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
-											return "<a id=\"btn\" href=\"javascript:deleteItem("
-													+ row.storeOid
-													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
-										}
 									}
-
+// 									{
+// 										field : 'operate',
+// 										title : '操作',
+// 										width : 100,
+// 										formatter : function(value, row, index) {
+// 											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+// 											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+// 											return "<a id=\"btn\" href=\"javascript:deleteItem("
+// 													+ row.storeOid
+// 													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
+// 										}
+// 									}
 							] ],
 							onLoadSuccess : function(index, field, value) {
 								$('.easyui-linkbutton').linkbutton({});
@@ -209,9 +208,10 @@
 	<table id="dg"></table>
 	<div id="tb">
 		<a href="#" class="easyui-linkbutton"
-			data-options="iconCls:'icon-remove',plain:true">批量删除</a> <a
-			href="javascript:openForm()" class="easyui-linkbutton"
-			data-options="iconCls:'icon-save',plain:true">增加</a>
+			data-options="iconCls:'icon-help',plain:true">帮助</a> 
+<!-- 			<a -->
+<!-- 			href="javascript:openForm()" class="easyui-linkbutton" -->
+<!-- 			data-options="iconCls:'icon-save',plain:true">增加</a> -->
 	</div>
 	<hr align="center" width="90%" size="1">
 	<!-- 版权 -->

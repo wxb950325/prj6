@@ -22,6 +22,12 @@ public class UserinfoController {
 	@Resource
 	private IUserService userServiceImpl;
 	
+	@RequestMapping("/main/update")
+	public String update(Userinfo info) {
+		userServiceImpl.update(info);
+		return "/before/userinfo/main/mainInfo";
+	}
+	
 	@RequestMapping("registe")
 	public String registe(Userinfo info) {
 		boolean flag = userServiceImpl.registe(info);
@@ -36,6 +42,11 @@ public class UserinfoController {
 	public String login(Userinfo info,HttpSession session) {
 		boolean flag = userServiceImpl.login(info,session);
 		if(flag) {
+			//获取用户id插入到商户字段中
+			List findByPhone = userServiceImpl.findByPhone(info);
+			Userinfo userinfo = (Userinfo) findByPhone.get(0);
+			Integer uid = userinfo.getUid();
+			session.setAttribute("uid", uid);
 			return "redirect:/before/comment.jsp";
 		}else {
 			return "redirect:/before/userinfo/login.jsp";
@@ -44,6 +55,7 @@ public class UserinfoController {
 	
 	@RequestMapping("/main/myinfo")
 	public @ResponseBody Userinfo myinfo(HttpSession session,ModelMap map) {
+		System.out.println(1111);
 		Object loginInfo = session.getAttribute("loginInfo");
 		if(loginInfo==null) {
 			return null;
@@ -53,6 +65,14 @@ public class UserinfoController {
 			Userinfo mainInfo = (Userinfo) findByPhone.get(0);
 			return mainInfo;
 		}
+	}
+	
+	@RequestMapping("/main/findById")
+	public String findById(Integer uid,ModelMap map) {
+		Userinfo findByIdInfo = userServiceImpl.findById(uid);
+		map.put("findByIdInfo", findByIdInfo);
+		
+		return "/before/userinfo/main/updateBasic";
 	}
 	
 }

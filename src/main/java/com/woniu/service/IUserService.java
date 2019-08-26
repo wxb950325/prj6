@@ -11,6 +11,6 @@ public interface IUserService {
 	boolean registe(Userinfo info);
 	boolean login(Userinfo info,HttpSession session);
 	List findByPhone(Userinfo info);
-	
-	
+	Userinfo findById(Integer uid);
+	void update(Userinfo info);
 }

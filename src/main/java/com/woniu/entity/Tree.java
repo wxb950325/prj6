@@ -1,6 +1,9 @@
 package com.woniu.entity;
 
-public class Tree {
+import java.io.Serializable;
+
+public class Tree implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private boolean open=true;
 	

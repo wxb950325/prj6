@@ -69,4 +69,10 @@ public class StoreOrderServiceImpl implements IStoreOrderService {
 		
 	}
 
+	@Override
+	public void update(StoreOrder storeOrder) {
+		storeOrderMapper.updateByPrimaryKeySelective(storeOrder);
+		
+	}
+
 }

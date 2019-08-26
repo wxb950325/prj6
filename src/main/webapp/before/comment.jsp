@@ -63,6 +63,7 @@
 						卖家中心
 					</span>
 						<li class="li"><a href="/before/storeType/storeRegiste">注册开店</a></li>
+						<li class="li"><a href="/before/store/list.jsp">查看所有商户</a></li>
 						<li class="li"><a>已卖出商品</a></li>
 						<li class="li"><a>出售中商品</a></li>
 				</ul>
@@ -174,7 +175,5 @@
 		Copyright &copy; 2018-2019 辽宁禾丰牧业股份有限公司版权所有 <a href="javascript:;"
 			onClick="goToMinistry();return false;">辽ICP备14005490号-5</a>
 	</div>
-
-
 </body>
 </html>

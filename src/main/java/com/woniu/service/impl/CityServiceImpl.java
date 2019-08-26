@@ -13,9 +13,9 @@ public class CityServiceImpl implements ICityService {
 	@Resource
 	private CityMapper cityMapper;
 	@Override
-	public int selectByName(String cname) {
+	public String selectByName(String cname,String pid) {
 		// TODO Auto-generated method stub
-		return cityMapper.selectByName(cname);
+		return cityMapper.selectByName(cname,pid);
 	}
 
 }
