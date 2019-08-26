@@ -23,6 +23,11 @@
     <result column="audittime" property="audittime" jdbcType="TIMESTAMP" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+    <select id="findOneByUid" parameterType="int" resultMap="BaseResultMap">
+			select * from store where uid=#{uid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

@@ -14,4 +14,5 @@ public interface IStoreService {
 	
 	public Store findById(Integer sid);
 	public void update(Store store,Integer[] chk);
+	Store findOneByUid(int uid);
 }

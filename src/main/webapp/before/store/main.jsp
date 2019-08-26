@@ -63,8 +63,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				border="false">
 				<ul type="square">
 					<li><span><a href="/before/comment.jsp">返回首页</a></span></li>
+					<li><span><a href="javascript:openURL('基本信息', '/before/userinfo/main/basicInfo.jsp')">基本信息</a></span></li>
+					<li>地址管理</li>
+					<li>我的收藏</li>
+					<li>支付管理</li>
+					<li>申请成为商家</li>
+				</ul>
+				<ul type="square">
 					<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp'')">商铺信息</a></span></li>
-					<li id="li"><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品管理</a></span>
+					<li id="li"><span><a href="javascript:openURL('基本信息', '/admin/product/list2.jsp')">商品管理</a></span>
 						<!-- <ul id="ul" type="square">
 							<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品展示</a></span></li>
 							<li>商品上架</li>
