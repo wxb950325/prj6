@@ -11,9 +11,8 @@ public interface IBrandService {
 	public void delete(Integer bid);
 	public void revoke(Integer bid);
 	public void update(Brand brand);
-	
 	public void deleteBatch(Integer[] tids);
-	
 	public Brand find(Integer bid);
 	public List<Brand> findAll(PageBean pageBean);
+     
 }
