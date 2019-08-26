@@ -17,7 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function goInput(){
 		location.href="goInput";  
 	}  
-
 </script>
 </head>
 <body>

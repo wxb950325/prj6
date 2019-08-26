@@ -3,7 +3,9 @@ package com.woniu.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.woniu.entity.Message;
+import com.woniu.entity.PageBean;
 import com.woniu.entity.Product;
 import com.woniu.service.IProductService;
   
@@ -89,15 +93,18 @@ public class ProductController {
 	
 	@RequestMapping("update")
 	public String update(Product product,ModelMap map) {
+		product.setPhoto(photo);
 		productServiceImpl.update(product);
-		return "redirect:findAll2Seller";
+		return "redirect:/admin/product/list2.jsp";
 	}
 	
 	@RequestMapping("findAll2Seller")
-	public String findAll2Seller(ModelMap map) {      //给商户的FindAll
-		List<Product> list = productServiceImpl.findAll2Seller();
-		map.put("list", list);
-		return "/admin/product/list";
+	public @ResponseBody Map findAll2Seller(PageBean pagebean) {      //给商户的FindAll
+		Map map = new HashMap();
+		List<Product> rows = productServiceImpl.findAll2Seller(pagebean);
+		map.put("total", pagebean.getCount());
+		map.put("rows", rows);
+		return map;
 	}
 	
 	@RequestMapping("findAll2buyers")
@@ -118,15 +125,29 @@ public class ProductController {
 	}
 	
 	@RequestMapping("delete")
-	public String delete(Integer pid) {
-		productServiceImpl.delete(pid);
-		return "redirect:findAll2Seller";
+	public @ResponseBody Message delete(Integer pid) {
+		
+		Message msg = null;
+		try {
+			productServiceImpl.delete(pid);
+			msg = new Message(true, "成功");
+		} catch (Exception e) {
+			msg = new Message(false, "失败"+e.getMessage());
+		}
+		
+		return msg;
 	}
 	
 	@RequestMapping("revoke")
-	public String revoke(Integer pid) {
-		productServiceImpl.revoke(pid);
-		return "redirect:findAll2Seller";
+	public @ResponseBody Message revoke(Integer pid) {
+		Message msg = null;
+		try {
+			productServiceImpl.revoke(pid);
+			msg = new Message(true, "成功");
+		} catch (Exception e) {
+			msg = new Message(false, "失败"+e.getMessage());
+		}
+		return msg;
 	}
 	
 	@RequestMapping("goInput")

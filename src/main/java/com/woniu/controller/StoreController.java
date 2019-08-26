@@ -70,12 +70,9 @@ public class StoreController {
 		StoreServiceImpl.save(store, chk);
 		System.out.println("上传成功");
 		return "redirect:findAll";
-
 		
 	}
 		
-
-
 	// 删除
 	@RequestMapping("delete")
 	public @ResponseBody Message delete(Integer sid) {
