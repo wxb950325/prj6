@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.woniu.mapper")
+@ServletComponentScan("com.woniu.filter")
 public class Prj6Application {
 
 	public static void main(String[] args) {
