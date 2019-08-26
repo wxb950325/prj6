@@ -19,10 +19,13 @@ public class ProductManagementController {
 	 @RequestMapping("findAll")	
 	 public String findAll(ModelMap map) {
 		 List<Product> list = ProductManagementService.findAll();
-		 System.out.println(list.toString());
 		 map.put("list", list);
 		 Object object = map.get(0);
-		 System.out.println(object);
+		 return "backgroundSite/List";
+	 }
+	 @RequestMapping("audit")
+	 public String audit(Integer pid) {
+		 ProductManagementService.audit(pid);
 		 return "backgroundSite/List";
 	 }
 }
