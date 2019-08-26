@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.woniu.mapper.CityMapper" >
+<cache></cache>
   <resultMap id="BaseResultMap" type="com.woniu.entity.City" >
     <!--
       WARNING - @mbggenerated
@@ -10,7 +11,17 @@
     <id column="cid" property="cid" jdbcType="VARCHAR" />
     <result column="cname" property="cname" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <collection property="zones" column="cid" select="com.woniu.mapper.ZoneMapper.findByCid"></collection>
   </resultMap>
+  
+  <select id="findByPid" resultMap="BaseResultMap">
+  	select * from city where pid=#{pid}
+  </select>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+	select cid from city where cname = #{cname}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

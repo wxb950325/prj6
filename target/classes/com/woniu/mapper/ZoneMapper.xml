@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.woniu.mapper.ZoneMapper" >
+<cache></cache>
   <resultMap id="BaseResultMap" type="com.woniu.entity.Zone" >
     <!--
       WARNING - @mbggenerated
@@ -11,6 +12,14 @@
     <result column="zname" property="zname" jdbcType="VARCHAR" />
     <result column="cid" property="cid" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+			select zid from zone where zname = #{zname}
+  </select>
+  
+  <select id="findByCid" resultMap="BaseResultMap">
+  	select * from zone where cid=#{cid}
+  </select>
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

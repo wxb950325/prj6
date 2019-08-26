@@ -160,4 +160,12 @@ public class Storetype {
     public void setNote(String note) {
         this.note = note;
     }
+
+	@Override
+	public String toString() {
+		return "Storetype [tid=" + tid + ", tname=" + tname + ", parentTid=" + parentTid + ", isdelete=" + isdelete
+				+ ", note=" + note + "]";
+	}
+    
+    
 }
