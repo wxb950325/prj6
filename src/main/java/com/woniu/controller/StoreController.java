@@ -97,8 +97,6 @@ public class StoreController {
 		
 	}
 		
-
-
 	// 删除
 	@RequestMapping("delete")
 	public @ResponseBody Message delete(Integer sid) {

@@ -7,7 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>    
 <!DOCTYPE html>
-<html>  
+<html>   
 <head>  
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -17,7 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function goInput(){
 		location.href="goInput";  
 	}  
-
 </script>
 </head>
 <body>

@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					zTree.expandNode(treeNode);
 					return false;
 				} else {
-					demoIframe.attr("src",treeNode.file + ".html");
+					demoIframe.attr("src",treeNode.file);
 					return true;
 				}
 			}
