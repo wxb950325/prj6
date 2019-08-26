@@ -219,7 +219,7 @@
 <body>
 	
 	<table id="dg"></table>
-	<div id="tb">
+	<div id="tb">          
 		<!-- <a href="#" class="easyui-linkbutton"
 			data-options="iconCls:'icon-remove',plain:true">批量删除</a>  -->
 		<button onclick="goInput()">增加商品</button>

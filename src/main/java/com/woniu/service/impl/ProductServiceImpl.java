@@ -18,7 +18,7 @@ public class ProductServiceImpl implements IProductService {
 	  
 	@Resource
 	private ProductMapper productMapper;
-	
+	 
 	@Override
 	@Transactional
 	public void save(Product product) {

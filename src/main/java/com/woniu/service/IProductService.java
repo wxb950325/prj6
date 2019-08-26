@@ -14,7 +14,7 @@ public interface IProductService {
 	
 	public List<Product> findAll2Seller(PageBean pagebean);
 	public List<Product> findAll2buyers();
-	
+	 
 	public List<Product> find();
 	
 	public Product find(Integer pid);
