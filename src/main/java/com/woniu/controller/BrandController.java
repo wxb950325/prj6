@@ -89,4 +89,11 @@ public class BrandController {
 		}
 		return msg;
 	}
+	
+	@RequestMapping("findByBrand")
+	public List findByBrand(String brand) {
+		if(brand!=null)
+			return brandServiceImpl.findByBrand(brand);
+		return null;
+	}
 }

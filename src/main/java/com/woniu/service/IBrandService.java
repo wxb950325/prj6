@@ -14,5 +14,7 @@ public interface IBrandService {
 	public void deleteBatch(Integer[] tids);
 	public Brand find(Integer bid);
 	public List<Brand> findAll(PageBean pageBean);
+	
+	List findByBrand(String brand);
      
 }

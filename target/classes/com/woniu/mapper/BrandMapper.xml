@@ -13,6 +13,12 @@
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="findByBrand" resultMap="BaseResultMap">
+  	SELECT * FROM brand WHERE
+	bname LIKE concat('%',#{brand},'%')
+	limit 0,5
+  </select>
+  
   <delete id="deleteBatch">
   	delete from brand where bid in 
   	<foreach collection="array" item="item" open="(" close=")" index="index" separator=",">

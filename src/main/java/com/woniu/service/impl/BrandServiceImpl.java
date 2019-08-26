@@ -19,7 +19,6 @@ public class BrandServiceImpl implements IBrandService {
 	
 	@Override
 	public void save(Brand brand) {
-		brand.setState(0);
 		brandMapper.insertSelective(brand);
 	}
 
@@ -58,6 +57,11 @@ public class BrandServiceImpl implements IBrandService {
 	@Override
 	public void deleteBatch(Integer[] tids) {
 		brandMapper.deleteBatch(tids);
+	}
+
+	@Override
+	public List findByBrand(String brand) {
+		return brandMapper.findByBrand(brand);
 	}
 
 }

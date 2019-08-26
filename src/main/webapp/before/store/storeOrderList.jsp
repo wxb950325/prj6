@@ -115,19 +115,19 @@
 												return '已删除';
 											}
 										}
-									},
-									{
-										field : 'operate',
-										title : '操作',
-										width : 100,
-										formatter : function(value, row, index) {
-											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
-											return "<a id=\"btn\" href=\"javascript:deleteItem("
-													+ row.storeOid
-													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
-										}
 									}
+// 									{
+// 										field : 'operate',
+// 										title : '操作',
+// 										width : 100,
+// 										formatter : function(value, row, index) {
+// 											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+// 											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+// 											return "<a id=\"btn\" href=\"javascript:deleteItem("
+// 													+ row.storeOid
+// 													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
+// 										}
+// 									}
 
 							] ],
 							onLoadSuccess : function(index, field, value) {
@@ -155,15 +155,38 @@
 				});
 	}
 	function openForm() {
+		$('#ff').form('clear');
 		$('#win').window('open'); // 打开窗口  
+	}
+
+	function dosave(){
+		$('#ff').form('submit', {   
+		    url:"saveOrder",   
+		    onSubmit: function(){   
+		        // do some check   
+		        // return false to prevent submit;   
+		    },   
+		    success:function(data){   
+		       var json = eval("("+data+")");
+		       $.messager.show({
+					title : 'My Title',
+					msg : json.msg,
+					timeout : 4000,
+					showType : 'slide'
+				});
+		       $('#win').window('close'); // 关闭窗口 
+				$('#dg').datagrid('reload');
+		    }   
+		});  
 	}
 </script>
 	<table id="dg"></table>
 	<div id="tb">
 		<a href="#" class="easyui-linkbutton"
-			data-options="iconCls:'icon-remove',plain:true">批量删除</a> <a
-			href="javascript:openForm()" class="easyui-linkbutton"
-			data-options="iconCls:'icon-save',plain:true">增加</a>
+			data-options="iconCls:'icon-help',plain:true">帮助</a> 
+<!-- 			<a -->
+<!-- 			href="javascript:openForm()" class="easyui-linkbutton" -->
+<!-- 			data-options="iconCls:'icon-save',plain:true">增加</a> -->
 	</div>
 	<div id="win" class="easyui-window" title="My Window"
 		style="width: 600px; height: 400px"
@@ -171,14 +194,64 @@
 		新增订单
 		<form id="ff" method="post">
 			<div>
-				<label for="name">Name:</label> <input class="easyui-validatebox"
-					type="text" name="name" data-options="required:true" />
+				<label for="orderNum">订单名:</label> <input class="easyui-validatebox"
+					type="text" name="orderNum" data-options="required:true" />
 			</div>
 			<div>
-				<label for="email">Email:</label> <input class="easyui-validatebox"
-					type="text" name="email" data-options="validType:'email'" />
+				<label for="pwid">pwid:</label> <input class="easyui-numberbox"
+					type="text" name="pwid" data-options="required:true" />
 			</div>
-			...
+			<div>
+				<label for="sname">商户名:</label> <input class="easyui-validatebox"
+					type="text" name="sname" data-options="required:true" />
+			</div>
+			<div>
+				<label for="uid">用户编号:</label> <input class="easyui-numberbox"
+					type="number" name="uid" data-options="required:true" />
+			</div>
+			<div>
+				<label for="userOid">用户订单编号:</label> 
+				<input type="text" class="easyui-numberbox" data-options="min:0,precision:2"></input>
+			</div>
+			<div>
+				<label for="evalstatus">evalstatus:</label>  
+	        <input type="radio" name="evalstatus" value="0">不可用<input type="radio" name="evalstatus" value="1">可用
+			</div>
+			<div>
+				<label for="orderstatus">订单状态:</label>  
+	        <input type="radio" name="orderstatus" value="0">已受理<input type="radio" name="orderstatus" value="1">未受理
+			</div>
+			<div>
+				<label for="pNum">pNum:</label> <input class="easyui-validatebox"
+					type="text" name="pNum" data-options="required:true" />
+			</div>
+			<div>
+				<label for="orderMoney">订单价格:</label> <input class="easyui-numberbox"
+					type="text" name="orderMoney" data-options="min:0,precision:2" />
+			</div>
+			<div>
+				<label for="payTime">支付时间:</label>
+				<input type="datetime" min="1970-01-01" max="2099-12-31" name="payTime">
+<!-- 				<input class="easyui-datetimebox" name="birthday"     -->
+<!--         data-options="required:true,showSeconds:false" value="2010/1/1 2:3" style="width:150px"> -->
+			</div>
+			<div>
+				<label for="phonenum">联系方式:</label> <input class="easyui-validatebox"
+					type="text" name="phonenum" data-options="required:true" />
+			</div>
+			<div>
+				<label for="receiptor">收件人:</label> <input class="easyui-validatebox"
+					type="text" name="receiptor" data-options="required:true" />
+			</div>
+			<div>
+				<label for="address">地址:</label> <input class="easyui-validatebox"
+					type="text" name="address" data-options="required:true" />
+			</div>
+			<label for="isdelete">是否删除:</label>  
+	        <input type="radio" name="isdelete" value="0">已删除<input type="radio" name="isdelete" value="1">已保留
+			<div>  
+		    	<input type="button" onclick="dosave()" value="保存" />  
+		    </div> 
 		</form>
 	</div>
 
