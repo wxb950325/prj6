@@ -50,32 +50,29 @@ public class StoreController {
 	@RequestMapping("save")
 	public String save(@RequestParam("fileName") MultipartFile file,HttpServletRequest req,Storetype storetype,Store store, HttpSession session,Integer[] chk) {
 		
+		Integer uid = (Integer) session.getAttribute("uid");
+		System.out.println(uid+"aaaaaaaaa");
+		store.setUid(uid);
+		
 		String provinceName = store.getProvinceName();
 		String cityName = store.getCityName();
-		String zoneName = store.getZoneName();
+		String zoneName = store.getZoneName();	
+		String pid = provinceServiceImpl.selectByName(provinceName);
+		String cid = cityServiceImpl.selectByName(cityName,pid);
+		String zid = zoneServiceImpl.selectByName(zoneName,cid);
 		
-		int pid = provinceServiceImpl.selectByName(provinceName);
-		int cid = cityServiceImpl.selectByName(cityName);
-		int zid = zoneServiceImpl.selectByName(zoneName);
-		
-		store.setProvinceId(pid);
-		store.setCityId(cid);
-		store.setZoneId(zid);
+		store.setProvinceId(Integer.parseInt(pid));
+		store.setCityId(Integer.parseInt(cid));
+		store.setZoneId(Integer.parseInt(zid));
 		store.setIsaudit(0);
 		store.setIsdelete(0);
 		
 		String fileName = file.getOriginalFilename();//获取文件名
-		System.out.println(fileName);
-		
+		System.out.println(fileName);	
 		fileName = UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
-					
-		// 获取web应用，所在服务器的真实路径。
-		String path = req.getServletContext().getRealPath("/image");
-		
-		System.out.println(path + "~~~~~~~~~~~~~~");
-		
+		String path = req.getServletContext().getRealPath("/image");		
+		System.out.println(path + "~~~~~~~~~~~~~~");		
 		File imagesDir = new File(path);
-		// 判断images文件夹是否存在，如果不存在就创建一个
 		if(!imagesDir.exists()) {
 			imagesDir.mkdirs();
 		}
@@ -86,13 +83,10 @@ public class StoreController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		store.setAudittime(new Date());
-		System.out.println(store);
 		session.setAttribute("store", store);
 		StoreServiceImpl.save(store, chk);
 		System.out.println("上传成功");
-		return "before/store/storeshow";
+		return "before/store/main";
 		
 		
 	}

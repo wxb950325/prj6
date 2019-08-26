@@ -13,9 +13,9 @@ public class ZoneServiceImpl implements IZoneService {
 	@Resource
 	private ZoneMapper zoneMapper;
 	@Override
-	public int selectByName(String zname) {
+	public String selectByName(String zname,String cid) {
 		
-		return zoneMapper.selectByName(zname);
+		return zoneMapper.selectByName(zname,cid);
 	}
 
 }
