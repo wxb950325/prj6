@@ -47,8 +47,8 @@
 
 	<table   style="width: 600px; height:100px;" align="center" frame=void>
 		<tr >
-			<th>商品分类</th>
-			<th>类型分类</th>
+			<th>查看精品好店</th>
+			<th>店铺分类</th>
 			<th>品种分类</th>
 		</tr>
 		<tr valign="top">
