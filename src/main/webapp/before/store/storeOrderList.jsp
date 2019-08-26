@@ -248,7 +248,7 @@
 			<label for="isdelete">是否删除:</label>  
 	        <input type="radio" name="isdelete" value="0">已删除<input type="radio" name="isdelete" value="1">已保留
 			<div>  
-		    	<input type="button" onclick="dosave()" value="保存" />  
+		    		<input type="button" onclick="dosave()" value="保存" />  
 		    </div>
 		</form>
 	</div>
