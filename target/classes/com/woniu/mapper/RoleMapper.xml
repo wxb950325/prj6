@@ -11,6 +11,13 @@
     <result column="rname" property="rname" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+     <select id="findByUid" resultMap="BaseResultMap">
+  	SELECT * FROM role r WHERE EXISTS (
+	    SELECT rid FROM user_role WHERE uid=#{uid} AND rid=r.rid		
+	)
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

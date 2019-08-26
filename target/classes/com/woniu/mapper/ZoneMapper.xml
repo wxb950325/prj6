@@ -12,6 +12,11 @@
     <result column="zname" property="zname" jdbcType="VARCHAR" />
     <result column="cid" property="cid" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="selectByName" parameterType="com.woniu.entity.Zone" resultType="java.lang.String">
+			select zid from zone where zname = #{zname} and cid=#{cid}
+  </select>
+  
   <select id="findByCid" resultMap="BaseResultMap">
   	select * from zone where cid=#{cid}
   </select>

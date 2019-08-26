@@ -19,6 +19,9 @@
 	src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+</head>
+<body>
 <script>
 	$(function() {
 		$('#dg')
@@ -177,8 +180,6 @@
 		});  
 	}
 </script>
-</head>
-<body>
 	<table id="dg"></table>
 	<div id="tb">
 		<a href="#" class="easyui-linkbutton"

@@ -15,7 +15,7 @@
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteBatch">
-  	delete from prodtype where tid in 
+  	delete from prod_type where tid in 
   	<foreach collection="array" item="item" open="(" close=")" index="index" separator=",">
   		#{item}
   	</foreach>
@@ -111,9 +111,7 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+      order by tid desc
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--

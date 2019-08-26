@@ -21,5 +21,11 @@ public class ProvinceServiceImpl implements IProvinceService {
 		return provinceMapper.selectByExample(null);
 	}
 
+	@Override
+	public String selectByName(String pname) {
+		
+		return provinceMapper.selectByName(pname);
+	}
+
 
 }

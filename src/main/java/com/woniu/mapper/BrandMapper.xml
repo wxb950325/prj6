@@ -12,6 +12,14 @@
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <delete id="deleteBatch">
+  	delete from brand where bid in 
+  	<foreach collection="array" item="item" open="(" close=")" index="index" separator=",">
+  		#{item}
+  	</foreach>
+  </delete>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

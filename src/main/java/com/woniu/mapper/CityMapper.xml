@@ -18,6 +18,10 @@
   	select * from city where pid=#{pid}
   </select>
   
+  <select id="selectByName" parameterType="com.woniu.entity.City" resultType="java.lang.String">
+	select cid from city where cname = #{cname} and pid = #{pid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

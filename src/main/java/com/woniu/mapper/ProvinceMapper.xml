@@ -12,6 +12,11 @@
     <result column="pname" property="pname" jdbcType="VARCHAR" />
     <collection property="citys" column="pid" select="com.woniu.mapper.CityMapper.findByPid"></collection>
   </resultMap>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultType="java.lang.String">
+			select pid from province where pname = #{pname}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

@@ -27,13 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    url:'findAll', 
 		    fitColumns:true,
 		    toolbar: '#tb',
-		    pageSize:20,
+		    pageSize:10,
 		    striped:true,
-		    title:'商品品牌管理',
+		    title:'商品类型管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
-		        {field:'tname',title:'商品品牌名称姓名',width:100},   
+		        {field:'tname',title:'商品名称姓名',width:100},   
 		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
 					if (value==1){
 						return '已保留';
@@ -158,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
         data-options="iconCls:'icon-save',modal:true,closed:true">  
-    	商品品牌管理
+    	商品类型管理
     <form id="ff" method="post">  
     	<input type="hidden" name="tid" id="tid">
 	    <div>  

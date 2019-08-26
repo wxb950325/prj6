@@ -7,7 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>    
 <!DOCTYPE html>
-<html>  
+<html>   
 <head>  
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -15,9 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
 	function goInput(){
-		location.href="goInput";  
+		location.href="/input.jsp";  
 	}  
-
 </script>
 </head>
 <body>
@@ -79,6 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </TABLE>
 
 </div>
-<button onclick="goInput()">增加商品</button>
+<button><a href="/admin/product/input.jsp">增加商品</a></button>
 </body>
 </html>
