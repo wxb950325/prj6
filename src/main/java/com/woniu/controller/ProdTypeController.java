@@ -34,8 +34,7 @@ public class ProdTypeController {
 	
 	@RequestMapping("findById")
 	public @ResponseBody ProdType findById(Integer tid) {
-		ProdType prodType = prodTypeServiceImpl.find(tid);
-		return prodType;
+		return prodTypeServiceImpl.find(tid);
 	}
 	
 	@RequestMapping("save")
@@ -43,9 +42,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.save(prodType);
-			msg = new Message(true, "增加成功");
+			msg = new Message(true, "商品类型增加成功");
 		} catch (Exception e) {
-			msg = new Message(false, "增加失败"+e.getMessage());
+			msg = new Message(false, "商品类型增加失败"+e.getMessage());
 		}
 		return msg;
 	}
@@ -55,9 +54,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.update(prodType);
-			msg = new Message(true, "修改成功");
+			msg = new Message(true, "商品类型修改成功");
 		} catch (Exception e) {
-			msg = new Message(false, "修改失败"+e.getMessage());
+			msg = new Message(false, "商品类型修改失败"+e.getMessage());
 		}
 		return msg;
 	}
@@ -67,9 +66,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.delete(tid);
-			msg = new Message(true, "删除成功");
+			msg = new Message(true, "商品类型删除成功");
 		} catch (Exception e) {
-			msg = new Message(false, "删除失败"+e.getMessage());
+			msg = new Message(false, "商品类型删除失败"+e.getMessage());
 		}
 		return msg;
 	}
@@ -84,9 +83,9 @@ public class ProdTypeController {
 				tids[i] = Integer.parseInt(tempStrings[i]);
 			}
 			prodTypeServiceImpl.deleteBatch(tids);
-			msg = new Message(true, "批量删除成功");
+			msg = new Message(true, "商品类型批量删除成功");
 		} catch (Exception e) {
-			msg = new Message(false, "批量删除失败"+e.getMessage());
+			msg = new Message(false, "商品类型批量删除失败"+e.getMessage());
 		}
 		return msg;
 	}

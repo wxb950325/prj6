@@ -18,7 +18,6 @@ public class ProdTypeServiceImpl implements IProdTypeService {
 
 	@Override
 	public void save(ProdType prodType) {
-		prodType.setIsdelete(0);
 		prodTypeMapper.insertSelective(prodType);
 	}
 

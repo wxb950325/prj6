@@ -20,8 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(function(){
 		//进到当前页面最上方显示的页面内容
 	    $("#pageNorth").panel("refresh", "north.jsp");
-// 	    $("#pageContent").panel("refresh", "basicInfo.jsp");
-	    openURL("基本信息", "basicInfo.jsp");
+	    openURL("订单管理", "before/store/storeOrderList.jsp");
+	    $("#pageContent").panel("refresh", "/before/store/storeOrderList.jsp");
+	    
 	});
 	 
 	 
@@ -67,11 +68,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li>地址管理</li>
 					<li>我的收藏</li>
 					<li>支付管理</li>
-					<li>申请成为商家</li>
 				</ul>
 				<ul type="square">
 					<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp'')">商铺信息</a></span></li>
 					<li id="li"><span><a href="javascript:openURL('基本信息', '/admin/product/list2.jsp')">商品管理</a></span>
+					<li><span><a href="javascript:openURL('商铺信息', '/admin/product/list.jsp'')">商铺信息</a></span></li>
+					<li id="li"><span><a href="javascript:openURL('商品管理', '/admin/product/list2.jsp')">商品管理</a></span>
+					<li id="li"><span><a href="javascript:openURL('商品管理', '/before/prodType/list.jsp')">商品类型</a></span>
+					<li id="li"><span><a href="javascript:openURL('商品品牌', '/before/brand/list.jsp')">商品品牌</a></span>
 						<!-- <ul id="ul" type="square">
 							<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品展示</a></span></li>
 							<li>商品上架</li>
@@ -80,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul> -->
 					</li>
 					<li>收藏管理</li>
-					<li><span><a href="javascript:openURL('基本信息', '/before/store/storeOrderList.jsp')">订单管理</a></span></li>
+					<li><span><a href="javascript:openURL('订单管理', '/before/store/storeOrderList.jsp')">订单管理</a></span></li>
 				</ul>
 			</div>
 		</div>

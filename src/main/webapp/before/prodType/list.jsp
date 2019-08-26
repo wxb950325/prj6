@@ -14,6 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+</head>
+<body>
 <script>
 	$.ajaxSetup({
 	  global: true,
@@ -24,16 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'findAll', 
+		    url:'/before/prodType/findAll', 
 		    fitColumns:true,
 		    toolbar: '#tb',
-		    pageSize:20,
+		    pageSize:10,
 		    striped:true,
-		    title:'商品品牌管理',
+		    title:'商品类型管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   
-		        {field:'tname',title:'商品品牌名称姓名',width:100},   
+		        {field:'tname',title:'商品名称',width:100},   
 		        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
 					if (value==1){
 						return '已保留';
@@ -66,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	})
 	
 	function deleteItem(tid){
-		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
+		$.messager.confirm('Confirm','确定删除?',function(r){   
 		    if (r){   
 		    	$.getJSON("delete",{tid:tid},function(json){
 		    		$.messager.show({
@@ -79,7 +82,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 		    }   
 		});  
-		
 	}
 	
 	function deleteBatch(){
@@ -146,11 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	}
 </script>
-</head>
-<body>
 <table id="dg"></table> 
-
-
 <div id="tb">
 <a href="javascript:deleteBatch()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
 <a href="javascript:openForm()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">增加</a>
@@ -158,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
         data-options="iconCls:'icon-save',modal:true,closed:true">  
-    	商品品牌管理
+    	商品类型管理
     <form id="ff" method="post">  
     	<input type="hidden" name="tid" id="tid">
 	    <div>  

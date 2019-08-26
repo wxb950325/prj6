@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.woniu.entity.Brand;
+import com.woniu.entity.PageBean;
 import com.woniu.mapper.BrandMapper;
 import com.woniu.service.IBrandService;
 @Service
@@ -17,7 +19,6 @@ public class BrandServiceImpl implements IBrandService {
 	
 	@Override
 	public void save(Brand brand) {
-		brand.setState(0);
 		brandMapper.insertSelective(brand);
 	}
 
@@ -46,8 +47,21 @@ public class BrandServiceImpl implements IBrandService {
 	}
 
 	@Override
-	public List<Brand> findAll() {
-		return brandMapper.selectByExample(null);
+	public List<Brand> findAll(PageBean pageBean) {
+		List<Brand> list = brandMapper.selectByExample(null,new RowBounds(pageBean.getOffset(), pageBean.getLimit()));
+		int count = brandMapper.countByExample(null);
+		pageBean.setCount(count);
+		return list;
+	}
+
+	@Override
+	public void deleteBatch(Integer[] tids) {
+		brandMapper.deleteBatch(tids);
+	}
+
+	@Override
+	public List findByBrand(String brand) {
+		return brandMapper.findByBrand(brand);
 	}
 
 }

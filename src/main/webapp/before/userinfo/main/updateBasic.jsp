@@ -28,7 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			url:"/before/province/findAll",
 			dataType:"json",
 			success:function(json){
-				alert(1);
 				ps = json;
 				fillP();
 			}
@@ -58,12 +57,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	}
 </script>
-<form action="">
-	用户名：<input type="text" name="uname" /><br>
-	密码：<input type="text" name="upass"  /><br>
-	性别：<input type="text"  name="usex" /><br>
-	年龄：<input type="text" name="uage"  /><br>
-	手机号：<input type="text"  name="phone"/><br>
+<form action="/before/userinfo/main/update">
+	<input type="hidden" name="uid" value="${findByIdInfo.uid }" />
+	用户名：<input type="text" name="uname" value="${findByIdInfo.uname }" /><br>
+	密码：<input type="text" name="upass" value="${findByIdInfo.upass }"   /><br>
+	性别：<input type="radio"  name="usex" value="0" ${findByIdInfo.usex?'':'checked'} />男
+		<input type="radio"  name="usex" value="1" ${findByIdInfo.usex?'checked':''} />女<br>
+	年龄：<input type="text" name="uage"  value="${findByIdInfo.uage }"  /><br>
+	手机号：<input type="text"  name="phone" value="${findByIdInfo.phone }" /><br>
 	省：
 	<select id="p" onchange="fillC(this.value)">
 	</select>
@@ -72,7 +73,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</select>
 	区：
 	<select id="z" >
-	</select>
+	</select><br> 
+	<button type="submit">修改</button>
 </form>
 </body>
 </html>
