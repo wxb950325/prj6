@@ -42,6 +42,11 @@ public class UserinfoController {
 	public String login(Userinfo info,HttpSession session) {
 		boolean flag = userServiceImpl.login(info,session);
 		if(flag) {
+			//获取用户id插入到商户字段中
+			List findByPhone = userServiceImpl.findByPhone(info);
+			Userinfo userinfo = (Userinfo) findByPhone.get(0);
+			Integer uid = userinfo.getUid();
+			session.setAttribute("uid", uid);
 			return "redirect:/before/comment.jsp";
 		}else {
 			return "redirect:/before/userinfo/login.jsp";

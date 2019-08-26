@@ -22,7 +22,7 @@ public class ProvinceServiceImpl implements IProvinceService {
 	}
 
 	@Override
-	public int selectByName(String pname) {
+	public String selectByName(String pname) {
 		
 		return provinceMapper.selectByName(pname);
 	}
