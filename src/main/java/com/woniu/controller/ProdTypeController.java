@@ -43,9 +43,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.save(prodType);
-			msg = new Message(true, "学生增加成功");
+			msg = new Message(true, "增加成功");
 		} catch (Exception e) {
-			msg = new Message(false, "学生增加失败"+e.getMessage());
+			msg = new Message(false, "增加失败"+e.getMessage());
 		}
 		return msg;
 	}
@@ -67,9 +67,9 @@ public class ProdTypeController {
 		Message msg = null;
 		try {
 			prodTypeServiceImpl.delete(tid);
-			msg = new Message(true, "学生删除成功");
+			msg = new Message(true, "删除成功");
 		} catch (Exception e) {
-			msg = new Message(false, "学生删除失败"+e.getMessage());
+			msg = new Message(false, "删除失败"+e.getMessage());
 		}
 		return msg;
 	}
@@ -84,9 +84,9 @@ public class ProdTypeController {
 				tids[i] = Integer.parseInt(tempStrings[i]);
 			}
 			prodTypeServiceImpl.deleteBatch(tids);
-			msg = new Message(true, "学生批量删除成功");
+			msg = new Message(true, "批量删除成功");
 		} catch (Exception e) {
-			msg = new Message(false, "学生批量删除失败"+e.getMessage());
+			msg = new Message(false, "批量删除失败"+e.getMessage());
 		}
 		return msg;
 	}
