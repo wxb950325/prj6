@@ -34,11 +34,15 @@
 							toolbar : '#tb',
 							title : '商户管理',
 							 columns:[[   
-						        {field:'sid',checkbox:'checkbox',title:'商户id',width:100},   
+						        {field:'sid',checkbox:'checkbox',title:'商户id',width:100,height:300},   
 						        {field:'sname',title:'商户名称',width:100}, 
 						        {field:'uid',title:'用户id',width:100},  
 						        {field:'legalName',title:'法人名称',width:100},  
-						        {field:'legalPhoto',title:'法人照片',width:100},  
+						        {title:'法人照片',field:'legalPhoto',width:110,align:'center',
+									formatter:function(value,row,index){
+										return '<img style="width:100px;height:100px;" border="1"  src="'+row.legalPhoto+'" />';
+									}
+								},
 						        {field:'provinceId',title:'省id',width:100},  
 						        {field:'provinceName',title:'省名称',width:100}, 
 						        {field:'cityId',title:'市id',width:100},
@@ -46,7 +50,15 @@
 						        {field:'zoneId',title:'区id',width:100},
 						        {field:'zoneName',title:'区名称',width:100},
 						        {field:'assessorId',title:'审核员id',width:100},
-						        {field:'isaudit',title:'审核状态',width:100},
+						     
+						        {field:'isaudit',title:'审核状态',width:100,formatter: function(value,row,index){
+									if (value==0){
+										return '审核中';
+									} else {
+										return '已审核';
+									}
+								}
+								},
 						        {field:'audittime',title:'审核时间',width:100},		        
 						        
 						        {field:'isdelete',title:'软删除',width:100,formatter: function(value,row,index){
@@ -93,12 +105,14 @@
 		$('#win').window('open'); // 打开窗口  
 	}
 </script>
+
+
 	<table id="dg"></table>
 	<div id="tb">
-		<a href="#" class="easyui-linkbutton"
-			data-options="iconCls:'icon-remove',plain:true">批量删除</a> <a
-			href="javascript:openForm()" class="easyui-linkbutton"
-			data-options="iconCls:'icon-save',plain:true">增加</a>
+		<!-- <a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'icon-remove',plain:true">批量删除</a> 
+			<a 	href="javascript:openForm()" class="easyui-linkbutton"
+			data-options="iconCls:'icon-save',plain:true">增加</a> -->
 	</div>
 	<div id="win" class="easyui-window" title="My Window"
 		style="width: 600px; height: 400px"
