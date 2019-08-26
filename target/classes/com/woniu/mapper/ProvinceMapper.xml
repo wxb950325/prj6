@@ -13,7 +13,7 @@
     <collection property="citys" column="pid" select="com.woniu.mapper.CityMapper.findByPid"></collection>
   </resultMap>
   
-  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+  <select id="selectByName" parameterType="java.lang.String" resultType="java.lang.String">
 			select pid from province where pname = #{pname}
   </select>
   
