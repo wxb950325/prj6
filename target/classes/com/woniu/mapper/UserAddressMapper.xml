@@ -10,6 +10,11 @@
     <id column="aid" property="aid" jdbcType="INTEGER" />
     <id column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
+  
+  <select id="findByUid" resultMap="BaseResultMap">
+  	select aid from user_address where uid=#{uid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

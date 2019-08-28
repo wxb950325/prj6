@@ -3,7 +3,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-
 </head>
 <body>
 <script>
@@ -26,36 +25,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  async: false
 	});
 
-
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'/before/brand/findAll', 
+		    url:'/before/order/goInput', 
 		    fitColumns:true,
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
 		    pagination:true,
 		    columns:[[   
-		        {field:'bid',checkbox:'checkbox',title:'品牌id',width:100},   
-		        {field:'bname',title:'品牌名',width:100},   
-		        {field:'state',title:'状态',width:100,formatter: function(value,row,index){
-					if (value==1){
-						return '已上架';
+		        {field:'aid',checkbox:'checkbox',title:'收货人',width:100},
+		        {field:'comsignee',title:'收货人',width:100},
+		        {field:'phonenum',title:'手机号',width:100},   
+		        {field:'address',title:'收货地址',width:100	},
+				{field:'note',title:'备注',width:100},
+				{field:'isdelete',title:'是否使用',width:100,formatter: function(value,row,index){
+					if (value==0){
+						return '正在使用';
 					} else {
-						return '已下架';
+						return '已弃用';
 					}
 				}
 				},
-		       /*  {field:'score',title:'成绩',width:100,styler: function(value,row,index){
-					if (value < 60){
-						return 'color:red;';
-					}
-				},}, */
-				{field:'note',title:'备注',width:100},
 				
 		        {field:'operate',title:'操作',width:100,formatter: function(value,row,index){
-		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.bid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.bid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+		        	var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.aid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+		        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.aid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>";
+		        	btns += "<a id=\"btn\" href=\"javascript:goOrder("+row.aid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">选择该地址</a>";  
 					return btns;
 				}
 				}
@@ -65,44 +61,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});  
 			}  
 		});
-		var vm = new Vue({
-	        el:'#app',
-	        data:{
-	            json:'',
-	            brand:''
-	   	    },
-	        methods:{
-	        	findByBrand:function(event){
-	            	this.$http({
-	                	method:'post',
-	                	url:'findByBrand',
-	                	emulateJSON:true, 
-	                	params:{
-	                		brand:this.brand
-	                	}	
-	                }).then(function(res){
-	                	 this.json=res.body;
-	                	 if(event.code!='Backspace')
-		                	 if(this.json.length==1){
-		                		 this.brand=this.json[0].brand;
-		                		 this.json ='';
-		                	 }
-	                },function(){
-	                    console.log('请求失败处理');
-	                });
-	            },
-	            select:function(brand){
-	            	this.brand=brand;
-	            	this.json='';
-	            }
-	        }
-	    });  
 	})
 	
-	function deleteItem(bid){
+	function deleteItem(aid){
 		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
 		    if (r){   
-		    	$.getJSON("delete",{bid:bid},function(json){
+		    	$.getJSON("delete",{aid:aid},function(json){
 		    		$.messager.show({
 		    			title:'My Title',
 		    			msg:json.msg,
@@ -121,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var selections = $('#dg').datagrid('getSelections');  // fix the 'name' column size
 		for(var i=0;i<selections.length;i++)
 		{
-			stidstring += selections[i].bid;
+			stidstring += selections[i].aid;
 			if(i<selections.length-1)
 				stidstring +=",";
 		}
@@ -136,11 +100,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#dg').datagrid('reload');    // reload the current page data  
 		});
 	}
+
+	function goOrder(aid){
+		$.getJSON("goOrder",{aid:aid},function(){});
+	}
 	
-	function findById(bid){
+	function findById(aid){
 		$('#ff').form('clear');	// 从URL加载 		
 		$('#win').window('open');  // open a window 
-			$.getJSON("findById",{bid:bid},function(json){
+			$.getJSON("findById",{aid:aid},function(json){
 				$('#ff').form('load',json);	// 从URL加载
 				/* var isdelete = json.isdelete?1:0;
 				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1'); */
@@ -155,9 +123,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	function dosave(){
-		var tid = $("#bid").val();
+		var tid = $("#aid").val();
 		var path = "save";
-		if(bid!=null&&bid!=""&&bid!=undefined){
+		if(aid!=null&&aid!=""&&aid!=undefined){
 			path = "update";
 		}
 		$('#ff').form('submit', {   
@@ -180,44 +148,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	}
 
-/* 	 $(function(){ 
-	    var vm = new Vue({
-	        el:'#app',
-	        data:{
-	            json:'',
-	            bname:''
-	   	    },
-	        methods:{
-	        	findByBrand:function(event){
-	            	this.$http({
-	                	method:'post',
-	                	url:'findByBrand',
-	                	emulateJSON:true, 
-	                	params:{
-	                		bname:this.bname
-	                	},	
-	                }).then(function(res){
-	                	 this.json=res.body;
-	                	 if(event.code!='Backspace')
-		                	 if(this.json.length==1){
-		                		 this.bname=this.json[0].bname;
-		                		 this.json ='';
-		                	 }
-	                },function(){
-	                    console.log('请求失败处理');
-	                });
-	            },
-	            select:function(brand){
-	            	this.bname=bname;
-	            	this.json='';
-	            }
-	        }
-	    });
-	}) */
-	
 </script>
-<table id="dg"></table> 
 
+<table id="dg"></table> 
 
 <div id="tb">
 <a href="javascript:deleteBatch()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
@@ -226,42 +159,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
         data-options="iconCls:'icon-save',modal:true,closed:true">  
-    	商品品牌管理
+    	用户地址管理
     <form id="ff" method="post">  
-    	<input type="hidden" name="bid" id="bid">
+    	<input type="hidden" name="aid" id="aid">
 	    <div>  
-	        <label for="bname">bname:</label>  
-	        <input class="easyui-validatebox" type="text" name="bname" data-options="required:true" />  
+	        <label for="comsignee">comsignee:</label>  
+	        <input class="easyui-validatebox" type="text" name="comsignee" data-options="required:true" />  
 	    </div>
 	    <div>  
-	        <label for="state">state:</label>  
-	        <input type="radio" name="state" value="0">已下架<input type="radio" name="state" value="1">已上架
-	    </div> 
+	        <label for="phonenum">phonenum:</label>  
+	        <input class="easyui-validatebox" type="text" name="phonenum" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="address">address:</label>  
+	        <input class="easyui-validatebox" type="text" name="address" data-options="required:true" />  
+	    </div>
 	    <div>  
 	        <label for="note">note:</label>  
 	        <input class="easyui-validatebox" type="text" name="note" data-options="required:true" />  
-	    </div>  
+	    </div>
+	    
+	    <div>  
+	        <label for="isdelete">isdelete:</label>  
+	        <input type="radio" name="state" value="0">正在使用<input type="radio" name="state" value="1">已弃用
+	    </div>
 	     
-	    <!-- <div>  
-	        <label for="score">score:</label>  
-	        <input class="easyui-numberbox" type="text" name="score" data-options="required:true" />  
-	    </div>  -->  
 	    <div>  
 	    	<input type="button" onclick="dosave()" value="保存" />  
 	    </div> 
 	</form>  
     	   
-</div>  
-
-<div id="app">
-	<INPUT TYPE="text" NAME="brand" v-model="brand" @keyup="findByBrand($event)"  style="width:175px">
-	
-	<TABLE bgColor="#FFFFCC" width="175px">
-		<TR v-for="n in json" bgcolor="#FFFFFF">
-			<TD @click="select(n.brand)">{{n.brand}}</TD>
-		</TR>
-	</TABLE>
 </div>
+
 
 </body>
 </html>

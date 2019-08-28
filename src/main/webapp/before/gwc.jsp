@@ -41,6 +41,7 @@
 				</form>
 			</div>
 		</nav>
+		
 		<div class="col-md-10 col-md-offset-1" style="margin-bottom: 70px;">
 			<table align="center" class="table table-bordered table-hover table-striped" style="width: 600px;">
 				<tr height="30px">
@@ -67,5 +68,7 @@
 				</tr>
 			</table>
 		</div>
+		
+		
 	</body>
 </html>
