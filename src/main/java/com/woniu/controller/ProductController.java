@@ -107,14 +107,26 @@ public class ProductController {
 		return map;
 	}
 	
-	@RequestMapping("findAll2buyers")
-	public List findAll2buyers() {         //给逛大集首页的FindAll，调用
-		List<Product> list = productServiceImpl.findAll2buyers();
-		for (Product product : list) {
-			System.out.println(product);
-		}  
+//	@RequestMapping("findAll2buyers")
+//	public List findAll2buyers() {         //给逛大集首页的FindAll，调用
+//		List<Product> list = productServiceImpl.findAll2buyers();
+//		return list;
+//	} 
+	
+	@RequestMapping("findAll2beforeByPrice")
+	public @ResponseBody List findAll2beforeByPrice() {     //给逛大集首页的FindAll，最实惠 那一栏
+		List<Product> list = productServiceImpl.findAll2beforeByPrice();
+		System.out.println("ProductController.findAll2beforeByPrice()");
 		return list;
 	} 
+	
+	@RequestMapping("findAll2beforeByTime")
+	public @ResponseBody List findAll2beforeByTime() {     //给逛大集首页的FindAll，最新品 那一栏
+		List<Product> list2 = productServiceImpl.findAll2beforeByTime();
+		System.out.println("ProductController.findAll2beforeByTime()");
+		return list2;
+	} 
+	
 	   
 	@RequestMapping("findById")
 	public String findById(Integer pid,ModelMap map) {
@@ -122,6 +134,14 @@ public class ProductController {
 		map.put("product", product);
 		System.out.println(product);
 		return "/admin/product/input";
+	}
+	
+	@RequestMapping("gogoodsinfo")
+	public String gogoodsinfo(Integer pid,ModelMap map) {
+		Product goods = productServiceImpl.find(pid);
+		map.put("goods", goods);
+		System.out.println(goods);
+		return "/before/goodsinfo";
 	}
 	
 	@RequestMapping("delete")
@@ -156,5 +176,23 @@ public class ProductController {
 		map.put("list", list);
 		return "/admin/product/input";
 	}
+	
+	@RequestMapping("audit")     //审核员审核商品调用此方法
+	public String audit(ModelMap map,Integer pid) {
+		Product product = productServiceImpl.find(pid);
+		Integer isaudit = product.getIsaudit();
+		int tempInt = 0 ;
+		if(isaudit==0) {
+			tempInt = 1;
+		}else {
+			tempInt = 0 ;
+		}
+		product.setIsaudit(tempInt);
+		productServiceImpl.update(product);
+		return "redirect:findAll2Seller";
+	}
+	
+	
+	
 	
 }

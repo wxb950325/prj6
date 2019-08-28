@@ -8,17 +8,59 @@
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
 		<script src="../js/jquery-1.10.2.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
-		<style>
-			td{
-				text-align: center;
-				font-weight: 900;
+		<style type="text/css">
+			div img{
+				widht:300px;
+				height:60px;
 			}
+			
+			.content ul{
+						list-style-type: none;
+					}
+			.content ul li{
+						/* float: left; */
+						margin-right: 15px;
+					}
 		</style>
 		<script>
 		$(document).ready(function(){
-			$("#del").click(function(){
-				location.href="cart.action?method=del&gid="+$("#del").val();
-			});
+
+			$.ajax({
+		        url:"/before/cart/findAll",
+		        dataType: 'json',
+		        data:{},
+		        success:function(list) {
+		        	var str = ""; 
+		        	for(var i=0;i<list.length;i++){    
+		        		  str = "<tr><td>" +'商品：'+ list[i].pname + "</td><td>" + '数量：'+list[i].pNum + "</td><td>" + '单价：'+list[i].price + 
+		        		  "</td><td><img src='"+list[i].photo+"'/></td><td>" + '小计￥：'+list[i].price*list[i].pNum + "</td><td><button onclick=\'rem("+list[i].pid+")\' >移出购物车</button></td></tr>";
+		        		  $('#tab').append(str);
+					 }
+		        },
+		        error:function(dataa) { 
+		          
+		        }
+		    });
+
+			function rem(pid){ 
+				　alert(pid);
+			}
+
+			
+			/*$(".removeBtn").click(function(){
+				 $.ajax({
+			        url:"/before/cart/remove",
+			        dataType: 'json',
+			        data:{},
+			        success:function(list) {
+			        	
+			        },
+			        error:function(dataa) { 
+			          
+			        } 
+			}); */
+
+			
 		});
 		</script>
 	</head>
@@ -42,30 +84,24 @@
 			</div>
 		</nav>
 		<div class="col-md-10 col-md-offset-1" style="margin-bottom: 70px;">
-			<table align="center" class="table table-bordered table-hover table-striped" style="width: 600px;">
-				<tr height="30px">
-					<td style="line-height: 30px;">图片</td>
-					<td style="line-height: 30px;">商品名称</td>
-					<td style="line-height: 30px;">单价</td>
-					<td style="line-height: 30px;">数量</td>
-					<td style="line-height: 30px;">操作</td>
-				</tr>
-				<c:forEach items="" var="obj" varStatus="i">
-					<tr>
-						<td><img src="/image/goods.png" width="50px" height="50px"></td>
-						<td style="line-height: 50px;">${obj.key.gname }</td>
-						<td style="line-height: 50px;">${obj.key.gprice }元</td>
-						<td style="line-height: 50px;">${obj.value }</td>
-						<td style="line-height: 50px;"><button class="btn btn-warning" id="del" value="${obj.key.gid }" >移除</button></td>
-					</tr>
-				</c:forEach>
-				<tr>
-					<td colspan="5" style="text-align: right;">总价为 
-						<span style="color: red;">￥1024</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button class="btn-danger">结账</button>
-					</td>
-				</tr>
-			</table>
+			
+			<hr align="center" width="90%" size="10">
+			<div class="col-md-10 col-md-offset-1" style="margin-bottom: 70px;">
+				
+				<table id="tab"  align="center" class="table table-bordered table-hover table-striped" style="width: 1000px;">
+				
+				</table>
+				
+				<div  class="col-md-12  bg-info text-right"  >
+						<h3>总计: ${sum }元</h3>	
+				</div>
+				
+				<div class="col-md-12 text-right">
+					<button id="clearBtn" class="btn btn-danger ">清空购物车</button>
+					<button id="payBtn" class="btn btn-success ">去下单</button>
+				</div>
+				
+			</div>
 		</div>
 	</body>
 </html>

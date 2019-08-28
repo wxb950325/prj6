@@ -49,6 +49,18 @@
   		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
   		,p_origin,p_weight,selling_price,isAudit,p_status, FROM product 
    </select>
+   
+   <select id="findAll2beforeByPrice" resultMap="BaseResultMap">
+   		select pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
+   		FROM product order by selling_price ASC limit 0,8
+   </select>
+   
+   <select id="findAll2beforeByTime" resultMap="BaseResultMap">
+   		select pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
+   		FROM product order by pid desc limit 0,8
+   </select>
   
   <sql id="Example_Where_Clause" >
     <!--
