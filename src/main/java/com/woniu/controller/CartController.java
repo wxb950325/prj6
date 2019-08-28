@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -45,7 +47,6 @@ public class CartController {
 	
 	@RequestMapping("save")
 	public @ResponseBody Message save(Cart cart,ModelMap map,HttpServletRequest request,HttpSession session){
-		
 		Message msg = null;
 		try {
 			System.out.println("CartController.save()");
@@ -63,18 +64,71 @@ public class CartController {
 //			cart.setUid(uid);
 			cartServiceImpl.save(cart);
 			
-			msg = new Message(true, "成功");
+			msg = new Message(true, "添加购物车成功");
 		} catch (Exception e) {
 			msg = new Message(false, "加入购物车失败，请先登录~");
 		}
 		return msg;
 	}
 	
+    //购物车的FindAll
 	@RequestMapping("findAll")
-	public String  findAll2Seller(ModelMap map) {      //给商户的FindAll
+	public String  findAll2Seller(ModelMap map,HttpSession session) {
 		List<Cart> carts = cartServiceImpl.find();
 		map.put("carts", carts);
+		//将购物车中的商品id 和对应的数量存在 session 的map中
+		Map<Integer,Integer> cartsMap = (Map<Integer,Integer>) session.getAttribute("carts");
+		if(cartsMap==null) {
+			cartsMap = new HashMap();
+		}
+		
+		for (Cart cart : carts) {
+				Integer pid = cart.getPid();  //获取购物车里的商品id
+				Integer getpNum = cart.getpNum();  //获取购物车里的商品id对应的 数量
+				Integer tempNum = cartsMap.get(pid);         //看看map里有没有存放该商品
+				if(tempNum==null) {
+					cartsMap.put(pid, getpNum);
+				}else {
+					getpNum+=tempNum;
+					cartsMap.put(pid, getpNum);
+				}
+				
+				System.out.println(getpNum+"~~~~~~~");
+		}
+		
+		session.setAttribute("carts", cartsMap);
 		return "before/gwc2";
+	}
+	
+	//跳转到选择地址页面的方法  gopay
+	@RequestMapping("selectAddress")
+	public String  selectAddress(ModelMap map,HttpSession session) {   
+		
+		Map<Integer,Integer> cartsMap = (Map<Integer,Integer>) session.getAttribute("carts");
+		Set<Integer> keySet = cartsMap.keySet();
+		Iterator<Integer> it = keySet.iterator();
+		while(it.hasNext()) {
+			Integer pid = it.next();
+			Integer pNum = (Integer) cartsMap.get(pid);
+			System.out.println("pid:"+pid+"   "+"pNum:"+pNum);
+		}
+		return "redirect:/before/order/goInput";
+	}
+	
+	//清空购物车的方法
+	@RequestMapping("clear")
+	public String clear(HttpSession session) {
+//		Userinfo user = (Userinfo) session.getAttribute("uid");
+//		Integer uid = user.getUid();
+//		cartServiceImpl.clear(uid);
+		//有用户登录 用上面的清空  无用户登录 用下面的清空
+		cartServiceImpl.clear();
+		//清空session中map里存放的商品id及对应的数量
+		Map<Integer,Integer> cartsMap = (Map<Integer,Integer>) session.getAttribute("carts");
+		if(cartsMap!=null) {
+			cartsMap.clear();
+		}
+		return "redirect:/before/cart/findAll";
 	}
 	
 	   
@@ -89,9 +143,7 @@ public class CartController {
 	@RequestMapping("delete")
 	public String delete(Integer cid) {
 		System.out.println("CartController.delete()");
-		
 		cartServiceImpl.delete(cid);
-			
 		return "redirect:/before/cart/findAll";
 	}
 	

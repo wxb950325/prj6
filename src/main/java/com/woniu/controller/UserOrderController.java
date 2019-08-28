@@ -32,7 +32,7 @@ public class UserOrderController {
 	@RequestMapping("goInput")
 	public @ResponseBody Map goInput(HttpSession session) {
 		//从session中获取用户信息中的用户ID，查出用户地址
-//		Userinfo userinfo=(Userinfo) session.getAttribute("userinfo");
+//		Userinfo userinfo=(Userinfo) session.getAttribute("uid");
 //		int uid=userinfo.getUid();
 		List<Address> rows=addressService.findByUid(1);
 		//将获取到的所有地址信息发送到前端
