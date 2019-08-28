@@ -95,5 +95,17 @@ public class ProductServiceImpl implements IProductService {
 		return productMapper.selectByExample(null);
 	}
 
+	@Override
+	public List<Product> findAll2beforeByTime() {
+		// TODO Auto-generated method stub
+		return productMapper.findAll2beforeByTime();
+	}
+
+	@Override
+	public List<Product> findAll2beforeByPrice() {
+		// TODO Auto-generated method stub
+		return productMapper.findAll2beforeByPrice();
+	}
+
 
 }

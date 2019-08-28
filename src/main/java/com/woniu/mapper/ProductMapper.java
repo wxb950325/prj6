@@ -11,6 +11,10 @@ import org.apache.ibatis.session.RowBounds;
 
 public interface ProductMapper {
 	
+	List<Product>  findAll2beforeByTime();
+	
+	List<Product> findAll2beforeByPrice();
+	
 	List<Product> findAll2Seller();
 	
 	List<Product> findAll2buyers();

@@ -290,4 +290,11 @@ public class Cart {
     public void setIsdelete(Integer isdelete) {
         this.isdelete = isdelete;
     }
+
+	@Override
+	public String toString() {
+		return "Cart [cid=" + cid + ", uid=" + uid + ", sid=" + sid + ", pid=" + pid + ", pname=" + pname + ", pNum="
+				+ pNum + ", price=" + price + "]";
+	}
+    
 }

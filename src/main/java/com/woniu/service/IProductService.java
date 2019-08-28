@@ -14,6 +14,8 @@ public interface IProductService {
 	
 	public List<Product> findAll2Seller(PageBean pagebean);
 	public List<Product> findAll2buyers();
+	public List<Product> findAll2beforeByTime();
+	public List<Product> findAll2beforeByPrice();
 	 
 	public List<Product> find();
 	

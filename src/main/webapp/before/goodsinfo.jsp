@@ -1,26 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>  
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<link rel="stylesheet" href="../css/bootstrap.min.css" />
-		<script src="../js/jquery-1.10.2.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css" />
+		<script src="<%=basePath%>js/jquery-1.10.2.js"></script>
+		<script src="<%=basePath%>js/bootstrap.min.js"></script>
 		<script>
 			$(document).ready(function(){
-				$("#num+").click(function(){
-					var n = $("#num").val();
-					var m = parseInt(n)+1;
-					$("#num").val(m);
-				});
-				$("#num-").click(function(){
+				$("#btnr").click(function(){
 					var n = $("#num").val();
 					if(n>1){
-						var m = parseInt(n)-1;
-						$("#num").val(m);
+						n--;
 					}
+					$("#num").val(n);
+				});
+				
+				$("#btnp").click(function(){
+					var n = $("#num").val();
+					n++;
+					$("#num").val(n);
+				});
+
+				$("#buy").click(function(){
+					var pid = $("#pid").val();
+					var pNum = $("#num").val();
+					$.ajax({
+					 url:"/before/cart/save",
+				        dataType: 'json',
+				        data:{"pid":pid,"pNum":pNum},
+				        success:function(data) {
+				        	alert(data.msg);
+				        },
+				        error:function(data) {
+				        	alert(data.msg);
+				        }
+					}); 
+					
 				});
 			});
 		</script>
@@ -45,40 +67,41 @@
 			</div>
 		</nav>
 		<div class="col-md-10 col-md-offset-1" style="margin-bottom: 70px;">
-				<img src="/image/goods.png" class="col-md-4" />
+				
+				<img src="${pageContext.request.contextPath }${goods.photo }" class="col-md-4" />
 				<div class="col-md-8">
-				<form action="cart.action?method=add" method="post">
+				<form action="/before/cart/save" method="post">
 					<table class="table table-bordered table-hover table-striped" style="width: 600px; height:350px;">
 						<tr>
-							<td colspan="2" style=" display: table-cell; vertical-align: middle;font-family: 宋体; font-size: 30px; font-weight: 800; text-align: center;">商品名称</td>
+							<td colspan="2" style=" display: table-cell; vertical-align: middle;font-family: 宋体; font-size: 30px; font-weight: 800; text-align: center;">${goods.pName }</td>
 						</tr>
 						<tr>
 							<td style="text-align: right; width: 200px; font-weight: 700; display: table-cell; vertical-align: middle;">现价：</td>
-							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">￥${goods.gprice }</td>
+							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">￥${goods.sellingPrice }</td>
 						</tr>
 						<tr>
 							<td style="text-align: right; width: 200px; font-weight: 700; display: table-cell; vertical-align: middle;">描述：</td>
-							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">${goods.gdescribe }</td>
+							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">${goods.pDescribe }</td>
 						</tr>
 						<tr>
 							<td style="text-align: right; width: 200px; font-weight: 700; display: table-cell; vertical-align: middle;">库存：</td>
-							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">${goods.ginventory }</td>
+							<td style="text-align: center; font-weight: 500; display: table-cell; vertical-align: middle;">${goods.stock }</td>
 						</tr>
 						<tr>
+							<input type="hidden" name="pid" id="pid" value="${goods.pid }"/>
 							<td style="text-align: right; width: 200px; font-weight: 700; display: table-cell; vertical-align: middle;">起购数量：</td>
 							<td style="text-align: center;">
-								<button type="button" id="num-">-</button>
-								<input type="text" value="1" readonly="readonly" id="num" name="num" style="text-align: center; width: 50px" />
-								<button type="button" id="num+">+</button>
+								<button type="button" id="btnr">-</button>
+								<input type="text" value="1" readonly="readonly" id="num" name="pNum" style="text-align: center; width: 50px" />
+								<button type="button" id="btnp">+</button>
 							</td>
 						</tr>
 						
 						<tr>
 							<td colspan="2" style="text-align: right;" >
-								<button class="btn-danger" value="" name="">
+								<button type="button" class="btn-danger" id="buy" name="buy">
 								加入购物车
 								</button>
-								<button class="btn-danger" value="" name="">收藏商品</button>
 							</td>
 						</tr>
 					</table>
