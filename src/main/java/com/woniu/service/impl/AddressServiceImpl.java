@@ -36,4 +36,10 @@ public class AddressServiceImpl implements IAddressService {
 		return addressMapper.deleteByPrimaryKey(aid);
 	}
 
+
+	@Override
+	public Address findAddByAid(Integer aid,Integer uid) {
+		return addressMapper.findAddByAid(aid,uid);
+	}
+
 }

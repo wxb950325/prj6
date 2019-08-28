@@ -93,4 +93,6 @@ public interface AddressMapper {
      * @mbggenerated Tue Aug 20 16:07:27 CST 2019
      */
     int updateByPrimaryKey(Address record);
+
+	Address findAddByAid(Integer aid,Integer uid);
 }
