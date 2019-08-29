@@ -38,6 +38,11 @@
     <result column="p_details" property="pDetails" jdbcType="LONGVARCHAR" />
   </resultMap>
   
+  <select id="findByName" resultMap="BaseResultMap">
+  		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
+  		FROM product where p_name LIKE concat('%',#{pName},'%') limit 0,12
+   </select>
   
    <select id="findAll2Seller" resultMap="BaseResultMap">
   		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
@@ -53,13 +58,13 @@
    <select id="findAll2beforeByPrice" resultMap="BaseResultMap">
    		select pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
   		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
-   		FROM product order by selling_price ASC limit 0,8
+   		FROM product order by selling_price ASC limit 0,4
    </select>
    
    <select id="findAll2beforeByTime" resultMap="BaseResultMap">
    		select pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
   		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
-   		FROM product order by pid desc limit 0,8
+   		FROM product order by pid desc limit 0,4
    </select>
   
   <sql id="Example_Where_Clause" >

@@ -20,6 +20,13 @@
   		#{item}
   	</foreach>
   </delete>
+  
+  <select id="findAll2Before" resultMap="BaseResultMap">
+  		select tid,tname,parent_tid,type_photo,note
+   		FROM prod_type  limit 0,18
+  
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

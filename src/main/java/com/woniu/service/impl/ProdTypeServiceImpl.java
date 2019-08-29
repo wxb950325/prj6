@@ -56,6 +56,12 @@ public class ProdTypeServiceImpl implements IProdTypeService {
 		pageBean.setCount(count);
 		return list;
 	}
+	
+	@Override
+	public List<ProdType> findAll2Before() {
+		List<ProdType> list = prodTypeMapper.findAll2Before();
+		return list;
+	}
 
 	@Override
 	public void deleteBatch(Integer[] tids) {

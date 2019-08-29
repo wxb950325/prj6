@@ -18,7 +18,7 @@ public interface IProductService {
 	public List<Product> findAll2beforeByPrice();
 	 
 	public List<Product> find();
-	
+	public List<Product> find(String pName);
 	public Product find(Integer pid);
 	     
 }

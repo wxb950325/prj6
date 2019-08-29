@@ -12,7 +12,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Store</title>
-
+<script src="<%=basePath%>js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>js/easyui/themes/icon.css">
+<script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
 	<script>
@@ -239,6 +249,5 @@
 		Copyright &copy; 2018-2019 辽宁禾丰牧业股份有限公司版权所有 <a href="javascript:;"
 			onClick="goToMinistry();return false;">辽ICP备14005490号-5</a>
 	</div>
-
 </body>
 </html>

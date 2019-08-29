@@ -49,26 +49,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 	<body >
 		<nav class="navbar navbar-default">
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-6" style="height: 50px; margin: auto" >
-				<form id="">
-					<input type="text" name="username" id="username"  placeholder="请输入手机号" />
-					<input type="password" name="password" id="password" placeholder="请输入密码">
-					<input type="button" value="登录" />
-					<input type="button" value="注册" />
-				</form>
-			</div>
-			<div class="col-md-4">
-				<form id="">
-					<input type="text" name="username" id="username" placeholder="来点啥" />
-					<input type="button" value="搜索" />
-				</form>
-			</div>
-		</nav>
+		<div class="col-md-1"></div>
+		<div class="col-md-5" style="height: 50px; margin: auto">
+
+			<form action="/before/userinfo/login" method="post">
+				<input type="text" name="phone" id="phone"
+					placeholder="请输入手机号" />
+					<input type="password" name="upass"id="password" placeholder="请输入密码">
+					<input type="submit"value="登录" />
+					<input type="button" id="registe" value="注册" />
+			</form>
+		
+		</div>
+		<div class="col-md-2">
+			<form action="/admin/product/findByName" method="post" >
+				<input type="text" style="width:120px;" name="pName" id="pName" placeholder="来点啥" />
+				<input type="submit" value="搜索" />
+			</form>
+		</div>
+		
+		<div class="col-md-2">
+			<span class="glyphicon glyphicon-bed"
+				style="height: 50px; line-height: 50px;"> <a href="/before/userinfo/main/mainInfo.jsp">${sessionScope.loginInfo==null?'我的':sessionScope.loginInfo.phone }</a>
+			</span> 
+			<span class="glyphicon glyphicon-arrow-right"
+				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/cart/findAll">购物车</a>
+			</span>
+		</div>
+	</nav>
+	
 		<div class="col-md-10 col-md-offset-1" style="margin-bottom: 70px;">
 				
-				<img src="${pageContext.request.contextPath }${goods.photo }" class="col-md-4" />
+				<img src="${pageContext.request.contextPath }${goods.photo }" style="height:360px" class="col-md-4" />
 				<div class="col-md-8">
 				<form action="/before/cart/save" method="post">
 					<table class="table table-bordered table-hover table-striped" style="width: 600px; height:350px;">
@@ -104,6 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</button>
 							</td>
 						</tr>
+						
 					</table>
 					</form>
 				</div>

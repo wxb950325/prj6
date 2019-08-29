@@ -15,5 +15,7 @@ public interface IProdTypeService {
 	public void deleteBatch(Integer[] tids);
 	
 	public ProdType find(Integer tid);
+	
+	public List<ProdType>  findAll2Before();
 	public List<ProdType> findAll(PageBean pageBean);
 }

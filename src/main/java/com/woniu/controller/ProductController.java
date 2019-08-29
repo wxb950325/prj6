@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.woniu.entity.Message;
 import com.woniu.entity.PageBean;
+import com.woniu.entity.ProdType;
 import com.woniu.entity.Product;
+import com.woniu.service.IProdTypeService;
 import com.woniu.service.IProductService;
   
 @Controller 
@@ -34,6 +36,9 @@ public class ProductController {
 	  
 	@Resource
 	private IProductService productServiceImpl;
+	
+	@Resource
+	private IProdTypeService prodTypeServiceImpl;
 	
 	private String photo;
 	   
@@ -95,6 +100,7 @@ public class ProductController {
 	public String update(Product product,ModelMap map) {
 		product.setPhoto(photo);
 		productServiceImpl.update(product);
+		
 		return "redirect:/admin/product/list2.jsp";
 	}
 	
@@ -106,12 +112,6 @@ public class ProductController {
 		map.put("rows", rows);
 		return map;
 	}
-	
-//	@RequestMapping("findAll2buyers")
-//	public List findAll2buyers() {         //给逛大集首页的FindAll，调用
-//		List<Product> list = productServiceImpl.findAll2buyers();
-//		return list;
-//	} 
 	
 	@RequestMapping("findAll2beforeByPrice")
 	public @ResponseBody List findAll2beforeByPrice() {     //给逛大集首页的FindAll，最实惠 那一栏
@@ -127,70 +127,87 @@ public class ProductController {
 		return list2;
 	} 
 	
-	   
+	 //修改时候 进入此方法
 	@RequestMapping("findById")
 	public String findById(Integer pid,ModelMap map) {
 		Product product = productServiceImpl.find(pid);
 		map.put("product", product);
+		List<ProdType> types = prodTypeServiceImpl.findAll2Before();
+		map.put("types", types);
+		
 		System.out.println(product);
 		return "/admin/product/input";
 	}
 	
-	@RequestMapping("gogoodsinfo")
-	public String gogoodsinfo(Integer pid,ModelMap map) {
-		Product goods = productServiceImpl.find(pid);
-		map.put("goods", goods);
-		System.out.println(goods);
-		return "/before/goodsinfo";
-	}
-	
-	@RequestMapping("delete")
-	public @ResponseBody Message delete(Integer pid) {
-		
-		Message msg = null;
-		try {
-			productServiceImpl.delete(pid);
-			msg = new Message(true, "成功");
-		} catch (Exception e) {
-			msg = new Message(false, "失败"+e.getMessage());
+	    //按照名称搜索 
+		@RequestMapping("findByName")
+		public String findByName(String pName ,ModelMap map) {
+			System.out.println(pName);
+			List<Product> products = productServiceImpl.find(pName); 
+			for (Product product : products) {
+				System.out.println(product);
+			}
+			map.put("products", products);
+			return "/before/goodsinfoByName";
 		}
 		
-		return msg;
-	}
-	
-	@RequestMapping("revoke")
-	public @ResponseBody Message revoke(Integer pid) {
-		Message msg = null;
-		try {
-			productServiceImpl.revoke(pid);
-			msg = new Message(true, "成功");
-		} catch (Exception e) {
-			msg = new Message(false, "失败"+e.getMessage());
+		@RequestMapping("gogoodsinfo")
+		public String gogoodsinfo(Integer pid,ModelMap map) {
+			Product goods = productServiceImpl.find(pid);
+			map.put("goods", goods);
+			System.out.println(goods);
+			return "/before/goodsinfo";
 		}
-		return msg;
-	}
 	
-	@RequestMapping("goInput")
-	public String goInput(ModelMap map) {
-		List<Product> list = productServiceImpl.find();
-		map.put("list", list);
-		return "/admin/product/input";
-	}
-	
-	@RequestMapping("audit")     //审核员审核商品调用此方法
-	public String audit(ModelMap map,Integer pid) {
-		Product product = productServiceImpl.find(pid);
-		Integer isaudit = product.getIsaudit();
-		int tempInt = 0 ;
-		if(isaudit==0) {
-			tempInt = 1;
-		}else {
-			tempInt = 0 ;
+		@RequestMapping("delete")
+		public @ResponseBody Message delete(Integer pid) {
+			
+			Message msg = null;
+			try {
+				productServiceImpl.delete(pid);
+				msg = new Message(true, "成功");
+			} catch (Exception e) {
+				msg = new Message(false, "失败"+e.getMessage());
+			}
+			
+			return msg;
 		}
-		product.setIsaudit(tempInt);
-		productServiceImpl.update(product);
-		return "redirect:findAll2Seller";
-	}
+		
+		@RequestMapping("revoke")
+		public @ResponseBody Message revoke(Integer pid) {
+			Message msg = null;
+			try {
+				productServiceImpl.revoke(pid);
+				msg = new Message(true, "成功");
+			} catch (Exception e) {
+				msg = new Message(false, "失败"+e.getMessage());
+			}
+			return msg;
+		}
+		
+		@RequestMapping("goInput")
+		public String goInput(ModelMap map) {
+			List<Product> list = productServiceImpl.find();
+			map.put("list", list);
+			List<ProdType> types = prodTypeServiceImpl.findAll2Before();
+			map.put("types", types);
+			return "/admin/product/input";
+		}
+		
+		@RequestMapping("audit")     //审核员审核商品调用此方法
+		public String audit(ModelMap map,Integer pid) {
+			Product product = productServiceImpl.find(pid);
+			Integer isaudit = product.getIsaudit();
+			int tempInt = 0 ;
+			if(isaudit==0) {
+				tempInt = 1;
+			}else {
+				tempInt = 0 ;
+			}
+			product.setIsaudit(tempInt);
+			productServiceImpl.update(product);
+			return "redirect:findAll2Seller";
+		}
 	
 	
 	

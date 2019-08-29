@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.woniu.entity.PageBean;
 import com.woniu.entity.Product;
+import com.woniu.entity.ProductExample;
 import com.woniu.mapper.ProductMapper;
 import com.woniu.service.IProductService;
 
@@ -67,11 +68,9 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Product> findAll2Seller(PageBean pagebean) {
-		
 		List list = productMapper.selectByExample(null,new RowBounds(pagebean.getOffset(), pagebean.getLimit()));
 		int count = productMapper.countByExample(null);
 		pagebean.setCount(count);
-		
 		return list;
 	}
 	
@@ -105,6 +104,15 @@ public class ProductServiceImpl implements IProductService {
 	public List<Product> findAll2beforeByPrice() {
 		// TODO Auto-generated method stub
 		return productMapper.findAll2beforeByPrice();
+	}
+
+	@Override
+	public List<Product> find(String pName) {
+//		ProductExample example = new ProductExample();
+//		example.createCriteria().andPNameLike(pName);
+//		List<Product> products = productMapper.selectByExample(example);
+		List<Product> products = productMapper.findByName(pName);
+		return products;
 	}
 
 
