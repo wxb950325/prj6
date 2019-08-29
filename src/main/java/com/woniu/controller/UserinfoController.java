@@ -52,8 +52,6 @@ public class UserinfoController {
 			Userinfo userinfo = (Userinfo) findByPhone.get(0);
 			Integer uid = userinfo.getUid();
 			session.setAttribute("uid", uid);
-			
-			
 			return "redirect:/before/comment.jsp";
 		}else {
 			return "redirect:/before/userinfo/login.jsp";

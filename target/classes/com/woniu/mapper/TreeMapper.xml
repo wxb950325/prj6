@@ -13,10 +13,10 @@
     <result column="pid" property="pid" jdbcType="CHAR" />
   </resultMap>
   
-    <select id="findByUid" resultMap="BaseResultMap">
+    <select id="findByAid" resultMap="BaseResultMap">
   	SELECT * FROM tree t WHERE EXISTS (
-	SELECT a.tid FROM roletree a,user_role b
-	WHERE a.rid=b.rid AND b.uid=#{uid} AND a.tid=t.tid)
+	SELECT a.tid FROM roletree a,adminrole b
+	WHERE a.rid=b.rid AND b.aid=#{aid} AND a.tid=t.tid)
   </select>
   <sql id="Example_Where_Clause" >
     <!--

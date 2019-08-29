@@ -79,10 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			border="false">
 			<div id="pageContent" class="easyui-panel"
 				style="width: 100%; height: 100%;" border="false">
-				
-				
-				
-				</div>
+			</div>
 		</div>
 		<!-- 下边版权区 -->
 		<div region="south"
