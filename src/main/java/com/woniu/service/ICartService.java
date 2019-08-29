@@ -21,5 +21,6 @@ public interface ICartService {
 	
 	public void update(Cart cart);
 	
-	
+	public void clear(Integer uid);
+	public void clear();
 }

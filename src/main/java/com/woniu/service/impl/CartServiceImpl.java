@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woniu.entity.Cart;
+import com.woniu.entity.CartExample;
 import com.woniu.mapper.CartMapper;
 import com.woniu.service.ICartService;
 
@@ -50,6 +51,28 @@ public class CartServiceImpl implements ICartService {
 	public void update(Cart cart) {
 		// TODO Auto-generated method stub
 		cartMapper.updateByPrimaryKeySelective(cart);
+	}
+
+	@Override
+	public void clear(Integer uid) {
+		// TODO Auto-generated method stub
+		CartExample example = new CartExample();
+		example.createCriteria().andUidEqualTo(uid);
+		List<Cart> carts = cartMapper.selectByExample(example);
+		for (Cart cart : carts) {
+			cart.setIsdelete(0);
+		}
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		List<Cart> carts = cartMapper.selectByExample(null);
+		for (Cart cart : carts) {
+			cart.setIsdelete(0);
+			cartMapper.updateByPrimaryKeySelective(cart);
+		}
 	}
 	
 	

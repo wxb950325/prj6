@@ -58,7 +58,6 @@ public class UserOrderController {
 		aid=1;
 		
 		UserOrder userOrder=new UserOrder();
-		userOrder.setUid(uid);
 		Date date=new Date();
 		
 		//订单时间就是当前时间，支付状态默认0为未支付
@@ -73,7 +72,7 @@ public class UserOrderController {
 		//从session中获取购物车内商品id和商品数量;
 		//用户ID加订单生成的当前时间就是订单编号，这样能确保唯一性
 		BigDecimal orderMoney=new BigDecimal(0);
-		Map<Integer,Integer> cart=(Map<Integer,Integer>)session.getAttribute("cart");
+		Map<Integer,Integer> cart=(Map<Integer,Integer>)session.getAttribute("carts");
 		for(Map.Entry<Integer,Integer> entry:cart.entrySet()) {
 			int pid=entry.getKey();
 			Integer pnum=entry.getValue();
@@ -81,6 +80,7 @@ public class UserOrderController {
 			BigDecimal sellingPrice=product.getSellingPrice();
 			orderMoney=sellingPrice.multiply(new BigDecimal(pnum));
 			
+			//将用户ID、商品数量、商品id、订单金额、订单编号存入用户订单对象中
 			userOrder.setUid(uid);
 			userOrder.setpNum(pnum);
 			userOrder.setPid(pid);
@@ -91,6 +91,7 @@ public class UserOrderController {
 			//将生成的订单对象存入数据库中
 			userOrderService.save(userOrder);
 			
+			//将订单对象放入集合中，再将集合发送到前端
 			list.add(userOrder);
 		}
 		
