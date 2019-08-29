@@ -20,6 +20,14 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+  <delete id="deleteBatch">
+  	delete from user_order where user_oid in 
+  	<foreach collection="array" item="item" open="(" close=")" index="index" separator=",">
+  		#{item}
+  	</foreach>
+  </delete>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>订单页面</title>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easyui/themes/icon.css">
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    pagination:true,
 		    columns:[[   
 		        {field:'aid',checkbox:'checkbox',title:'收货人',width:100},
-		        {field:'comsignee',title:'收货人',width:100},
+		        {field:'consignee',title:'收货人',width:100},
 		        {field:'phonenum',title:'手机号',width:100},   
 		        {field:'address',title:'收货地址',width:100	},
 				{field:'note',title:'备注',width:100},
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function deleteItem(aid){
 		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
 		    if (r){   
-		    	$.getJSON("delete",{aid:aid},function(json){
+		    	$.getJSON("/before/address/userorder/delete",{aid:aid},function(json){
 		    		$.messager.show({
 		    			title:'My Title',
 		    			msg:json.msg,
@@ -102,13 +102,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 
 	function goOrder(aid){
-		$.getJSON("goOrder",{aid:aid},function(){});
+		$('#order').form('clear');	// 从URL加载 		
+		$('#orderwindow').window('open');  // open a window 
+		$.getJSON("goOrder",{aid:aid},function(json){
+			$('#order').form('load',json);	// 从URL加载
+			/* var orderNum = json.list[0].orderNum; */
+				/* $("input[name='orderNum'][value="+orderNum+"]");
+				$("input[name='pid'][value="+json.list[0].pid+"]");
+				$("input[name='pNum'][value="+json[0].pNum+"]");
+				$("input[name='orderMoney'][value="+json[0].orderMoney+"]");
+				$("input[name='address'][value="+json[0].address+"]"); */
+			/* console.log(json[0].pid);
+			console.log(json[0].orderNum);
+			console.log(json[0].orderMoney); */
+		});
 	}
 	
 	function findById(aid){
 		$('#ff').form('clear');	// 从URL加载 		
 		$('#win').window('open');  // open a window 
-			$.getJSON("findById",{aid:aid},function(json){
+			$.getJSON("/before/order/findById",{aid:aid},function(json){
 				$('#ff').form('load',json);	// 从URL加载
 				/* var isdelete = json.isdelete?1:0;
 				$("input[name='isdelete'][value="+isdelete+"]").prop('checked','1'); */
@@ -123,13 +136,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	function dosave(){
-		var tid = $("#aid").val();
-		var path = "save";
+		var aid = $("#aid").val();
+		var path = "/before/address/userorder/save";
 		if(aid!=null&&aid!=""&&aid!=undefined){
-			path = "update";
+			path = "/before/address/userorder/update";
 		}
 		$('#ff').form('submit', {   
 		    url:path,   
+		    onSubmit: function(){   
+		        // do some check   
+		        // return false to prevent submit;   
+		    },   
+		    success:function(data){   
+		       	var json = eval("("+data+")");
+		       	$.messager.show({
+	    			title:'My Title',
+	    			msg:json.msg,
+	    			timeout:4000,
+	    			showType:'slide'
+	    		});
+		       	$('#win').window('close');  // open a window 
+				$('#dg').datagrid('reload');    // reload the current page data  
+		    }   
+		}); 
+	}
+
+	function goPay(){
+		$('#ff').form('submit', {   
+		    url:'goPay',   
 		    onSubmit: function(){   
 		        // do some check   
 		        // return false to prevent submit;   
@@ -163,8 +197,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form id="ff" method="post">  
     	<input type="hidden" name="aid" id="aid">
 	    <div>  
-	        <label for="comsignee">comsignee:</label>  
-	        <input class="easyui-validatebox" type="text" name="comsignee" data-options="required:true" />  
+	        <label for="consignee">consignee:</label>  
+	        <input class="easyui-validatebox" type="text" name="consignee" data-options="required:true" />  
 	    </div>
 	    <div>  
 	        <label for="phonenum">phonenum:</label>  
@@ -181,16 +215,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
 	    <div>  
 	        <label for="isdelete">isdelete:</label>  
-	        <input type="radio" name="state" value="0">正在使用<input type="radio" name="state" value="1">已弃用
+	        <input type="radio" name="isdelete" value="0">正在使用<input type="radio" name="isdelete" value="1">已弃用
 	    </div>
 	     
 	    <div>  
 	    	<input type="button" onclick="dosave()" value="保存" />  
 	    </div> 
 	</form>  
-    	   
 </div>
 
+<div id="orderwindow" class="easyui-window" title="订单框" style="width:600px;height:400px"  
+        data-options="iconCls:'icon-save',modal:true,closed:true"> 
+        订单详情 
+ 	<form id="order" method="post">
+    	<div>  
+	        <label for="orderNum">订单编号:</label>  
+	        <input class="easyui-validatebox" type="text"  name="orderNum" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="pid">商品id:</label>  
+	        <input class="easyui-validatebox" type="text" name="pid" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="pNum">商品数量:</label>  
+	        <input class="easyui-validatebox" type="text" name="pNum" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="orderMoney">订单金额:</label>  
+	        <input class="easyui-validatebox" type="text" name="orderMoney" data-options="required:true" />  
+	    </div>
+	    <div>  
+	        <label for="address">收货地址:</label>  
+	        <input class="easyui-validatebox" type="text" name="address" data-options="required:true" />  
+	    </div>
+	    <div>  
+	    	<input type="button" onclick="goPay()" value="去支付" />  
+	    </div>
+	</form>
+	  
+</div>
 
 </body>
 </html>

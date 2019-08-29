@@ -22,7 +22,6 @@ public class AddressServiceImpl implements IAddressService {
 	
 	@Override
 	public List findByUid(Integer uid) {
-		// TODO Auto-generated method stub
 		AddressExample example = new AddressExample();
 		example.createCriteria().andUidEqualTo(uid);
 		List<Address> list = addressMapper.selectByExample(example);
@@ -32,7 +31,6 @@ public class AddressServiceImpl implements IAddressService {
 
 	@Override
 	public int delete(Integer aid) {
-		// TODO Auto-generated method stub
 		return addressMapper.deleteByPrimaryKey(aid);
 	}
 
@@ -40,6 +38,18 @@ public class AddressServiceImpl implements IAddressService {
 	@Override
 	public Address findAddByAid(Integer aid,Integer uid) {
 		return addressMapper.findAddByAid(aid,uid);
+	}
+
+
+	@Override
+	public void update(Address address) {
+		addressMapper.updateByPrimaryKeySelective(address);
+	}
+
+
+	@Override
+	public void save(Address address) {
+		addressMapper.insertSelective(address);
 	}
 
 }
