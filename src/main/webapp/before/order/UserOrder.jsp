@@ -106,7 +106,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#orderwindow').window('open');  // open a window 
 		$.getJSON("/before/order/goOrder",{aid:aid},function(json){
 			$('#order').form('load',json);	// 从URL加载
-			$("input[name='orderNum'][value="+json.orderNum+"]");
+			$("input[name='orderNum'][value="+json[0].orderNum+"]");
+			$("input[name='pNum'][value="+json[0].pNum+"]");
+			$("input[name='pid'][value="+json[0].pid+"]");
+			$("input[name='address'][value="+json[0].address+"]");
+			$("input[name='orderMoney'][value="+json[0].orderMoney+"]");
+			
 		});
 	}
 	
@@ -223,27 +228,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<form id="order" method="post">
     	<div>  
 	        <label for="orderNum">订单编号:</label>  
-	        <input class="easyui-validatebox" type="text" name="orderNum" data-options="required:true" />  
+	        <input class="easyui-validatebox" type="text" readonly="readonly" name="orderNum" data-options="required:true" />  
 	    </div>
 	    <div>  
 	        <label for="pid">商品id:</label>  
-	        <input class="easyui-validatebox" type="text" name="pid" data-options="required:true" />  
+	        <input class="easyui-validatebox" type="text" readonly="readonly" name="pid" data-options="required:true" />  
 	    </div>
 	    <div>  
 	        <label for="pNum">商品数量:</label>  
-	        <input class="easyui-validatebox" type="text" name="pNum" data-options="required:true" />  
-	    </div>
-	    <!-- <div>  
-	        <label for="pNum">收货人:</label>  
-	        <input class="easyui-validatebox" type="text" name="pNum" data-options="required:true" />  
+	        <input class="easyui-validatebox" type="text" readonly="readonly" name="pNum" data-options="required:true" />  
 	    </div>
 	    <div>  
-	        <label for="pNum">收货地址:</label>  
-	        <input class="easyui-validatebox" type="text" name="pNum" data-options="required:true" />  
-	    </div> -->
+	        <label for="orderMoney">订单金额:</label>  
+	        <input class="easyui-validatebox" type="text" readonly="readonly" name="orderMoney" data-options="required:true" />  
+	    </div>
 	    <div>  
 	        <label for="address">收货地址:</label>  
-	        <input class="easyui-validatebox" type="text" name="address" data-options="required:true" />  
+	        <input class="easyui-validatebox" type="text" readonly="readonly" name="address" data-options="required:true" />  
 	    </div>
 	    
 	    <div>  

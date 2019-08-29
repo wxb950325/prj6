@@ -17,6 +17,11 @@
     <result column="isdefault" property="isdefault" jdbcType="INTEGER" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+  <select id="findAddByAid" resultMap="BaseResultMap">
+  	select * from address where aid=#{aid} and uid=#{uid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
