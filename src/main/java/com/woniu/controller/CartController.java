@@ -64,7 +64,7 @@ public class CartController {
 //			cart.setUid(uid);
 			cartServiceImpl.save(cart);
 			
-			msg = new Message(true, "添加购物车成功");
+			msg = new Message(true, "添加成功，快打开右上角购物车取支付吧~");
 		} catch (Exception e) {
 			msg = new Message(false, "加入购物车失败，请先登录~");
 		}

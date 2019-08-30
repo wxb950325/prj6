@@ -43,7 +43,7 @@
 
 				
 				$("#payBtn").click(function(){
-					location.href="/before/cart/selectAddress";
+					location.href="/before/order/UserOrder.jsp";
 				});
 				
 			});
