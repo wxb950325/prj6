@@ -50,60 +50,143 @@ public class StoreController {
 	@RequestMapping("save")
 	public String save(@RequestParam("fileName") MultipartFile file,HttpServletRequest req,Storetype storetype,Store store, HttpSession session,Integer[] chk) {
 		
+		//获取用户的uid
 		Integer uid = (Integer) session.getAttribute("uid");
 		System.out.println(uid+"aaaaaaaaa");
 		store.setUid(uid);
 		
+		//根据省市区名 获得 相应id
 		String provinceName = store.getProvinceName();
+		
 		String cityName = store.getCityName();
 		String zoneName = store.getZoneName();	
 		String pid = provinceServiceImpl.selectByName(provinceName);
 		String cid = cityServiceImpl.selectByName(cityName,pid);
 		String zid = zoneServiceImpl.selectByName(zoneName,cid);
 		
+		System.out.println("省市区");
 		store.setProvinceId(Integer.parseInt(pid));
 		store.setCityId(Integer.parseInt(cid));
 		store.setZoneId(Integer.parseInt(zid));
 		store.setIsaudit(0);
 		store.setIsdelete(0);
 		
-		String fileName = file.getOriginalFilename();//获取文件名
-		System.out.println(fileName);	
-		fileName = UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
-		String path = req.getServletContext().getRealPath("/image");		
-		System.out.println(path + "~~~~~~~~~~~~~~");		
-		File imagesDir = new File(path);
-		if(!imagesDir.exists()) {
-			imagesDir.mkdirs();
-		}
-		try {
-			file.transferTo(new File(path ,fileName));//保存文件
-			store.setLegalPhoto("http://localhost:8888/image/"+fileName);		
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		session.setAttribute("store", store);
+		//图片存盘
+		Store upload = upload(file,req,store);
+		
+		session.setAttribute("store", upload);
 		StoreServiceImpl.save(store, chk);
-		System.out.println("上传成功");
-		return "before/store/main";
+		
+		return "/before/userinfo/main/basicInfo";
 		
 		
 	}
+	
+	//图片存盘
+	public Store upload(MultipartFile file,HttpServletRequest req,Store store) {
+		
+		//图片存盘
+				String fileName = file.getOriginalFilename();//获取文件名
+				
+				if(fileName!=null) {
+					
+					System.out.println(fileName);	
+					fileName = UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
+					String path = req.getServletContext().getRealPath("/image");		
+					System.out.println(path + "~~~~~~~~~~~~~~");		
+					File imagesDir = new File(path);
+					if(!imagesDir.exists()) {
+						imagesDir.mkdirs();
+					}
+					try {
+						file.transferTo(new File(path ,fileName));//保存文件
+						//设置文件路径
+						store.setLegalPhoto("http://localhost:8888/image/"+fileName);		
+					} catch (IllegalStateException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("上传成功");
+					return store;
+				}else {
+					System.out.println("未上传");
+					return store;
+				}
+	}
+	
+	
 		
 	// 删除
 	@RequestMapping("deleteStore")
 	public @ResponseBody Message delete(Integer sid) {
+		System.out.println("sid:"+sid);
 		Message msg = null;
 		try {
+			System.out.println("111111111111");
 			StoreServiceImpl.delete(sid);
+			System.out.println("22222222");
 			msg = new Message(true, "商户删除成功");
+			System.out.println(msg+"msg");
 		} catch (Exception e) {
 			msg = new Message(false, "商户删除失败");
 		}
 		
 		return msg;
 	}
+	
+	// 通过sid查找一个，回显，修改
+	@RequestMapping("storelist/findById")
+	public @ResponseBody Store findBySid(Integer sid,HttpSession session) {
+		
+		System.out.println("sid:"+sid);
+		
+		Store store = StoreServiceImpl.findById(sid);
+		System.out.println(store+"333333333");
+		session.setAttribute("findBySid", store);
+		return store;
+	}
+	
+		// 商户自己修改
+		@RequestMapping("update")
+		public @ResponseBody Message update(@RequestParam("fileName") MultipartFile file,Store store,HttpSession session,HttpServletRequest req) {
+			
+			System.out.println("update"+store.getLegalPhoto());
+			
+			Store upload = upload(file,req,store);
+		
+			Message msg = null;
+			try {
+				
+				StoreServiceImpl.update(upload, null);
+				System.out.println("22222222");
+				msg = new Message(true, "商户修改成功");
+				System.out.println(msg+"msg");
+			} catch (Exception e) {
+				msg = new Message(false, "商户修改失败");
+			}
+			
+			return msg;
+		}
+		
+		// 后台审核修改
+				@RequestMapping("update1")
+				public @ResponseBody Message update1(Store store,HttpSession session,HttpServletRequest req) {
+					
+					System.out.println("update"+store.getLegalPhoto());
+				
+					Message msg = null;
+					try {
+						
+						StoreServiceImpl.update(store, null);
+						System.out.println("22222222");
+						msg = new Message(true, "商户修改成功");
+						System.out.println(msg+"msg");
+					} catch (Exception e) {
+						msg = new Message(false, "商户修改失败");
+					}
+					
+					return msg;
+				}
 
 	// 恢复
 	@RequestMapping("revokeStore")
@@ -129,25 +212,17 @@ public class StoreController {
 		return map;
 	}
 
-	// 商户查所有
-	@RequestMapping("findById")
-	public String findById(Integer sid,ModelMap map) {
-		Store store = StoreServiceImpl.findById(sid);
-		map.put("store", store);
-		return "forward:goInput";
+	
+	
+	//查询商户个人信息
+	@RequestMapping("findBySid")
+	public String findBySid(HttpSession session) {
+		session.getAttribute("store");
+		
+		return "before/store/storeshow";
 	}
 
-//	// 省市区级查所有
-//	@RequestMapping("goInput")
-//	public String goInput(ModelMap map) {
-//		List prov = provinceServiceImpl.findAll();
-////		List city = provinceServiceImpl.findAllCity();
-////		List zone = provinceServiceImpl.findAllZone();
-//		map.put("prov", prov);
-////		map.put("city", city);
-////		map.put("zone", zone);
-//		return "/before/store/input";
-//	}
+
 
 }
 

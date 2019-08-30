@@ -24,7 +24,8 @@
 		});
 		$("#registe").click(function(){
 			location.href = "/before/userinfo/registe.jsp";
-		})
+		});
+		
 	});
 </script>
 </head>
@@ -32,43 +33,34 @@
 	<img alt="123" src="/image/logo.png">
 	<br>
 	<nav class="navbar navbar-default">
-		<div class="col-md-1"></div>
-		<div class="col-md-5" style="height: 50px; margin: auto">
-
-			<form action="/before/userinfo/login" method="post">
-				<input type="text" name="phone" id="phone"
-					placeholder="请输入手机号" /> <input type="password" name="upass"
-					id="password" placeholder="请输入密码"> <input type="submit"
-					value="登录" /> <input type="button" id="registe" value="注册" />
-			</form>
-		</div>
-		<div class="col-md-2">
-			<form id="">
-				<input type="text" style="width:120px;" name="username" id="username" placeholder="来点啥" />
-				<input type="button" value="搜索" />
-			</form>
-		</div>
-		<div class="col-md-2">
-			<span class="glyphicon glyphicon-bed"
-				style="height: 50px; line-height: 50px;"> <a href="/before/userinfo/main/mainInfo.jsp">${sessionScope.loginInfo==null?'我的':sessionScope.loginInfo.phone }</a>
-			</span> 
-			<span class="glyphicon glyphicon-arrow-right"
-				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/gwc.jsp">购物车</a>
-			</span>
-		</div>
-		<div class="col-md-2">
+	<div class="col-md-12">
+			<div class="col-md-1"></div>
+			<div class="col-md-5" style="height: 50px; margin: auto">
+	
+				<form action="/before/userinfo/login" method="post">
+					<input type="text" name="phone" id="phone"
+						placeholder="请输入手机号" /> <input type="password" name="upass"
+						id="password" placeholder="请输入密码"> <input type="submit"
+						value="登录" /> <input type="button" id="registe" value="注册" />
+				</form>
+			</div>
+			<div class="col-md-3">
+				<form id="">
+					<input type="text" style="width:120px;" name="username" id="username" placeholder="来点啥" />
+					<input type="button" value="搜索" />
+				</form>
+			</div>
+			<div class="col-md-3">
+				<span class="glyphicon glyphicon-bed"
+					style="height: 50px; line-height: 50px;"> <a href="/before/userinfo/main/mainInfo.jsp">${sessionScope.loginInfo==null?'我的':sessionScope.loginInfo.phone }</a>
+				</span> 
+				<span class="glyphicon glyphicon-arrow-right"
+					style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/gwc.jsp">购物车</a>
+				</span>
+			</div>
+	</div>
 			
-				<ul id="ul" style="list-style-type:none">
-					<span class="glyphicon glyphicon-home" 	style="height: 50px; line-height: 50px;">
-						卖家中心
-					</span>
-						<li class="li"><a href="/before/storeType/storeRegiste">注册开店</a></li>
-						<li class="li"><a href="/before/store/list.jsp">查看所有商户</a></li>
-						<li class="li"><a>已卖出商品</a></li>
-						<li class="li"><a>出售中商品</a></li>
-				</ul>
-			
-		</div>
+		
 	</nav>
 
 	<table style="width: 600px; height: 100px;" align="center" frame=void>

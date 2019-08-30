@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.woniu.entity.Store;
 import com.woniu.entity.Userinfo;
+import com.woniu.service.IProvinceService;
 import com.woniu.service.IStoreService;
 import com.woniu.service.IUserService;
 
@@ -29,6 +30,7 @@ public class UserinfoController {
 	
 	@RequestMapping("/main/update")
 	public String update(Userinfo info) {
+		
 		userServiceImpl.update(info);
 		return "/before/userinfo/main/mainInfo";
 	}
@@ -54,14 +56,15 @@ public class UserinfoController {
 			session.setAttribute("uid", uid);
 			
 			//根据用户查找是否为商户，如果是跳转/before/store/main.jsp
-			Store store = StoreServiceImpl.findOneByUid(uid);
-			System.out.println(store);
-			if(store!=null) {
-				System.out.println("======"+store);
-				return "/before/store/main";
+			List<Store> stores = StoreServiceImpl.findOneByUid(uid);
+			System.out.println(stores+"-------");
+			if(stores.size()!=0) {
+				System.out.println("======"+stores);
+				session.setAttribute("stores", stores);
+				return "/before/userinfo/main/mainInfo";
 			}
 			
-			return "redirect:/before/comment.jsp";
+			return "/before/userinfo/main/mainInfo";
 		}else {
 			return "redirect:/before/userinfo/login.jsp";
 		}

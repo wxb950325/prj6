@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface IStoreService {
 //	public Store login(Store store);
-	public List findAll(PageBean pagebean);
-	public void save(Store store,Integer[] chk);
-	public void delete(Integer sid);
-	public void revoke(Integer sid);
+	List findAll(PageBean pagebean);
+	void save(Store store,Integer[] chk);
+	void delete(Integer sid);
+	void revoke(Integer sid);
 	
-	public Store findById(Integer sid);
-	public void update(Store store,Integer[] chk);
-	Store findOneByUid(int uid);
+	Store findById(Integer sid);
+	void update(Store store,Integer[] chk);
+	List<Store> findOneByUid(int uid);
 }

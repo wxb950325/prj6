@@ -8,7 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 public interface StoreMapper {
 	
-	Store findOneByUid(int uid);
+	List<Store> findOneByUid(int uid);
 	
 	
     /**

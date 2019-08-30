@@ -39,7 +39,9 @@ public class StoreServiceImpl implements IStoreService {
 //		store.setIsdelete(0);
 //		storeMapper.updateByPrimaryKeySelective(store);
 		Store store = storeMapper.selectByPrimaryKey(sid);
+		System.out.println("store"+store);
 		int i = store.getIsdelete();
+		System.out.println("i"+i);
 		if(i == 1) {
 			i = 0;
 		}else {
@@ -57,15 +59,17 @@ public class StoreServiceImpl implements IStoreService {
 	}
 	@Override
 	public Store findById(Integer sid) {
-		// TODO Auto-generated method stub
+		
 		return storeMapper.selectByPrimaryKey(sid);
 	}
 	@Override
 	public void update(Store store, Integer[] chk) {
-		// TODO Auto-generated method stub
+	
+		storeMapper.updateByPrimaryKeySelective(store);
+		
 	}
 	@Override
-	public Store findOneByUid(int uid) {
+	public List findOneByUid(int uid) {
 		
 		return storeMapper.findOneByUid(uid);
 	}

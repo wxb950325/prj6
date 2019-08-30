@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.woniu.entity.Province;
 import com.woniu.service.IProvinceService;
 
 @RestController  //RestController该注解可以直接返回json
@@ -18,8 +19,8 @@ public class ProvinceController {
 	
 	@RequestMapping("findAll")
 	public List findAll() {
-		System.out.println(111+"===================");
-		List list = provinceServiceImpl.findAll();
+		List<Province> list = provinceServiceImpl.findAll();
+		
 		return list;
 	}
 	

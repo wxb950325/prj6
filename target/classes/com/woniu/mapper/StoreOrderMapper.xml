@@ -23,6 +23,9 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

@@ -27,7 +27,7 @@
 		$('#dg')
 				.datagrid(
 						{
-							url : 'findAllOrder',
+							url : '/before/store/findAllOrder',
 							fitColumns : true,
 							striped : true,
 							pagination : true,
