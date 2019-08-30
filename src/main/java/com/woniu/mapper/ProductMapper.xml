@@ -38,6 +38,12 @@
     <result column="p_details" property="pDetails" jdbcType="LONGVARCHAR" />
   </resultMap>
   
+  <select id="findBySid" parameterType="int" resultMap="BaseResultMap">
+  		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales
+  		,p_origin,p_weight,opening_price,selling_price,isAudit,p_status,isdelete
+  		 FROM product where sid = #{sid}
+   </select>
+  
   
    <select id="findAll2Seller" resultMap="BaseResultMap">
   		SELECT pid,p_name,tid,sid,stock,photo,bid,p_describe,p_size,total_sales

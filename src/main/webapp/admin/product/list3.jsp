@@ -28,11 +28,13 @@
 <body>
 
 	<script>
+	alert(111111111);
+	alert(<%=request.getParameter("sid") %>);
 	$(function() {
 		$('#dg')
 				.datagrid(
 						{
-							url : '/admin/product/findAll2Seller',
+							url : '/admin/product/listBySid?sid='+'<%=request.getParameter("sid") %>',
 							fitColumns : true,
 							striped : true,
 							pagination : true,

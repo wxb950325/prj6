@@ -115,5 +115,12 @@ public class ProductServiceImpl implements IProductService {
 		return products;
 	}
 
+	@Override
+	public List<Product> findBySid(Integer sid) {
+		
+		
+		return productMapper.findBySid(sid);
+	}
+
 
 }

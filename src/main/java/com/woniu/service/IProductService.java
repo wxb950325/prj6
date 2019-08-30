@@ -22,4 +22,6 @@ public interface IProductService {
 	List<Product> findAll2beforeByPrice();
 	List<Product> find(String pName);
 	     
+	
+	List<Product> findBySid(Integer sid);
 }

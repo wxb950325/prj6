@@ -62,42 +62,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				border="false">
 				<ul type="square">
 					<li><span><a href="/before/comment.jsp">返回首页</a></span></li>
-<<<<<<< HEAD
+
 					<li><span><a href="/before/userinfo/main/mainInfo.jsp">返回用户页面</a></span></li>
 					<li><span><a href="javascript:openURL('/before/store/storeshow.jsp')">商铺信息</a></span></li>
-					<li id="li"><span><a href="javascript:openURL('/admin/product/list2.jsp')">商品管理</a></span>
-					<li id="li"><span><a href="javascript:openURL('/admin/product/list2.jsp')">商品管理</a></span>
 					<li id="li"><span><a href="javascript:openURL('/before/prodType/list.jsp')">商品类型</a></span>
 					<li id="li"><span><a href="javascript:openURL('/before/brand/list.jsp')">商品品牌</a></span>
-=======
-					<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp'')">商铺信息</a></span></li>
-					<li id="li"><span><a href="javascript:openURL('基本信息', '/admin/product/list2.jsp')">商品管理</a></span>
->>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
-						<!-- <ul id="ul" type="square">
-							<li><span><a href="javascript:openURL('基本信息', '/admin/product/list.jsp')">商品展示</a></span></li>
-							<li>商品上架</li>
-							<li>商品下架</li>
-							<li>商品修改</li>
-						</ul> -->
 					</li>
 					<li>收藏管理</li>
-					<li><span><a href="javascript:openURL('订单管理', '/before/store/storeOrderList.jsp')">订单管理</a></span></li>
+					<li><span><a href="javascript:openURL('/before/store/storeOrderList.jsp')">订单管理</a></span></li>
 				</ul>
 			</div>
 		</div>
 		<!-- 中间区域 -->
 		<div id="content" region="center" style="overflow: hidden;"
 			border="false">
-<<<<<<< HEAD
+
 			
 			<iframe id="pageContent" class="easyui-panel" style="width: 100%; height: 100%;" border="false">
 			
 			</iframe>
-=======
-			<div id="pageContent" class="easyui-panel"
-				style="width: 100%; height: 100%;" border="false">
-			</div>
->>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
+
 		</div>
 		<!-- 下边版权区 -->
 		<div region="south"

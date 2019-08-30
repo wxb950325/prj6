@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
@@ -123,6 +124,18 @@ public class ProductController {
 		System.out.println(product);
 		return "/admin/product/input";
 	}
+	
+	//根据商户sid查询该商户的商品 李飞
+	@RequestMapping("listBySid")
+	public @ResponseBody Map findBySId(PageBean pagebean,Integer sid,HttpSession session) {
+		System.out.println("寇宇通");
+		Map map = new HashMap();
+		List rows = productServiceImpl.findBySid(sid);
+		map.put("total", pagebean.getCount());
+		map.put("rows", rows);
+		return map;
+	}
+	
 	
 	@RequestMapping("delete")
 	public @ResponseBody Message delete(Integer pid) {

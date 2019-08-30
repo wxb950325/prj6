@@ -11,6 +11,8 @@ import org.apache.ibatis.session.RowBounds;
 
 public interface ProductMapper {
 	
+	List<Product> findBySid(Integer sid);
+	
 	List<Product> findAll2Seller();
 	
 	List<Product> findAll2buyers();

@@ -81,7 +81,7 @@
 			
 				<table  cellspacing="0" align="center" style="background-color:pink;border-style:solid;border-color:black;width: 1200px; height:350px;">
 					<tr>
-						<td colspan="3" style="text-align: center; width: 200px;font-family: 微软雅黑; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">商铺信息</td>
+						<td colspan="6" style="text-align: center; width: 200px;font-family: 微软雅黑; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">商铺信息</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; width: 200px;font-family: 微软雅黑; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">店铺名</td>
@@ -95,7 +95,7 @@
 						<tr>
 							
 							<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">
-								<a href="/admin/product/list2.jsp">${store.sname }</a>
+								<a href="/admin/product/list3.jsp?sid=${store.sid }">${store.sname }</a>
 							</td>
 							<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">
 								${store.legalName }
@@ -113,15 +113,6 @@
 									<c:when test="${store.isaudit==1 }">审核通过</c:when>
 									<c:when test="${store.isaudit==2 }">审核未通过</c:when>
 								</c:choose>
-								<%-- if (){
-										return '审核中';
-								} else if(${store.isaudit }==1) {
-										return '已审核';
-								}else{
-									return '审核未通过';
-								} --%>
-								
-								<%-- ${store.isaudit eq '0'?'审核中':'已审核'} --%>
 							</td>
 							<td style="text-align: center; width: 200px;font-family: 楷体; font-size: 25px; font-weight: 1000; display: table-cell; vertical-align: middle;">
 								<button onclick="edit(${store.sid })">修改</button>
