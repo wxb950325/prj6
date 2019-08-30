@@ -116,6 +116,7 @@ public class ProductController {
 		}  
 		return list;
 	} 
+	
 	   
 	@RequestMapping("findById")
 	public String findById(Integer pid,ModelMap map) {
