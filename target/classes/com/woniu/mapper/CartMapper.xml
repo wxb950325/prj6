@@ -17,6 +17,12 @@
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
+  
+  <select id="findAll" resultMap="BaseResultMap">
+  		SELECT * FROM cart where isdelete = 1; 
+  
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated

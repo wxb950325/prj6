@@ -32,7 +32,6 @@
 							striped : true,
 							pagination : true,
 							toolbar : '#tb',
-							title : '商户订单管理',
 							columns : [ [
 									{
 										field : 'storeOid',
@@ -115,19 +114,19 @@
 												return '已删除';
 											}
 										}
+									},
+									{
+										field : 'operate',
+										title : '操作',
+										width : 100,
+										formatter : function(value, row, index) {
+											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
+											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
+											return "<a id=\"btn\" href=\"javascript:deleteItem("
+													+ row.storeOid
+													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
+										}
 									}
-// 									{
-// 										field : 'operate',
-// 										title : '操作',
-// 										width : 100,
-// 										formatter : function(value, row, index) {
-// 											// 											var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a>";
-// 											// 								        	btns += "<a id=\"btn\" href=\"javascript:findById("+row.tid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">修改</a>"; 
-// 											return "<a id=\"btn\" href=\"javascript:deleteItem("
-// 													+ row.storeOid
-// 													+ ")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">删除</a> ";
-// 										}
-// 									}
 
 							] ],
 							onLoadSuccess : function(index, field, value) {
@@ -184,9 +183,8 @@
 	<div id="tb">
 		<a href="#" class="easyui-linkbutton"
 			data-options="iconCls:'icon-help',plain:true">帮助</a> 
-<!-- 			<a -->
-<!-- 			href="javascript:openForm()" class="easyui-linkbutton" -->
-<!-- 			data-options="iconCls:'icon-save',plain:true">增加</a> -->
+			<a href="javascript:openForm()" class="easyui-linkbutton"
+			data-options="iconCls:'icon-save',plain:true">增加</a>
 	</div>
 	<div id="win" class="easyui-window" title="My Window"
 		style="width: 600px; height: 400px"
@@ -250,8 +248,8 @@
 			<label for="isdelete">是否删除:</label>  
 	        <input type="radio" name="isdelete" value="0">已删除<input type="radio" name="isdelete" value="1">已保留
 			<div>  
-		    	<input type="button" onclick="dosave()" value="保存" />  
-		    </div> 
+		    		<input type="button" onclick="dosave()" value="保存" />  
+		    </div>
 		</form>
 	</div>
 

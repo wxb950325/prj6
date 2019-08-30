@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath %>easyui/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>easyui/jquery.easyui.min.js"></script>
 <script>
+<<<<<<< HEAD
 $(function(){
 	
 	//进到当前页面最上方显示的页面内容
@@ -37,6 +38,17 @@ window.onload = function(){
 		$("#li").show();
 	}else{
 		$("#li").hide();
+=======
+	$(function(){
+		//进到当前页面最上方显示的页面内容
+	    $("#pageNorth").panel("refresh", "north.jsp");
+	    openURL("/before/userinfo/main/basicInfo.jsp");
+	});
+
+	//给iframe设置src（加载页面的路径）
+	function openURL(url) {
+	    $("#pageContent").attr("src",url);
+>>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
 	}
 } */
 
@@ -59,8 +71,13 @@ window.onload = function(){
 				<ul type="square">
 					<li><span><a href="/before/comment.jsp">返回首页</a></span></li>
 					<li><span><a href="javascript:openURL('/before/userinfo/main/basicInfo.jsp')">基本信息</a></span></li>
+<<<<<<< HEAD
 					<li><span><a href="javascript:openURL('address.jsp')">地址管理</a></span></li>
+=======
+					<li><span><a href="javascript:openURL('/before/userinfo/main/address.jsp')">地址管理</a></span></li>
+>>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
 					<li>我的收藏</li>
+					<li>订单管理</li>
 					<li>支付管理</li>
 					<li><span><a href="javascript:openURL('/before/store/registe.jsp')">申请成为商家</a></span></li>
 					<li id="li"><span><a href="/before/store/main.jsp">我的店铺</a></span></li>
@@ -70,9 +87,15 @@ window.onload = function(){
 		<!-- 中间区域 -->
 		<div id="content" region="center" style="overflow: hidden;"
 			border="false">
+<<<<<<< HEAD
 			<iframe id="pageContent" class="easyui-panel" style="width: 100%; height: 100%;" border="false">
 			
 			</iframe>
+=======
+			<iframe id="pageContent" style="width: 100%; height: 100%;">
+			</iframe>
+		</div>
+>>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
 		<!-- 下边版权区 -->
 		<div region="south"
 			style="height: 30px; background-color: #2d8bef; text-align: center; line-height: 30px; color: #fff;"

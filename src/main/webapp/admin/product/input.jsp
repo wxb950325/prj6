@@ -114,7 +114,14 @@ background: #93b6fc;
 
 <div class="form-group">
 		<label class="col-xs-2">商品类型：</label>
-		<INPUT class="col-xs-6 form-control" TYPE="text" NAME="tid" value="${product.tid }"><br>
+		<%-- <INPUT class="col-xs-6 form-control" TYPE="text" NAME="tid" value="${product.tid }"><br> --%>
+		
+		<select name="tid" class="col-xs-6 form-control">
+				<c:forEach items="${types }" var="type">
+									<option value="${type.tid }" >${type.tname }</option>
+				</c:forEach>
+		</select>
+
 </div>
 
 <div class="form-group">

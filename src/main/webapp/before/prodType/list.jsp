@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品类型管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'tid',checkbox:'checkbox',title:'商品类型id',width:100},   

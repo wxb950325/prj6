@@ -32,6 +32,17 @@ public class ProdTypeController {
 		return map;
 	}
 	
+	//给首页展示的类型  findAll
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("findAll2Before")
+	public @ResponseBody List findAll2Before() {
+		List<ProdType> rows = prodTypeServiceImpl.findAll2Before();
+//		Map map = new HashMap();
+//		map.put("rows", rows);
+		return rows;
+	}
+	
+	
 	@RequestMapping("findById")
 	public @ResponseBody ProdType findById(Integer tid) {
 		return prodTypeServiceImpl.find(tid);

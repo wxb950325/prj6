@@ -14,6 +14,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 
 </head>
 <body>
@@ -32,7 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    toolbar: '#tb',
 		    pageSize:10,
 		    striped:true,
-		    title:'商品品牌管理',
 		    pagination:true,
 		    columns:[[   
 		        {field:'bid',checkbox:'checkbox',title:'品牌id',width:100},   
@@ -68,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        el:'#app',
 	        data:{
 	            json:'',
-	            bname:''
+	            brand:''
 	   	    },
 	        methods:{
 	        	findByBrand:function(event){
@@ -77,13 +78,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	url:'findByBrand',
 	                	emulateJSON:true, 
 	                	params:{
-	                		bname:this.bname
-	                	},	
+	                		brand:this.brand
+	                	}	
 	                }).then(function(res){
 	                	 this.json=res.body;
 	                	 if(event.code!='Backspace')
 		                	 if(this.json.length==1){
-		                		 this.bname=this.json[0].bname;
+		                		 this.brand=this.json[0].brand;
 		                		 this.json ='';
 		                	 }
 	                },function(){
@@ -91,11 +92,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                });
 	            },
 	            select:function(brand){
-	            	this.bname=bname;
+	            	this.brand=brand;
 	            	this.json='';
 	            }
 	        }
-	    }); 
+	    });  
 	})
 	
 	function deleteItem(bid){
@@ -179,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	}
 
-/* 	$(function(){
+/* 	 $(function(){ 
 	    var vm = new Vue({
 	        el:'#app',
 	        data:{
@@ -257,7 +258,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<TABLE bgColor="#FFFFCC" width="175px">
 		<TR v-for="n in json" bgcolor="#FFFFFF">
-			<TD @click="select(n.bname)">{{n.bname}}</TD>
+			<TD @click="select(n.brand)">{{n.brand}}</TD>
 		</TR>
 	</TABLE>
 </div>
