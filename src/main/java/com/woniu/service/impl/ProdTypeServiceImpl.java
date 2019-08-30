@@ -61,6 +61,12 @@ public class ProdTypeServiceImpl implements IProdTypeService {
 	public void deleteBatch(Integer[] tids) {
 		prodTypeMapper.deleteBatch(tids);
 	}
+
+	@Override
+	public List<ProdType> findAll2Before() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

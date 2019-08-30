@@ -103,7 +103,7 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public List<Product> findAll2beforeByPrice() {
 		// TODO Auto-generated method stub
-		return productMapper.findAll2beforeByPrice();
+		return productMapper.findAll2beforeByTime();
 	}
 
 	@Override

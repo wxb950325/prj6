@@ -126,5 +126,9 @@ public interface ProductMapper {
      */
     int updateByPrimaryKey(Product record);
 
+	List<Product> findAll2beforeByTime();
+
+	List<Product> findByName(String pName);
+
 	
 }

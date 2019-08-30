@@ -18,5 +18,8 @@ public interface IProductService {
 	public List<Product> find();
 	
 	public Product find(Integer pid);
+	List<Product> findAll2beforeByTime();
+	List<Product> findAll2beforeByPrice();
+	List<Product> find(String pName);
 	     
 }

@@ -54,7 +54,6 @@ public class UserinfoController {
 			Userinfo userinfo = (Userinfo) findByPhone.get(0);
 			Integer uid = userinfo.getUid();
 			session.setAttribute("uid", uid);
-<<<<<<< HEAD
 			
 			//根据用户查找是否为商户，如果是跳转/before/store/main.jsp
 			List<Store> stores = StoreServiceImpl.findOneByUid(uid);
@@ -62,13 +61,9 @@ public class UserinfoController {
 			if(stores.size()!=0) {
 				System.out.println("======"+stores);
 				session.setAttribute("stores", stores);
-				return "/before/userinfo/main/mainInfo";
 			}
 			
-			return "/before/userinfo/main/mainInfo";
-=======
 			return "redirect:/before/comment.jsp";
->>>>>>> branch 'master' of git@github.com:wxb950325/prj6.git
 		}else {
 			return "redirect:/before/userinfo/login.jsp";
 		}
