@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
-    <classPathEntry location="D:\mysql-connector-java-5.1.35.jar"/>	
+    <classPathEntry location="F:\mysql-connector-java-5.1.35.jar"/>	
   <context id="context1" >
     <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://xawn.f3322.net:3306/prj6" userId="prj6" password="#@$*()#$" />
     <javaModelGenerator targetPackage="com.woniu.entity" targetProject="prj6" ></javaModelGenerator>
     <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="prj6" ></sqlMapGenerator>
     <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="prj6" type="XMLMAPPER" />
-    <table schema="" tableName="tree" ></table>
+    <table schema="" tableName="admin" ></table>
+    <table schema="" tableName="adminrole" ></table>
   </context>
 </generatorConfiguration>

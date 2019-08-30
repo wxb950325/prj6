@@ -13,10 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easyui/themes/icon.css">
 <script type="text/javascript" src="<%=basePath %>easyui/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>easyui/jquery.easyui.min.js"></script>
-
-
-</head>
-<body>
 <script type="text/javascript" src="<%=basePath %>easyui/locale/easyui-lang-zh_CN.js"></script>
 <script>
 	$(function(){
@@ -54,6 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	}
 </script>
+</head>
+<body>
 <table id="dg"></table>
 <div id="tb">
 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>

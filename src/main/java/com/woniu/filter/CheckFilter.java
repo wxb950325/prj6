@@ -22,8 +22,8 @@ public class CheckFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		
-		Object loginInfo = req.getSession().getAttribute("loginInfo");
-		if(loginInfo==null) {
+		Object uid = req.getSession().getAttribute("uid");
+		if(uid==null) {
 			res.sendRedirect("/before/userinfo/login.jsp");
 		}else {
 			chain.doFilter(request, response);
