@@ -54,7 +54,7 @@ public class UserOrderController {
 	}
 	@SuppressWarnings({ "null", "rawtypes" })
 	@RequestMapping("goOrder")
-	public @ResponseBody List goOrder(HttpSession session,int aid) {
+	public @ResponseBody UserOrder goOrder(HttpSession session,int aid) {
 		List<UserOrder> list=new ArrayList<UserOrder>();
 		if(list.size()!=0) {
 			list.clear();
@@ -102,9 +102,8 @@ public class UserOrderController {
 //			list.add(userOrder);
 //		}
 		int pid,pnum;
-		for(int i=37;i<=39;i++) {
-			pid=i;
-			pnum=i;
+			pid=37;
+			pnum=37;
 			BigDecimal sellingPrice=productService.find(pid).getSellingPrice();
 			orderMoney=sellingPrice.multiply(new BigDecimal(pnum));
 			userOrder.setUid(uid);
@@ -119,13 +118,8 @@ public class UserOrderController {
 			System.out.println(userOrder.getPid());
 			//将订单对象放入集合中，再将集合发送到前端
 			list.add(userOrder);
-			System.out.println(list.get(i-37).getPid()+list.get(i-37).getOrderNum());
-		}
-		for (int i=0;i<list.size();i++) {
-			System.out.println(i+":"+list.get(i).getPid());
-		}
-		
-		return list;
+			
+		return userOrder;
 	}
 	
 	@RequestMapping("goPay")

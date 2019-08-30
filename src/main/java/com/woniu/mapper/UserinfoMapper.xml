@@ -29,8 +29,8 @@
   <resultMap id="BaseResultMapWithTree" type="com.woniu.entity.Userinfo" >
   	<collection property="trees" column="uid" select="com.woniu.mapper.TreeMapper.findByUid"></collection>
   </resultMap>
-  <select id="bglogin" resultMap="BaseResultMapWithTree">
-       select * from userinfo where uname=#{uname} and upass=#{upass} 
+  <select id="login" resultMap="BaseResultMapWithTree">
+       select * from userinfo where phone=#{phone} and upass=#{upass} 
    </select>
   <sql id="Example_Where_Clause" >
     <!--

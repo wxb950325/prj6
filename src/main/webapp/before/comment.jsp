@@ -53,7 +53,7 @@
 				style="height: 50px; line-height: 50px;"> <a href="/before/userinfo/main/mainInfo.jsp">${sessionScope.loginInfo==null?'我的':sessionScope.loginInfo.phone }</a>
 			</span> 
 			<span class="glyphicon glyphicon-arrow-right"
-				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/gwc.jsp">购物车</a>
+				style="height: 50px; line-height: 50px;"> <a id="reg" href="/before/userorder/UserOrder.jsp">购物车</a>
 			</span>
 		</div>
 		<div class="col-md-2">

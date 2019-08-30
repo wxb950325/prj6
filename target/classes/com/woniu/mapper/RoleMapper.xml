@@ -12,7 +12,7 @@
     <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
   </resultMap>
   
-     <select id="findByAid" resultMap="BaseResultMap">
+     <select id="findByUid" resultMap="BaseResultMap">
   	SELECT * FROM role r WHERE EXISTS (
 	    SELECT rid FROM adminrole WHERE aid=#{aid} AND rid=r.rid		
 	)

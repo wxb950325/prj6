@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function goOrder(aid){
 		$('#order').form('clear');	// 从URL加载 		
 		$('#orderwindow').window('open');  // open a window 
-		$.getJSON("goOrder",{aid:aid},function(json){
+		$.getJSON("/before/order/goOrder",{aid:aid},function(json){
 			$('#order').form('load',json);	// 从URL加载
 			/* var orderNum = json.list[0].orderNum; */
 				/* $("input[name='orderNum'][value="+orderNum+"]");
