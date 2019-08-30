@@ -64,6 +64,14 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.alipay.sdk</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>4.5.0.ALL</version>
+		</dependency>
+				
+		
 	</dependencies>
 	<properties>
 		<java.version>1.8</java.version>
